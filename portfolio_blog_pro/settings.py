@@ -40,6 +40,7 @@ INSTALLED_APPS = [
 
     # Local
     'users.apps.UsersConfig',
+    'pages.apps.PagesConfig',
 ]
 
 AUTH_USER_MODEL = 'users.CustomUser'
@@ -59,7 +60,7 @@ ROOT_URLCONF = 'portfolio_blog_pro.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [Path(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     # Local
     'users.apps.UsersConfig',
     'pages.apps.PagesConfig',
+    'blogs.apps.BlogsConfig',
 ]
 
 # django-crispy-forms
@@ -168,3 +169,5 @@ STATICFILES_FINDERS = [
     "django.contrib.staticfiles.finders.AppDirectoriesFinder",
 ]
 
+MEDIA_URL = '/media/'
+MEDIA_ROOT = Path(BASE_DIR, 'media') 

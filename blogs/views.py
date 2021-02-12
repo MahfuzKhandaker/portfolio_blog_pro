@@ -88,15 +88,22 @@ def post_favourite_list(request):
     }
     return render(request, 'blogs/post_favourite_list.html', context)
 
-def favourite_post(request, slug):
-    post = get_object_or_404(Post, slug=slug)
+def favourite_post(request):
+    post = get_object_or_404(Post, slug=request.POST.get('post_slug'))
+    is_favourite = False
     if post.favourite.filter(id=request.user.id).exists():
         post.favourite.remove(request.user)
+        is_favourite = False
     else:
         post.favourite.add(request.user)
-    
-    return JsonResponse({'bool': True})
-    # return HttpResponseRedirect(post.get_absolute_url())
+        is_favourite = True
+    context ={
+        'post': post,
+        'is_favourite': is_favourite,
+    }
+    if request.is_ajax():
+        html = render_to_string('blogs/favourite_section.html', context, request=request)
+        return JsonResponse({'form': html})
 
 
 def likes(request):

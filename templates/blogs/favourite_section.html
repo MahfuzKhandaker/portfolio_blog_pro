@@ -1,0 +1,12 @@
+<form action="{% url 'favourite_post' %}" method="POST">
+    {% csrf_token %}
+    {% if is_favourite %}
+    <a class="btn" style="background-color:transparent" id="favourite" value="{{ post.slug }}">
+        <i class="fa fa-heart fa-3x" style="color:red"></i>
+    </a> 
+    {% else %}
+    <a class="btn" style="background-color:transparent" id="favourite" value="{{ post.slug }}">
+        <i class="fa fa-heart fa-3x" style="color:black"></i>
+    </a> 
+    {% endif %}
+</form>

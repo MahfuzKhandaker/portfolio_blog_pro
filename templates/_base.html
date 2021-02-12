@@ -31,13 +31,34 @@
             {% endblock content %}
         </div>
 
-        <!-- JavaScript -->
         {% block javascript %}
+        <!-- JavaScript -->
+        
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
         <script src="{% static 'js/jquery-3.5.0.min.js' %}"></script>
         <script src="{% static 'js/bootstrap.min.js' %}"></script>
-        <script src="{% static 'js/base.js' %}"></script>
         <script src="https://use.fontawesome.com/d6a626efdd.js"></script>
+        <script src="{% static 'js/base.js' %}"></script>
+        <script>
+            $(document).on('click', '#favourite', function(event){
+                event.preventDefault();
+                var slug = $(this).attr('value');
+                $.ajax({
+                    type: 'POST',
+                    url: '{% url "favourite_post" %}',
+                    data: {'post_slug':slug, 'csrfmiddlewaretoken': '{{ csrf_token }}'},
+                    dataType: 'json',
+                    success: function(response){
+                        $('#favourite-section').html(response['form'])
+                        console.log($('#favourite-section').html(response['form']));
+                    },
+                    error: function(rs, e){
+                        console.log(rs.responseText);
+                    },
+                
+                });
+            });
+        </script>
         <script>
             $(document).on('click', '#like', function(event){
                 event.preventDefault();

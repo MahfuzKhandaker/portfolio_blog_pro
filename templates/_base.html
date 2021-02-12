@@ -8,23 +8,13 @@
         <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
         <!-- CSS -->
         <link rel="stylesheet" href="{% static 'css/base.css' %}">
+        <script src="https://use.fontawesome.com/d6a626efdd.js"></script>
+        {% block head_extra %} {% endblock head_extra %}
     </head>
     <body>
-        <header>
-            <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
-                <a href="{% url 'home' %}" class="navbar-brand my-0 mr-md-auto font-weight-normal">Letsflyonthewebsky</a>
-                <nav class="my-2 my-md-0 mr-md-3">
-                    <a class="p-2 text-dark" href="{% url 'post-list' %}">Blog</a>
-                    <a class="p-2 text-dark" href="{% url 'about' %}">About</a>
-                    {% if request.user.is_authenticated %}
-                    <a class="p-2 text-dark" href="{% url 'account_logout' %}">Log Out</a>
-                    {% else %}
-                    <a class="p-2 text-dark" href="{% url 'account_login' %}">Log In</a>
-                    <a class="btn btn-outline-primary" href="{% url 'account_signup' %}">Sign Up</a>
-                    {% endif %}
-                </nav>
-            </div>
-        </header>
+        <div class="container-fluid">
+            {% include 'header.html' %}
+        </div>
 
         <div class="container">
             {% block content %}
@@ -37,7 +27,6 @@
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
         <script src="{% static 'js/jquery-3.5.0.min.js' %}"></script>
         <script src="{% static 'js/bootstrap.min.js' %}"></script>
-        <script src="https://use.fontawesome.com/d6a626efdd.js"></script>
         <script src="{% static 'js/base.js' %}"></script>
         <script>
             $(document).on('click', '#favourite', function(event){

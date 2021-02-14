@@ -1,28 +1,58 @@
 {% extends "_base.html" %}
 
+{% load markdown_extras %}
+
 {% block content %}
 
 <div class="container">
-    <h1>All Posts</h1>
-    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Totam perferendis cupiditate veniam, facere ipsam praesentium. Maxime explicabo, magnam nobis temporibus repudiandae enim! Praesentium maiores, accusantium hic at soluta commodi quae.</p>
-    <br>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa excepturi inventore sed nobis? Enim exercitationem libero magni, perspiciatis deserunt porro illo nisi dolore cum? Itaque earum corrupti architecto at iure.</p>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam modi unde excepturi voluptatem velit a accusantium accusamus, tempore officia nam. In ipsa quam laudantium voluptate quod possimus reiciendis, voluptas officiis.</p>
-</div>
-
-{% for post in posts %}
-<div class="container cf">
-
-    <div class="card blogcard bounce-up cf" style="width: 18rem;">
-        <img class="card-img-top" src="{{ post.thumbnail.url }}" alt="Card image cap">
-        <div class="card-body cf">
-          <h5 class="card-title"><a href="{{ post.get_absolute_url }}">{{post.title}}</a></h5>
-          <p class="card-text">{{post.overview}}</p>
-          <a href="{{ post.get_absolute_url }}" class="btn btn-primary">READ MORE</a>
+  <div class="row d-flex align-items-stretch">
+  <!-- Blog Posts -->
+    <main class="posts-listing col-lg-8"> 
+      <div class="container">
+        <div class="row">
+          <!-- post -->
+          {% for post in posts %}
+          <div class="col-md-6">
+            <div class="card mb-3">
+              <img class="card-img-top" src="{{ post.thumbnail.url }}" alt="{{ post.title }}">
+              <div class="card-body">
+                <h3 class="card-title"><a class="text-dark" href="{{ post.get_absolute_url }}">{{ post.title }}</a></h3>
+                <small class="text-muted">
+                  Published on:&nbsp;
+                  {{ post.timestamp.date }} |&nbsp;
+                  <i class="far fa-clock text-info"></i> {% if post.read_time <= 1 %} < 1 Minute {% else %}{{ post.read_time }} minutes read {% endif %} |&nbsp;
+                  <i class="far fa-eye"></i> {{ post.number_of_views }} views
+                  <i class="fas fa-thumbs-up"></i> {{ post.number_of_likes }}
+                  <i class="far fa-comment"></i> {{ post.comments.count }} comments
+                  {% for category in post.categories.all %}
+                  <a href="{% url 'post_category' category.title %}">
+                    {{ category.title }}
+                  </a>&nbsp;
+                  {% endfor %}
+                </small>
+                <p class="card-text">{{ post.content | markdown | safe | truncatewords:15 }}</p>
+                <a href="{{ post.get_absolute_url }}" class="blog-home__cta">Read More &rarr;</a>
+            </div>
         </div>
-      </div>
+    </div>
+    {% empty %}
+    <center>
+      <h5>No post found</h5>
+    </center>
+  {% endfor %}
+  </div>
+    
+
+  
+  {% if is_paginated %}
+  <div class="container">
+    {% include 'pagination.html' %}
+</div>
+{% endif %}
 
 </div>
-{% endfor %}
-
+</main>
+  {% include 'sidebar.html' %}
+  </div>
+</div>
 {% endblock content %}

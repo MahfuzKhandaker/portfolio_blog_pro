@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.sites',
 
     # Third-party
+    'pagedown.apps.PagedownConfig',
     'crispy_forms',
     'allauth',
     'allauth.account',

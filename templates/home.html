@@ -1,5 +1,8 @@
 {% extends '_base.html' %}
+
 {% load static %}
+
+{% load markdown_extras %}
 
 {% block title %}Home{% endblock title %}
 
@@ -59,17 +62,17 @@ Hi {{ user.email }}!
                   <h5 class="card-title">
                     <a class="text-dark" href="{{ post.get_absolute_url }}">{{ post.title }}</a></h5>
                     <small class="text-muted">
-                      {{ post.last_modified|timesince }} ago |&nbsp;
+                      {{post.timestamp|timesince}} ago |&nbsp;
                       <i class="fas fa-thumbs-up"></i> {{ post.number_of_likes }}
                       <i class="far fa-comment"></i> {{ post.comments.count }} comments |&nbsp;
                       
                       {% for category in post.categories.all %}
                       <a href="#">
-                        {{ category.name }}
+                        {{ category.title }}
                       </a>&nbsp;
                       {% endfor %}
                     </small>
-                  <p class="card-text">{{ post.summary|truncatewords:50 }}</p>
+                  <p class="card-text">{{ post.overview|truncatewords:50 }}</p>
                 </div>
               </div>
               {% if not forloop.first and not forloop.last %}
@@ -126,12 +129,12 @@ Hi {{ user.email }}!
   
                   {% for category in post.categories.all %}
                   <a href="#">
-                    {{ category.name }}
+                    {{ category.title }}
                   </a>&nbsp;
                   {% endfor %}
                 </small>
-                <p class="card-text">{{ post.summary|linebreaks|truncatewords:30 }}</p>
-                <p><small class="text-muted">Last updated {{ post.last_modified|timesince }} ago</small></p>
+                <p class="card-text">{{ post.overview|linebreaks|truncatewords:30 }}</p>
+                <p><small class="text-muted">Last updated {{ post.updated|timesince }} ago</small></p>
               </div>
             </div>
           </div>

@@ -1,0 +1,49 @@
+{% extends "_base.html" %}
+
+{% block content %}
+
+{% if searching_post_list %}
+<div class="container-fluid">
+    <div class="row">
+  
+    {% for post in searching_post_list %}
+    
+  
+      <div class="col-md-6">
+        
+          <div class="card mb-3 animated animatedFadeInUp fadeInUp">
+              <div class="card-body">
+                <h3 class="card-title"><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h3>
+                <small class="text-muted">
+                  Published on:&nbsp;
+                  {{ post.created_on.date }} |&nbsp;
+                  <i class="far fa-clock text-info"></i> {% if post.read_time <= 1 %} < 1 Minute {% else %}{{ post.read_time }} minutes read {% endif %} |&nbsp;
+                  <i class="far fa-eye"></i> {{ post.number_of_views }} views
+                  <i class="far fa-comment"></i> {{ post.comments.count }} comments
+                  Categories:&nbsp;
+                  {% for category in post.categories.all %}
+                  <a href="{% url 'post_category' category.title %}">
+                    {{ category.title }}
+                    </a>&nbsp;
+                  {% endfor %}
+                </small>
+                  <a href="{{ post.get_absolute_url }}" class="blog-home__cta">Read More &rarr;</a>
+              </div>
+          </div>
+      </div>
+      {% endfor %}
+    </div>
+    {% if is_paginated %}
+    <div class="container">
+      {% include 'pagination.html' %}
+  </div>
+  {% endif %}
+  
+  </div>
+  {% else %}
+  <center>
+    <h5>Oops!No post found</h5>
+  </center>
+  
+  {% endif %}
+{% endblock %}

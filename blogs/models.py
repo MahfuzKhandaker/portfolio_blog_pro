@@ -1,19 +1,24 @@
 from django.db import models
-from django.contrib.auth import get_user_model
+from django.conf import settings
 from django.urls import reverse
 from django.db.models.signals import pre_save
 from django.dispatch import receiver
 from django.utils.text import slugify
+from django.utils.safestring import mark_safe   
+from blogs.utils import get_read_time 
 
 
 class Author(models.Model):
-    user = models.OneToOneField(get_user_model(), on_delete=models.CASCADE)
-    profile_picture = models.ImageField()
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    profile_picture = models.ImageField(upload_to='images/', null=True, blank=True)
 
     objects = models.Manager()
 
     def __str__(self):
         return self.user.username
+    
+    class Meta:
+        verbose_name_plural = 'authors'
 
 
 class Category(models.Model):
@@ -23,10 +28,16 @@ class Category(models.Model):
 
     def __str__(self):
         return self.title
+    
+    class Meta:
+        ordering = ['-title']
+        verbose_name_plural = 'categories'
+
 
 class PublishedManager(models.Manager):
     def get_queryset(self):
         return super(PublishedManager, self).get_queryset().filter(status="published")
+
 
 class Post(models.Model):
     objects     = models.Manager()      #Default Manager
@@ -49,12 +60,14 @@ class Post(models.Model):
     categories  = models.ManyToManyField(Category)
     featured    = models.BooleanField()
     status      = models.CharField(max_length=10, choices=STATUS_CHOICES, default='draft')
-    likes       = models.ManyToManyField(get_user_model(), blank=True, related_name='likes')
-    favourite   = models.ManyToManyField(get_user_model(), related_name='favourite', blank=True)
-    
+    likes       = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True, related_name='likes')
+    favourite   = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='favourite', blank=True)
+    number_of_views = models.IntegerField(default=0, null=True, blank=True)
+    read_time       = models.IntegerField(default=0)
     
     class Meta: 
         ordering = ['-id']
+        verbose_name_plural = 'posts'
  
     def __str__(self): 
         return self.title
@@ -70,18 +83,29 @@ def pre_save_slug(sender, **kwargs):
     slug = slugify(kwargs['instance'].title)
     kwargs['instance'].slug = slug
 
+def pre_save_post_receiver(sender, instance, *args, **kwargs):
+    if instance.content:
+        html_string = instance.content
+        read_time_var = get_read_time(html_string)
+        instance.read_time = read_time_var
+pre_save.connect(pre_save_post_receiver, sender=Post)
+
 
 class Profile(models.Model):
-    user = models.OneToOneField(get_user_model(), on_delete=models.CASCADE)
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     dob = models.DateField(null=True, blank=True)
-    photo = models.ImageField(null=True, blank=True)
+    photo = models.ImageField(upload_to='images/', blank=True)
 
 
     def __str__(self):
         return "Profile of user {}".format(self.user.username)
 
+    class Meta:
+        ordering = ['-dob']
+        verbose_name_plural = 'profiles'
+
 class Comment(models.Model):
-    user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     timestamp = models.DateTimeField(auto_now_add=True)
     content = models.TextField(max_length=1000)
     reply = models.ForeignKey('Comment', on_delete=models.CASCADE, related_name='replies', null=True, blank=True, default=None)
@@ -90,9 +114,11 @@ class Comment(models.Model):
 
     objects = models.Manager()
 
-    class Meta: 
-        ordering = ['-timestamp']
-
     def __str__(self):
         return '{}-{}'.format(self.post.title, str(self.user.username))
 
+    class Meta: 
+        ordering = ['-timestamp']
+        verbose_name_plural = 'comments'
+
+    

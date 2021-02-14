@@ -1,16 +1,10 @@
 from django import forms
+from pagedown.widgets import AdminPagedownWidget
 from .models import Post, Comment
 
 
 class PostForm(forms.ModelForm):
-    content = forms.CharField(
-        widget=forms.Textarea(attrs={
-        'placeholder': 'Write your blog here...',
-        'required': False, 
-        'cols': 30, 
-        'rows': 10
-    })
-    )
+    content =  forms.CharField(widget=AdminPagedownWidget())
 
     class Meta:
         model = Post

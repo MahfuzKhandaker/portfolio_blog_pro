@@ -3,7 +3,8 @@ from django.views.generic import FormView, CreateView, ListView, DetailView
 from django.views.generic.edit import FormMixin
 from django.http import JsonResponse
 from .forms import PostForm, CommentForm
-from .models import Post, Comment
+from blogs.utils import get_read_time
+from .models import Post, Comment, Category
 from .mixins import AjaxFormMixin
 from django.http import HttpResponseRedirect
 from django.template.loader import render_to_string
@@ -12,6 +13,8 @@ from django.urls import reverse_lazy
 from django.core import serializers
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST
+from django.db.models import Count
+from django.db.models import Q
 try:
     from django.utils import simplejson as json
 except ImportError:
@@ -32,12 +35,40 @@ class PostCreateView(AjaxFormMixin, CreateView):
 
 class PostListView(ListView):
     model = Post
-    context_object_name = 'posts'
     template_name = 'blogs/post_list.html'
+    paginate_by = 10
 
-    def queryset(self):
-        return Post.published.all()
+    def get_context_data(self, **kwargs):
+        context = super(PostListView, self).get_context_data(**kwargs)
+        context['posts'] = Post.published.order_by('-timestamp')
+        context['post_num'] = Post.published.count()
+        context['most_recent'] = Post.published.order_by('-timestamp')[:3]
+        context['post_by_category_count']  = Post.published.values('categories__title').annotate(Count('categories__title')).order_by('categories')
+        return context
 
+
+class SearchResultsListView(ListView):
+    model = Post
+    template_name = 'blogs/search_results.html'
+    context_object_name = 'searching_post_list'
+    
+    def get_queryset(self):
+        query = self.request.GET.get('q')
+        return Post.published.filter(
+            Q(title__icontains=query) | Q(categories__title__icontains=query)
+        )
+
+def post_category(request, category):
+    category_posts = Post.published.filter(
+        categories__title__contains=category
+    ).order_by(
+        '-timestamp'
+    )
+    context = {
+        'category': category,
+        'category_posts': category_posts
+    }
+    return render(request, 'blogs/post_category.html', context)
 
 def post_detail(request, slug):
     post = get_object_or_404(Post, slug=slug)

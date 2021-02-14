@@ -1,0 +1,54 @@
+<aside class="col-lg-4">
+    <div class="blog-sidebar">
+      <div class="make-me-sticky">
+    <!-- Widget [Search Bar Widget]-->
+    <div class="widget search">
+    <header>
+        <h3 class="h6">Search the blog</h3>
+    </header>
+    <form action="{% url 'search_results' %}" class="search-form">
+        <div class="form-group">
+        <input type="text" name="q" placeholder="What are you looking for?">
+        <button type="submit" class="submit"><i class="fas fa-search"></i></button>
+        </div>
+    </form>
+    </div>
+    <!-- Widget [Latest Posts Widget]        -->
+    <div class="widget latest-posts">
+    <header>
+        <h3 class="h6">Latest Posts</h3>
+    </header>
+    <div class="blog-post">
+        {% for post in most_recent %}
+        <a href="{{ post.get_absolute_url }}">
+            <div class="item d-flex align-items-center">
+            <div class="image"><img src="{{ post.thumbnail.url }}" alt="..." class="img-fluid"></div>
+            <div class="title"><strong>{{ post.title }}</strong>
+                <div class="d-flex align-items-center">
+                <div class="views"><i class="far fa-eye"></i> {{ post.number_of_views }}</div> |&nbsp;
+                <div class="comments"><i class="far fa-comment"></i> {{ post.comments.count }}</div>
+                </div>
+            </div>
+            </div>
+        </a>
+        <div class="item d-flex justify-content-between">
+          
+      </div>
+        {% endfor %}
+    </div>
+  </div>
+    <!-- Widget [Categories Widget]-->
+    <div class="widget categories">
+    <header>
+        <h3 class="h6">Categories</h3>
+    </header>
+    {% for cat in post_by_category_count %}
+    <div class="item d-flex justify-content-between">
+      <a href="#">{{ cat.categories__title }}</a><span>{{ cat.categories__title__count }}</span>
+    </div>
+    {% endfor %}
+    </div>
+    
+      </div>
+    </div>
+  </aside>

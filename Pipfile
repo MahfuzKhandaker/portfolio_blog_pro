@@ -11,6 +11,8 @@ psycopg2 = "*"
 django-crispy-forms = "*"
 django-allauth = "*"
 pillow = "*"
+markdown = "*"
+django-pagedown = "*"
 
 [requires]
 python_version = "3.7"

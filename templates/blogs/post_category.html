@@ -1,0 +1,37 @@
+{% extends "_base.html" %}
+
+{% load markdown_extras %}
+
+{% block content %}
+
+    <div class="container">
+      <div class="row">
+          <!-- Blog Entries Category Column -->
+          <div class="col-md-12 left">
+            {% for post in category_posts %}
+              <div class="card mb-4">
+                {% if post.thumbnail %}
+                  <img class="card-img-top" src="{{ post.thumbnail.url }}" />
+                {% endif %}
+                  <div class="card-body">
+                      <h3 class="card-title"><a href="{{ post.get_absolute.url }}">{{ post.title }}</a></h3>
+                      <small>
+                        {{ post.timestamp.date }} |&nbsp;
+                        {% for category in post.categories.all %}
+                        <a href="{% url 'post_category' category.title %}">
+                            {{ category.title }}
+                        </a>&nbsp;
+                        {% endfor %}
+                      </small>
+                      <p class="card-text">{{ post.content | markdown | safe | truncatewords:30 }}</p>
+                      <a href="{{ post.get_absolute.url }}" class="blog-home__cta">Read More &rarr;</a>
+                  </div>
+                  <div class="card-footer">
+                    <small class="text-muted">{{ post.updated }}</small>
+                  </div>
+              </div>
+              {% endfor %}
+          </div>
+      </div>
+  </div>
+{% endblock %}

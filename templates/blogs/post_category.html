@@ -17,7 +17,7 @@
                       <h3 class="card-title"><a href="{{ post.get_absolute.url }}">{{ post.title }}</a></h3>
                       <small>
                         {{ post.timestamp.date }} |&nbsp;
-                        {% for category in post.categories.all %}
+                        {% for category in category_posts %}
                         <a href="{% url 'post_category' category.title %}">
                             {{ category.title }}
                         </a>&nbsp;

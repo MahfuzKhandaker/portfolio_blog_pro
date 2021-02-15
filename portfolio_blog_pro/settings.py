@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'users.apps.UsersConfig',
     'pages.apps.PagesConfig',
     'blogs.apps.BlogsConfig',
+    'projects.apps.ProjectsConfig',
 ]
 
 # django-crispy-forms

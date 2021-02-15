@@ -29,6 +29,7 @@ urlpatterns = [
     # Local apps
     path('', include('pages.urls')),
     path('blogs/', include('blogs.urls')),
+    path('projects/', include('projects.urls')),
 ]
 
 if settings.DEBUG:

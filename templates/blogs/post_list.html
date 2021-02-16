@@ -8,14 +8,15 @@
   <div class="row d-flex align-items-stretch">
   <!-- Blog Posts -->
     <main class="posts-listing col-lg-8"> 
-      <div class="container">
+      
+      <div class="container cf">
         <div class="row">
           <!-- post -->
           {% for post in posts %}
           <div class="col-md-6">
-            <div class="card mb-3">
+            <div class="card mb-3 blogcard bounce-up cf">
               <img class="card-img-top" src="{{ post.thumbnail.url }}" alt="{{ post.title }}">
-              <div class="card-body">
+              <div class="card-body cf">
                 <h3 class="card-title"><a class="text-dark" href="{{ post.get_absolute_url }}">{{ post.title }}</a></h3>
                 <small class="text-muted">
                   Published on:&nbsp;
@@ -52,7 +53,9 @@
 
 </div>
 </main>
-  {% include 'sidebar.html' %}
+
+{% include 'sidebar.html' %}
+  
   </div>
 </div>
 {% endblock content %}

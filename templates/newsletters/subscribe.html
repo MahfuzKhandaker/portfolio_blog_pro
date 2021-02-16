@@ -1,0 +1,31 @@
+{% extends "_base.html" %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row ">
+        <div class="col-12">
+            <div class="container">
+                <h2>Stay Updated</h2>
+                <p>Subscribe to our newsletter to get our latest news.</p>
+                {% if messages %}
+                {% for message in messages %}
+                <div {% if message.tags %} class="{{ message.tags }}" {% endif %} role="alert">
+                  {{ message }}
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                {% endfor %}
+                {% else %}
+                <form action="{% url 'newsletters:subscribe' %}" method="POST">{% csrf_token %}
+                  <input type="email" name="email" placeholder="Enter email address">
+                  <input type="submit" value="Subscribe">
+                </form>
+                {% endif %}
+              </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

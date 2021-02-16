@@ -8,7 +8,7 @@ from django.views.generic import TemplateView
 class HomePageView(generic.ListView):
     model = Post
     context_object_name = 'posts'
-    template_name = 'home.html'
+    template_name = 'pages/home.html'
     paginate_by = 6 
 
 
@@ -22,4 +22,4 @@ class HomePageView(generic.ListView):
 
 
 class AboutPageView(TemplateView): # new
-    template_name = 'about.html'
+    template_name = 'pages/about.html'

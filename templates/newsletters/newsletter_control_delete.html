@@ -1,0 +1,33 @@
+{% extends 'control_base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+      <div class="col-md-12">
+          {% block form %}
+
+          <form method="post" novalidate>
+            {% csrf_token %}
+          
+            {{ form.subject|as_crispy_field }}
+            {{ form.body|as_crispy_field }}
+          
+            <div class="row">
+              <div class="col-6">
+                {{ form.email|as_crispy_field }}
+              </div>
+              <div class="col-6">
+                {{ form.status|as_crispy_field }}
+              </div>
+            </div>
+            
+            <button type="submit" class="btn btn-success">DELETE</button>
+          </form>
+
+          {% endblock %}
+      </div>
+    </div>
+</div>
+{% endblock content %}

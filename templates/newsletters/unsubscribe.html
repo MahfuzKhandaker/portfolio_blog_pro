@@ -1,0 +1,33 @@
+{% extends "_base.html" %}
+
+{% block content %}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="ft-main">
+                <div class="ft-main-item">
+                <h2 class="ft-title">Do you unsubscribe?</h2>
+                <p>Unsubscribe to newsletter.</p>
+                {% if messages %}
+                {% for message in messages %}
+                <div {% if message.tags %} class="{{ message.tags }}" {% endif %} role="alert">
+                  {{ message }}
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                {% endfor %}
+                {% else %}
+                <form action="{% url 'newsletters:unsubscribe' %}" method="POST">{% csrf_token %}
+                  <input type="email" name="email" placeholder="Enter email address">
+                  <input type="submit" value="Unsubscribe">
+                </form>
+                {% endif %}
+              </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

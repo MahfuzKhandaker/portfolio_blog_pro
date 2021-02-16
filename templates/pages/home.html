@@ -1,0 +1,186 @@
+{% extends '_base.html' %}
+
+{% load static %}
+
+{% load markdown_extras %}
+
+{% block title %}Home{% endblock title %}
+
+{% block content %}
+
+{% if user.is_authenticated %}
+
+Hi {{ user.email }}!
+
+<p><a href="{% url 'account_logout' %}">Log Out</a></p>
+
+{% else %}
+
+<p>You are not logged in</p>
+<a href="{% url 'account_login' %}">Log In</a>
+<a href="{% url 'account_signup' %}">Sign Up</a>
+
+{% endif %}
+
+<!-- Hero Section-->
+<section style="background-image: url('media/images/web13.jpg'); background-size: cover; background-position: center center" class="hero">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8">
+          {{ post_num }}
+          <h1>Bootstrap 4 Blog - A free template by Bootstrap Temple</h1><a href="#" class="hero-link">Discover More</a>
+        </div>
+      </div><a href="#" class="continue link-scroll"><i class="fas fa-chevron-down"></i> Scroll Down</a>
+    </div>
+  </section>
+  <!-- Intro Section-->
+  <section class="intro">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8">
+          <h2 class="h3">Some great intro here</h2>
+          <p class="text-big">Place a nice <strong>introduction</strong> here <strong>to catch reader's attention</strong>. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderi.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="featured-posts">
+  <div class="container">
+    <!-- Blog post -->
+      <div class="row py-3">
+        {% for post in posts %}
+        <div class="col-lg-12">
+          <div class="card mb-3">
+            <div class="row no-gutters">
+              {% if forloop.first or forloop.last %}
+              <div class="col-lg-4">
+                <img src="{{ post.thumbnail.url }}" class="card-img" alt="{{ post.title }}">
+              </div>
+              {% endif %}
+              <div class="col-lg-8">
+                <div class="card-body">
+                  <h5 class="card-title">
+                    <a class="text-dark" href="{{ post.get_absolute_url }}">{{ post.title }}</a></h5>
+                    <small class="text-muted">
+                      {{post.timestamp|timesince}} ago |&nbsp;
+                      <i class="fas fa-thumbs-up"></i> {{ post.number_of_likes }}
+                      <i class="far fa-comment"></i> {{ post.comments.count }} comments |&nbsp;
+                      
+                      {% for category in post.categories.all %}
+                      <a href="#">
+                        {{ category.title }}
+                      </a>&nbsp;
+                      {% endfor %}
+                    </small>
+                  <p class="card-text">{{ post.overview|truncatewords:50 }}</p>
+                </div>
+              </div>
+              {% if not forloop.first and not forloop.last %}
+              <div class="col-lg-4">
+                <img src="{{ post.thumbnail.url }}" class="card-img" alt="{{ post.title }}">
+              </div>
+              {% endif %}
+            </div>
+          </div>       
+      </div>
+      {% empty %}
+      <center>
+        <h5>Oops!No post found</h5>
+      </center>
+      {% endfor %}
+      </div>
+  
+      {% if is_paginated %}
+      <div class="container mb-3">
+        {% include 'pagination.html' %}
+      </div>
+    {% endif %}
+  </div>
+  </section>
+  
+   <!-- Divider Section-->
+   <section style="background: url('media/images/web3.jpg'); background-size: cover; background-position: center bottom" class="divider">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-7">
+          <h2>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</h2><a href="#" class="hero-link">View More</a>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+    <!-- Latest Posts -->
+    <section class="latest-posts"> 
+      <div class="container cf">
+        <header> 
+          <h2>Latest from the blog</h2>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+        </header>
+        <div class="row">
+          {% for post in most_recent %}
+          <div class="col-md-4">
+            <div class="card blogcard bounce-up cf">
+              <img src="{{ post.thumbnail.url }}" class="card-img-top" alt="{{ post.title }}">
+              <div class="card-body cf">
+                <h5 class="card-title"><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h5>
+                <small class="text-muted">
+                  <i class="far fa-eye"></i> {{ post.number_of_views }} views
+                  <i class="far fa-comment"></i> {{ post.comments.count }} comments
+  
+                  {% for category in post.categories.all %}
+                  <a href="#">
+                    {{ category.title }}
+                  </a>&nbsp;
+                  {% endfor %}
+                </small>
+                <p class="card-text">{{ post.overview|linebreaks|truncatewords:30 }}</p>
+                <p><small class="text-muted">Last updated {{ post.updated|timesince }} ago</small></p>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </section>
+    {% comment %}
+    <!-- Newsletter Section-->
+    <section class="newsletter no-padding-top">
+      <div class="container">
+        <div class="row py-5">
+          <div class="col-sm text-center">
+            <h2>Stay Updated</h2>
+            <p>Subscribe to our newsletter to get our latest news.</p>
+            <form action="{% url 'newsletters:subscribe' %}" method="POST">{% csrf_token %}
+              <input type="email" name="email" placeholder="Enter email address">
+              <input type="submit" value="Subscribe">
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+     <!-- Gallery Section-->
+     <section class="gallery no-padding">    
+      <div class="row">
+        <div class="mix col-lg-3 col-md-3 col-sm-6">
+          <div class="item"><a href="" data-fancybox="gallery" class="image"><img src="{% static 'img/gallery-1.jpg' %}" alt="..." class="img-fluid">
+              <div class="overlay d-flex align-items-center justify-content-center"><i class="icon-search"></i></div></a></div>
+        </div>
+        <div class="mix col-lg-3 col-md-3 col-sm-6">
+          <div class="item"><a href="img/gallery-2.jpg" data-fancybox="gallery" class="image"><img src="{% static 'img/gallery-2.jpg' %}" alt="..." class="img-fluid">
+              <div class="overlay d-flex align-items-center justify-content-center"><i class="icon-search"></i></div></a></div>
+        </div>
+        <div class="mix col-lg-3 col-md-3 col-sm-6">
+          <div class="item"><a href="img/gallery-3.jpg" data-fancybox="gallery" class="image"><img src="{% static 'img/gallery-3.jpg' %}" alt="..." class="img-fluid">
+              <div class="overlay d-flex align-items-center justify-content-center"><i class="icon-search"></i></div></a></div>
+        </div>
+        <div class="mix col-lg-3 col-md-3 col-sm-6">
+          <div class="item"><a href="img/gallery-4.jpg" data-fancybox="gallery" class="image"><img src="{% static 'img/gallery-4.jpg' %}" alt="..." class="img-fluid">
+              <div class="overlay d-flex align-items-center justify-content-center"><i class="icon-search"></i></div></a></div>
+        </div>
+      </div>
+    </section>
+    {% endcomment %}
+
+    
+{% endblock content %}

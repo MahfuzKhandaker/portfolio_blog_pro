@@ -1,0 +1,13 @@
+{% extends 'control_base.html' %}
+
+{% block control %}
+<div class="container">
+    <div class="row">
+      <div class="col-md-12">
+          {% block form %}
+            {% include 'newsletters/newsletter_form.html' %}
+          {% endblock form %}
+      </div>
+    </div>
+</div>
+{% endblock control %}

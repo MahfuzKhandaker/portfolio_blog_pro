@@ -51,6 +51,8 @@ INSTALLED_APPS = [
     'pages.apps.PagesConfig',
     'blogs.apps.BlogsConfig',
     'projects.apps.ProjectsConfig',
+    'contact.apps.ContactConfig',
+    'newsletters.apps.NewslettersConfig',
 ]
 
 # django-crispy-forms
@@ -173,3 +175,14 @@ STATICFILES_FINDERS = [
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = Path(BASE_DIR, 'media') 
+
+
+# These are the settings for sending email in Django via Gmail
+from .email_info import EMAIL_BACKEND, EMAIL_HOST, EMAIL_HOST_USER, EMAIL_HOST_PASSWORD, EMAIL_PORT, EMAIL_USE_TLS, EMAIL_USE_SSL
+EMAIL_BACKEND = EMAIL_BACKEND
+EMAIL_HOST = EMAIL_HOST
+EMAIL_HOST_USER = EMAIL_HOST_USER
+EMAIL_HOST_PASSWORD = EMAIL_HOST_PASSWORD 
+EMAIL_PORT = EMAIL_PORT
+EMAIL_USE_TLS = EMAIL_USE_TLS
+EMAIL_USE_SSL = EMAIL_USE_SSL

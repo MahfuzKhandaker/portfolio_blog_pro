@@ -1,6 +1,34 @@
 console.log('JavaScript here!')
 
+// Preloader
+$(window).on('load', function() { // makes sure the whole site is loaded
+  $('#status').fadeOut(); // will first fade out the loading animation 
+  $('#preloader').delay(350).fadeOut('slow'); // will fade out the white DIV that covers the website. 
+  $('body').delay(350).css({'overflow':'visible'});
+});
+
+// jquery function
 $(document).ready(function(){
+
+  // Fixed Header
+  var offset = $('.blog-header').offset();
+  checkOffset();
+
+  $(window).scroll(function() {
+    checkOffset();
+  });
+  function checkOffset() {
+    if ($(document).scrollTop() > offset.top) {
+      $('.blog-header').addClass('fixed');
+    } else {
+      $('.blog-header').removeClass('fixed');
+    }
+  }
+  // markdown content image resized to bootstrap card-img-top class
+  $(".card-body img").each(function(){
+    $(this).addClass("card-img-top");
+  });
+
 
   $('#delete').click(function(){
     return confirm("Are you sure to delete this post?");
@@ -60,20 +88,20 @@ $(document).ready(function(){
     });
   });
   // blogcard move up animation onScroll in view
-    $.fn.isInViewport = function () {
+  $.fn.isInViewport = function () {
     let elementTop = $(this).offset().top;
     let elementBottom = elementTop + $(this).outerHeight();
     let viewportTop = $(window).scrollTop();
     let viewportBottom = viewportTop + $(window).height();
     return elementBottom > viewportTop && elementTop < viewportBottom;
-    };
-    $(window).on("load resize scroll", function () {
-      $('.blogcard').each(function() {
-        if( $(this).isInViewport() ) {
-            $(this).addClass('animate');
-        } else {
-          $(this).removeClass('animate');
-        }
-      });
+  };
+  $(window).on("load resize scroll", function () {
+    $('.blogcard').each(function() {
+      if( $(this).isInViewport() ) {
+        $(this).addClass('animate');
+      } else {
+        $(this).removeClass('animate');
+      }
     });
   });
+});

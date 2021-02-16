@@ -1,0 +1,13 @@
+{% extends 'control_base.html' %}
+
+{% block content %}
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12">
+        {% block form %}
+          {% include 'newsletters/newsletter_form.html' %}
+        {% endblock %}
+    </div>
+  </div>
+</div>
+{% endblock %}

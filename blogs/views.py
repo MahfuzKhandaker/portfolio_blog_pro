@@ -72,6 +72,10 @@ def post_category(request, category):
 
 def post_detail(request, slug):
     post = get_object_or_404(Post, slug=slug)
+
+    post.number_of_views = post.number_of_views+1
+    post.save()
+    
     comments = Comment.objects.filter(post=post, reply=None).order_by('-id')
     
     is_liked = False
@@ -100,7 +104,7 @@ def post_detail(request, slug):
         'is_liked': is_liked,
         'is_favourite': is_favourite,
         'comments': comments,
-        'total_likes': post.likes.count(),
+        'total_likes': post.total_likes,
         'total_comments': post.comments.count(),
         'comment_form': comment_form,
     }

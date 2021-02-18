@@ -8,29 +8,22 @@
 
 {% block content %}
 
-{% if user.is_authenticated %}
-
-Hi {{ user.email }}!
-
-<p><a href="{% url 'account_logout' %}">Log Out</a></p>
-
-{% else %}
-
-<p>You are not logged in</p>
-<a href="{% url 'account_login' %}">Log In</a>
-<a href="{% url 'account_signup' %}">Sign Up</a>
-
-{% endif %}
-
 <!-- Hero Section-->
 <section style="background-image: url('media/images/web13.jpg'); background-size: cover; background-position: center center" class="hero">
     <div class="container">
       <div class="row">
         <div class="col-lg-8">
-          {{ post_num }}
-          <h1>Bootstrap 4 Blog - A free template by Bootstrap Temple</h1><a href="#" class="hero-link">Discover More</a>
+          <h1>Welcome! {{ user.email }}! </h1><a href="{% url 'post-list' %}" class="hero-link text-white">{{ post_num }} Posts</a>
+          
         </div>
-      </div><a href="#" class="continue link-scroll"><i class="fas fa-chevron-down"></i> Scroll Down</a>
+      </div><a href="#" class="continue link-scroll">
+        Scroll Down
+        <br>
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-double-down" viewBox="0 0 16 16">
+          <path fill-rule="evenodd" d="M1.646 6.646a.5.5 0 0 1 .708 0L8 12.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+          <path fill-rule="evenodd" d="M1.646 2.646a.5.5 0 0 1 .708 0L8 8.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+        </svg>
+      </a>
     </div>
   </section>
   <!-- Intro Section-->
@@ -48,41 +41,30 @@ Hi {{ user.email }}!
   <div class="container">
     <!-- Blog post -->
       <div class="row py-3">
-        {% for post in posts %}
-        <div class="col-lg-12">
-          <div class="card mb-3">
-            <div class="row no-gutters">
-              {% if forloop.first or forloop.last %}
-              <div class="col-lg-4">
-                <img src="{{ post.thumbnail.url }}" class="card-img" alt="{{ post.title }}">
-              </div>
-              {% endif %}
-              <div class="col-lg-8">
-                <div class="card-body">
-                  <h5 class="card-title">
-                    <a class="text-dark" href="{{ post.get_absolute_url }}">{{ post.title }}</a></h5>
-                    <small class="text-muted">
-                      {{post.timestamp|timesince}} ago |&nbsp;
-                      <i class="fas fa-thumbs-up"></i> {{ post.number_of_likes }}
-                      <i class="far fa-comment"></i> {{ post.comments.count }} comments |&nbsp;
-                      
-                      {% for category in post.categories.all %}
-                      <a href="#">
-                        {{ category.title }}
-                      </a>&nbsp;
-                      {% endfor %}
-                    </small>
-                  <p class="card-text">{{ post.overview|truncatewords:50 }}</p>
-                </div>
-              </div>
-              {% if not forloop.first and not forloop.last %}
-              <div class="col-lg-4">
-                <img src="{{ post.thumbnail.url }}" class="card-img" alt="{{ post.title }}">
-              </div>
-              {% endif %}
-            </div>
-          </div>       
+        {% for post in featured_posts %}
+        <div class="col-md-4">
+          <div class="card mb-3 blogcard bounce-up cf">
+            <img class="card-img-top" src="{{ post.thumbnail.url }}" alt="{{ post.title }}">
+            <div class="card-body cf">
+              <h3 class="card-title"><a class="text-dark" href="{{ post.get_absolute_url }}">{{ post.title }}</a></h3>
+              <small class="text-muted">
+                Published on:&nbsp;
+                {{ post.timestamp.date }} |&nbsp;
+                <i class="far fa-clock text-info"></i> {% if post.read_time <= 1 %} < 1 Minute {% else %}{{ post.read_time }} minutes read {% endif %} |&nbsp;
+                <i class="far fa-eye"></i> {{ post.number_of_views }} views
+                <i class="fas fa-thumbs-up"></i> {{ post.number_of_likes }}
+                <i class="far fa-comment"></i> {{ post.comments.count }} comments
+                {% for category in post.categories.all %}
+                <a href="{% url 'post_category' category.title %}">
+                  {{ category.title }}
+                </a>&nbsp;
+                {% endfor %}
+              </small>
+              <p class="card-text">{{ post.content | markdown | safe | truncatewords:15 }}</p>
+              <a href="{{ post.get_absolute_url }}" class="blog-home__cta">Read More</a>
+          </div>
       </div>
+  </div>
       {% empty %}
       <center>
         <h5>Oops!No post found</h5>
@@ -128,7 +110,7 @@ Hi {{ user.email }}!
                   <i class="far fa-comment"></i> {{ post.comments.count }} comments
   
                   {% for category in post.categories.all %}
-                  <a href="#">
+                  <a href="{% url 'post_category' category.title %}">
                     {{ category.title }}
                   </a>&nbsp;
                   {% endfor %}
@@ -141,46 +123,6 @@ Hi {{ user.email }}!
           {% endfor %}
         </div>
       </div>
-    </section>
-    {% comment %}
-    <!-- Newsletter Section-->
-    <section class="newsletter no-padding-top">
-      <div class="container">
-        <div class="row py-5">
-          <div class="col-sm text-center">
-            <h2>Stay Updated</h2>
-            <p>Subscribe to our newsletter to get our latest news.</p>
-            <form action="{% url 'newsletters:subscribe' %}" method="POST">{% csrf_token %}
-              <input type="email" name="email" placeholder="Enter email address">
-              <input type="submit" value="Subscribe">
-            </form>
-          </div>
-        </div>
-      </div>
-    </section>
-    
-     <!-- Gallery Section-->
-     <section class="gallery no-padding">    
-      <div class="row">
-        <div class="mix col-lg-3 col-md-3 col-sm-6">
-          <div class="item"><a href="" data-fancybox="gallery" class="image"><img src="{% static 'img/gallery-1.jpg' %}" alt="..." class="img-fluid">
-              <div class="overlay d-flex align-items-center justify-content-center"><i class="icon-search"></i></div></a></div>
-        </div>
-        <div class="mix col-lg-3 col-md-3 col-sm-6">
-          <div class="item"><a href="img/gallery-2.jpg" data-fancybox="gallery" class="image"><img src="{% static 'img/gallery-2.jpg' %}" alt="..." class="img-fluid">
-              <div class="overlay d-flex align-items-center justify-content-center"><i class="icon-search"></i></div></a></div>
-        </div>
-        <div class="mix col-lg-3 col-md-3 col-sm-6">
-          <div class="item"><a href="img/gallery-3.jpg" data-fancybox="gallery" class="image"><img src="{% static 'img/gallery-3.jpg' %}" alt="..." class="img-fluid">
-              <div class="overlay d-flex align-items-center justify-content-center"><i class="icon-search"></i></div></a></div>
-        </div>
-        <div class="mix col-lg-3 col-md-3 col-sm-6">
-          <div class="item"><a href="img/gallery-4.jpg" data-fancybox="gallery" class="image"><img src="{% static 'img/gallery-4.jpg' %}" alt="..." class="img-fluid">
-              <div class="overlay d-flex align-items-center justify-content-center"><i class="icon-search"></i></div></a></div>
-        </div>
-      </div>
-    </section>
-    {% endcomment %}
-
+    </section>   
     
 {% endblock content %}

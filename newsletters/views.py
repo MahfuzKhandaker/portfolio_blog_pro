@@ -62,7 +62,7 @@ def newsletter_unsubscribe(request):
             subject = "You have been unsubscribed"
             from_email = settings.EMAIL_HOST_USER
             to_email = [instance.email]
-            with open(settings.BASE_DIR + "/templates/newsletters/unsubscribe_email.txt") as f:
+            with open(str(settings.BASE_DIR) + "/templates/newsletters/unsubscribe_email.txt") as f:
                 newsletter_message = f.read()
             
             message = EmailMultiAlternatives(subject=subject, body=newsletter_message, from_email=from_email, to=to_email)

@@ -2,34 +2,63 @@
 
 {% load markdown_extras %}
 
+{% block head_title %}
+{{ post.title }} | {{ block.super }}
+{% endblock head_title %}
+
+
+{% block post_detail_link %}
+  <li><a href='{{ post.get_absolute_url }}'>{{ post.title }}</a></li>
+{% endblock %}
+
 {% block content %}
+<div class="container">
+  <div class="row">
+      <div class="col-md-12 mt-3 left">
+          <div class="card mb-4">
+              {% if post.thumbnail %}
+                <img class="img-responsive" src="{{ post.thumbnail.url }}" alt="{{ post.title }}" />
+              {% endif %}
+          
+          <div class="card-body">
+              <h3 class="card-title">{{ post.title }} </h3>
+              <small class="text-muted">
+                  Published on:&nbsp;
+                  {{ post.published_date.date }} |&nbsp;
+          
+                  <i class="fa fa-thumbs-up"> {{ total_likes }}</i>
+                  <i class="fa fa-clock text-info"></i> {% if post.read_time <= 1 %} < 1 Minute {% else %}{{ post.read_time }} min read {% endif %} |&nbsp;
+                  <i class="fa fa-eye"></i> {{ post.number_of_views }} views |&nbsp;
+                  <i class="fa fa-comment"></i> {{ post.comments.count }} comments |&nbsp;
 
-{% if post %}
-<h3>{{post.title}}</h3>
+                  Categories:&nbsp;
+                  {% for category in post.categories.all %}
+                  <a href="{% url 'post_category' category.title %}">
+                    {{ category.title }}
+                    </a>&nbsp;
+                  {% endfor %}
+                </small>
+                  <p class="card-text">{{ post.content | markdown | safe }}</p>
+              <br>
+              
+              <div id="like-section">
+                  {% include 'blogs/like_section.html' %}
+              </div>
+              <div id="favourite-section">
+                {% include 'blogs/favourite_section.html' %}
+              </div>
 
-<small>
-    <span>Published on:{{post.timestamp|timesince}} ago |&nbsp;
-      <div id="like-section">
-        {% include 'blogs/like_section.html' %}
+              
+              <!-- Comment & Reply -->
+              
+              <div class="main-comment-section">
+                {% include 'blogs/comment_section.html' %}
+              </div>
+             
+          </div>
+          </div>
       </div>
-    </span>
-</small>
-
-<p><b>{{post.overview}}</b></p>
-<p>{{post.content | markdown | safe }}</p>
-
-<br>
-<hr>
-
-<div id="favourite-section">
-  {% include 'blogs/favourite_section.html' %}
+  </div>
 </div>
-<!-- Comment & Reply -->
-
-<div class="main-comment-section">
-  {% include 'blogs/comment_section.html' %}
-</div>
-
-{% endif %}
 
 {% endblock content %}

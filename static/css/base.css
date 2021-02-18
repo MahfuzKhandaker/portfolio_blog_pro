@@ -196,6 +196,10 @@ section.hero .container {
 section.hero h1 {
 	line-height: 1.2em;
 }
+
+section.hero .hero-link {
+	color: #ddd;
+}
   
 section.hero .continue {
 	position: absolute;
@@ -401,6 +405,7 @@ h1, h2, h3, h4, h5, h6 {
 .blog-post {
   margin: 3%;
 }
+
 /*
  * Footer
  */

@@ -14,17 +14,17 @@
                   <img class="card-img-top" src="{{ post.thumbnail.url }}" />
                 {% endif %}
                   <div class="card-body">
-                      <h3 class="card-title"><a href="{{ post.get_absolute.url }}">{{ post.title }}</a></h3>
+                      <h3 class="card-title"><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h3>
                       <small>
                         {{ post.timestamp.date }} |&nbsp;
-                        {% for category in category_posts %}
+                        {% for category in post.categories.all %}
                         <a href="{% url 'post_category' category.title %}">
                             {{ category.title }}
                         </a>&nbsp;
                         {% endfor %}
                       </small>
                       <p class="card-text">{{ post.content | markdown | safe | truncatewords:30 }}</p>
-                      <a href="{{ post.get_absolute.url }}" class="blog-home__cta">Read More &rarr;</a>
+                      <a href="{{ post.get_absolute_url }}" class="blog-home__cta">Read More</a>
                   </div>
                   <div class="card-footer">
                     <small class="text-muted">{{ post.updated }}</small>

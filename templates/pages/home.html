@@ -9,12 +9,15 @@
 {% block content %}
 
 <!-- Hero Section-->
-<section style="background-image: url('media/images/web13.jpg'); background-size: cover; background-position: center center" class="hero">
-    <div class="container">
+<section style="background-image: url('media/images/web3.jpg'); background-size: cover; background-position: center center" class="hero">
+  <div class="container">
       <div class="row">
-        <div class="col-lg-8">
-          <h1>Welcome! {{ user.email }}! </h1><a href="{% url 'post-list' %}" class="hero-link text-white">{{ post_num }} Posts</a>
-          
+        <div class="col-lg">
+          <a href="{% url 'post-list' %}" class="hero-link">{{ post_num }} Posts</a> |
+          <a href="{% url 'project_index' %}" class="hero-link">{{ project_num }} Projects</a>
+          <h1>Build your ideas faster and easier with Python & Django Web Development Services</h1>
+          <br>
+          <p>We build custom web application that’s responsive (mobile-ready), reactive (light-speed fast), with a full-featured admin interface to manage the content and more...</p>
         </div>
       </div><a href="#" class="continue link-scroll">
         Scroll Down
@@ -30,30 +33,37 @@
   <section class="intro">
     <div class="container">
       <div class="row">
-        <div class="col-lg-8">
-          <h2 class="h3">Some great intro here</h2>
-          <p class="text-big">Place a nice <strong>introduction</strong> here <strong>to catch reader's attention</strong>. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderi.</p>
+        <div class="col-lg-5">
+          <img src="{% static 'images/web13.jpg' %}" class="card-img mx-auto d-block mb-3" alt="...">
         </div>
+        <div class="col-lg-7">
+          <h2 class="h3">Hire the best
+            DJANGO Developers
+            in Bangladesh</h2>
+          <p class="text-big">We love <strong>Django</strong> using Python code on the back end and mostly familiar with <strong>VueJS,</strong> a JavaScript framework on the front end, for <strong>Web Development</strong> - with a passion for programming and learning - the perfect combination. Our primary areas of interest are web technologies and Python in general. Never afraid of diving in the deep end and figuring out how to climb out as well as to get into tech domain profusely.</p>
+        </div>
+        
       </div>
     </div>
   </section>
   <section class="featured-posts">
   <div class="container">
+    <h1>Featured posts</h1>
     <!-- Blog post -->
       <div class="row py-3">
         {% for post in featured_posts %}
-        <div class="col-md-4">
-          <div class="card mb-3 blogcard bounce-up cf">
+        <div class="col-md-6">
+          <div class="card mb-3">
             <img class="card-img-top" src="{{ post.thumbnail.url }}" alt="{{ post.title }}">
             <div class="card-body cf">
               <h3 class="card-title"><a class="text-dark" href="{{ post.get_absolute_url }}">{{ post.title }}</a></h3>
               <small class="text-muted">
                 Published on:&nbsp;
                 {{ post.timestamp.date }} |&nbsp;
-                <i class="far fa-clock text-info"></i> {% if post.read_time <= 1 %} < 1 Minute {% else %}{{ post.read_time }} minutes read {% endif %} |&nbsp;
-                <i class="far fa-eye"></i> {{ post.number_of_views }} views
-                <i class="fas fa-thumbs-up"></i> {{ post.number_of_likes }}
-                <i class="far fa-comment"></i> {{ post.comments.count }} comments
+                <i class="fa fa-thumbs-up"> {{ post.total_likes }} Like{{ post.total_likes|pluralize }}</i> |
+                <i class="fas fa-clock text-info"></i> {% if post.read_time <= 1 %} 1 Minute read  {% else %} {{ post.read_time }} Minute{{ post.read_time|pluralize }} read {% endif %} |&nbsp;
+                <i class="fa fa-eye"></i> {{ post.number_of_views }} views |
+                <i class="fa fa-comment"></i> {{ post.comments.count }} comments
                 {% for category in post.categories.all %}
                 <a href="{% url 'post_category' category.title %}">
                   {{ category.title }}
@@ -106,8 +116,8 @@
               <div class="card-body cf">
                 <h5 class="card-title"><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h5>
                 <small class="text-muted">
-                  <i class="far fa-eye"></i> {{ post.number_of_views }} views
-                  <i class="far fa-comment"></i> {{ post.comments.count }} comments
+                  <i class="fa fa-eye"></i> {{ post.number_of_views }} views
+                  <i class="fa fa-comment"></i> {{ post.comments.count }} comments
   
                   {% for category in post.categories.all %}
                   <a href="{% url 'post_category' category.title %}">

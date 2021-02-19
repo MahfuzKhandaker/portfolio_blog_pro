@@ -26,8 +26,8 @@
                   Published on:&nbsp;
                   {{ post.published_date.date }} |&nbsp;
           
-                  <i class="fa fa-thumbs-up"> {{ total_likes }}</i>
-                  <i class="fa fa-clock text-info"></i> {% if post.read_time <= 1 %} < 1 Minute {% else %}{{ post.read_time }} min read {% endif %} |&nbsp;
+                  <i class="fa fa-thumbs-up"> {{ total_likes }} Like{{ total_likes|pluralize }}</i>
+                  <i class="fa fa-clock text-info"></i> {% if post.read_time <= 1 %} 1 Minute read  {% else %} {{ post.read_time }} Minute{{ post.read_time|pluralize }} read {% endif %} |&nbsp;
                   <i class="fa fa-eye"></i> {{ post.number_of_views }} views |&nbsp;
                   <i class="fa fa-comment"></i> {{ post.comments.count }} comments |&nbsp;
 

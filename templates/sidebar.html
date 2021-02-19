@@ -9,7 +9,11 @@
     <form action="{% url 'search_results' %}" class="search-form">
         <div class="form-group">
         <input type="text" name="q" placeholder="What are you looking for?">
-        <button type="submit" class="submit"><i class="fas fa-search"></i></button>
+        <button type="submit" class="submit">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+          </svg>
+        </button>
         </div>
     </form>
     </div>
@@ -25,8 +29,8 @@
             <div class="image"><img src="{{ post.thumbnail.url }}" alt="..." class="img-fluid"></div>
             <div class="title"><strong>{{ post.title }}</strong>
                 <div class="d-flex align-items-center">
-                <div class="views"><i class="far fa-eye"></i> {{ post.number_of_views }}</div> |&nbsp;
-                <div class="comments"><i class="far fa-comment"></i> {{ post.comments.count }}</div>
+                <div class="views"><i class="fa fa-eye"></i> {{ post.number_of_views }}</div> |&nbsp;
+                <div class="comments"><i class="fa fa-comment"></i> {{ post.comments.count }}</div>
                 </div>
             </div>
             </div>

@@ -21,10 +21,10 @@
                 <small class="text-muted">
                   Published on:&nbsp;
                   {{ post.timestamp.date }} |&nbsp;
-                  <i class="far fa-clock text-info"></i> {% if post.read_time <= 1 %} < 1 Minute {% else %}{{ post.read_time }} minutes read {% endif %} |&nbsp;
-                  <i class="far fa-eye"></i> {{ post.number_of_views }} views
-                  <i class="fas fa-thumbs-up"></i> {{ post.number_of_likes }}
-                  <i class="far fa-comment"></i> {{ post.comments.count }} comments
+                  <i class="fa fa-thumbs-up"> {{ total_likes }} Like{{ total_likes|pluralize }}</i>
+                  <i class="fa fa-clock text-info"></i> {% if post.read_time <= 1 %} 1 Minute read  {% else %} {{ post.read_time }} Minute{{ post.read_time|pluralize }} read {% endif %} |&nbsp;
+                  <i class="fa fa-eye"></i> {{ post.number_of_views }} views
+                  <i class="fa fa-comment"></i> {{ post.comments.count }} comments
                   {% for category in post.categories.all %}
                   <a href="{% url 'post_category' category.title %}">
                     {{ category.title }}

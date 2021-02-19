@@ -5,13 +5,14 @@
 {% block title %}About{% endblock title %}
 
 {% block content %}
-<h1>About Me</h1>
-<div class="card mb-3">
+
+<div class="container">
+  <div class="card mb-3">
     <div class="row">
       <div class="col-md-4 py-3">
         <img src="{% static 'images/web13.jpg' %}" class="card-img rounded-circle mx-auto d-block mb-3" alt="...">
         <center class="py-3">
-          <small class="text-center">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facilis ipsa distinctio magni vitae quasi incidunt error nisi, corrupti deserunt accusantium doloremque aliquid asperiores delectus fugiat, fuga dicta sapiente aut quas?</small>
+          <small class="card-text text-justify">Freelance web developer with a passion for programming and learning - the perfect combination. I use my skills to climb out the tree of tech domain profusely.</small>
         </center>
         <button class="anywhere-link mx-auto d-block p-2">
           <a href="{% url 'contact' %}">Contact</a>
@@ -19,12 +20,13 @@
       </div>
       <div class="col-md-8">
         <div class="card-body">
-          <h3 class="card-title">Mahfuz Khandaker</h3>
-          <h5 class="card-subtitle text-muted">Python Web Developer</h5>
+          <h1 class="card-title text-center">Mahfuz Khandaker</h1>
+          <h5 class="card-subtitle text-muted text-center">Python Web Developer</h5>
           <hr>
-          <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita sequi cupiditate ipsum repellendus corrupti asperiores cum perferendis possimus quibusdam accusamus, voluptatem veritatis veniam tempore, nostrum error commodi! Non, nulla atque.</p>
+          <p class="card-text text-justify">An enthusiastic fresher, highly motivated, self-taught Full Stack Web Developer with a passion for programming and learning - the perfect combination. My primary areas of interest are web technologies and Python in general. I like Django framework and I'm always eager to learn something new about it. Never afraid of diving in the deep end and figuring out how to climb out as well as to get into tech domain profusely. Looking for an opportunity to work in a challenging position combining my skills, which provides professional development, interesting experiences and personal growth.</p>
         </div>
       </div>
     </div>
   </div>
+</div>
 {% endblock content %}

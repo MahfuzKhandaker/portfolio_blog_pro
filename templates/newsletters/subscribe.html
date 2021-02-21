@@ -1,8 +1,10 @@
 {% extends "_base.html" %}
 
+{% load crispy_forms_tags %}
+
 {% block content %}
 
-<div class="container">
+<div class="container subscribe">
     <div class="row ">
         <div class="col-12">
             <div class="container">
@@ -19,8 +21,13 @@
                 {% endfor %}
                 {% else %}
                 <form action="{% url 'newsletters:subscribe' %}" method="POST">{% csrf_token %}
-                  <input type="email" name="email" placeholder="Enter email address">
-                  <input type="submit" value="Subscribe">
+
+                  <div class="form-group col-md-12 mb-0">
+                    {{ form.email|as_crispy_field }}
+                  </div>
+
+                  <button type="submit" class="btn cta btn-primary">Subscribe</button>
+
                 </form>
                 {% endif %}
               </div>

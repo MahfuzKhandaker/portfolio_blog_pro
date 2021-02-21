@@ -16,7 +16,7 @@ class HomePageView(generic.ListView):
 
     def get_context_data(self, **kwargs):
         context = super(HomePageView, self).get_context_data(**kwargs)
-        context['featured_posts'] = Post.published.filter(featured=True)[:6]
+        context['featured_posts'] = Post.published.filter(featured=True)[:3]
         context['post_num'] = Post.published.count()
         context['project_num'] = Project.objects.count()
         context['most_recent'] = Post.published.all().order_by('-timestamp', '-updated')[:3]

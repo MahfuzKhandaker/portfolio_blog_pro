@@ -4,27 +4,27 @@
 
 {% block content %}
 
-<div class="container">
+<div class="container-lg">
   <div class="row d-flex align-items-stretch">
   <!-- Blog Posts -->
     <main class="posts-listing col-lg-8"> 
       
-      <div class="container cf">
+      <div class="container">
         <div class="row">
           <!-- post -->
           {% for post in posts %}
           <div class="col-md-6">
-            <div class="card mb-3 blogcard bounce-up cf">
+            <div class="card mb-3">
               <img class="card-img-top" src="{{ post.thumbnail.url }}" alt="{{ post.title }}">
-              <div class="card-body cf">
+              <div class="card-body">
                 <h3 class="card-title"><a class="text-dark" href="{{ post.get_absolute_url }}">{{ post.title }}</a></h3>
                 <small class="text-muted">
                   Published on:&nbsp;
                   {{ post.timestamp.date }} |&nbsp;
-                  <i class="fa fa-thumbs-up"> {{ total_likes }} Like{{ total_likes|pluralize }}</i>
+                  <i class="fa fa-thumbs-up"> {{ post.total_likes }} Like{{ post.total_likes|pluralize }}</i> |&nbsp;
                   <i class="fa fa-clock text-info"></i> {% if post.read_time <= 1 %} 1 Minute read  {% else %} {{ post.read_time }} Minute{{ post.read_time|pluralize }} read {% endif %} |&nbsp;
-                  <i class="fa fa-eye"></i> {{ post.number_of_views }} views
-                  <i class="fa fa-comment"></i> {{ post.comments.count }} comments
+                  <i class="fa fa-eye"></i> {{ post.number_of_views }} views |&nbsp;
+                  <i class="fa fa-comment"></i> {{ post.comments.count }} comments |&nbsp;
                   {% for category in post.categories.all %}
                   <a href="{% url 'post_category' category.title %}">
                     {{ category.title }}
@@ -46,7 +46,7 @@
 
   
   {% if is_paginated %}
-  <div class="container">
+  <div class="container-fluid">
     {% include 'pagination.html' %}
 </div>
 {% endif %}

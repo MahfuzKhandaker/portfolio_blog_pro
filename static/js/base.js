@@ -86,22 +86,5 @@ $(document).ready(function(){
         console.log(rs.responseText);
       },
     });
-  });
-  // blogcard move up animation onScroll in view
-  $.fn.isInViewport = function () {
-    let elementTop = $(this).offset().top;
-    let elementBottom = elementTop + $(this).outerHeight();
-    let viewportTop = $(window).scrollTop();
-    let viewportBottom = viewportTop + $(window).height();
-    return elementBottom > viewportTop && elementTop < viewportBottom;
-  };
-  $(window).on("load resize scroll", function () {
-    $('.blogcard').each(function() {
-      if( $(this).isInViewport() ) {
-        $(this).addClass('animate');
-      } else {
-        $(this).removeClass('animate');
-      }
-    });
-  });
+  }); 
 });

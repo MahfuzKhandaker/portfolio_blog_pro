@@ -5,27 +5,62 @@
 {% block title %}About{% endblock title %}
 
 {% block content %}
+<div class="container about">
+  <div class="row">
+    <div class="col-md-4">
+        
+          <img src="{% static 'images/mk.jpg' %}" class="card-img rounded-circle mx-auto d-block mb-3" alt="...">
+        <span class="pro">PRO</span>
+          <h3>Mahfuz Khandaker</h3>
+    
+          
+    
+          <p class="text-justify-center">
+            Python Django Expert and <br />
+      
+      
+            Web Developer
+    
+          </p>
+          <div class="buttons">
+            <button class="primary"><a href="{% url 'contact' %}">Message</a></button>
+            <button class="primary ghost"><a href="{% url 'newsletters:subscribe' %}">Following</a></button>
+          </div>
+          <div class="skills">
+            <h6>Skills</h6>
+            <ul>
+              <li>UI / UX</li>
+              <li>Frontend Development</li>
+              <li>HTML</li>
+              <li>CSS</li>
+              <li>JavaScript</li>
+              <li>VueJs</li>
+              <li>React</li>
+              <li>Node</li>
+            </ul>
+          </div>
+    </div>
+     
+    <div class="col-md-8">
+      <div class = "vertical"></div>
 
-<div class="container">
-  <div class="card mb-3">
-    <div class="row">
-      <div class="col-md-4 py-3">
-        <img src="{% static 'images/web13.jpg' %}" class="card-img rounded-circle mx-auto d-block mb-3" alt="...">
-        <center class="py-3">
-          <small class="card-text text-justify">Freelance web developer with a passion for programming and learning - the perfect combination. I use my skills to climb out the tree of tech domain profusely.</small>
-        </center>
-        <button class="anywhere-link mx-auto d-block p-2">
-          <a href="{% url 'contact' %}">Contact</a>
-        </button>
+      
+
+      <h3>Python Django Web Developer</h3>
+    <div class="skills">
+      <p class="text-justify">
+        We love Django using Python code on the back end 
+        with JavaScript, Jquery, Ajax, CSS, Bootstrap4 and mostly familiar with VueJS, 
+        a JavaScript framework on the front end, for Web Development - with a passion 
+        for programming and learning - the perfect combination. Our primary areas of interest 
+        are web technologies and Python in general. Never afraid of diving in the deep end 
+        and figuring out how to climb out as well as to get into tech domain profusely.
+      </p>
       </div>
-      <div class="col-md-8">
-        <div class="card-body">
-          <h1 class="card-title text-center">Mahfuz Khandaker</h1>
-          <h5 class="card-subtitle text-muted text-center">Python Web Developer</h5>
-          <hr>
-          <p class="card-text text-justify">An enthusiastic fresher, highly motivated, self-taught Full Stack Web Developer with a passion for programming and learning - the perfect combination. My primary areas of interest are web technologies and Python in general. I like Django framework and I'm always eager to learn something new about it. Never afraid of diving in the deep end and figuring out how to climb out as well as to get into tech domain profusely. Looking for an opportunity to work in a challenging position combining my skills, which provides professional development, interesting experiences and personal growth.</p>
-        </div>
+      <div class="buttons">
+        <button class="primary ghost"><a href="{% url 'contact' %}">GET IN TOUCH</a></button>
       </div>
+    
     </div>
   </div>
 </div>

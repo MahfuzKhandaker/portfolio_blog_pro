@@ -20,8 +20,8 @@
                 </div>
                 {% endfor %}
                 {% else %}
-                <form action="{% url 'newsletters:subscribe' %}" method="POST">{% csrf_token %}
-
+                <form action="{% url 'newsletters:subscribe' %}" method="POST">
+                  {% csrf_token %}
                   <div class="form-group col-md-12 mb-0">
                     {{ form.email|as_crispy_field }}
                   </div>

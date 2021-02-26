@@ -5,7 +5,7 @@
 {% block content %}
 
 
-  <div class="container">      
+  <div class="container contact">      
     <h2 class="text-center pt-4">Contact Us</h2>
 
     <form action="{% url 'contact' %}" method="post" novalidate>
@@ -20,7 +20,7 @@
         </div>
       </div>
       {{ form.message|as_crispy_field }}
-      <button type="submit" class="btn btn-success">Send</button>
+      <button type="submit" class="btn cta btn-primary">Send</button>
     </form>
   </div>
 

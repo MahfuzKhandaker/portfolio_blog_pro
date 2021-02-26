@@ -9,6 +9,11 @@
         <!-- CSS -->
         <link rel="stylesheet" href="{% static 'css/base.css' %}">
         <script src="https://use.fontawesome.com/d6a626efdd.js"></script>
+        <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.css" />
+        <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+
+        <script src="https://unpkg.com/swiper/swiper-bundle.js"></script>
+        <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
         {% block head_extra %} {% endblock head_extra %}
     </head>
     <body>
@@ -21,17 +26,19 @@
             {% endblock content %}
         </div>
 
-        <footer class="blog-footer">
+        <footer class="footer-section">
             {% include 'footer.html' %}     
         </footer>
 
-        {% block javascript %}
+       
         <!-- JavaScript -->
         
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
         <script src="{% static 'js/jquery-3.5.0.min.js' %}"></script>
         <script src="{% static 'js/bootstrap.min.js' %}"></script>
         <script src="{% static 'js/base.js' %}"></script>
+        
+        {% block javascript %}
         <script>
             $(document).on('click', '#favourite', function(event){
                 event.preventDefault();
@@ -72,6 +79,7 @@
                 });
             });
         </script>
+
         {% endblock javascript %}
     </body>
 </html>

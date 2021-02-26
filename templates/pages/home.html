@@ -32,7 +32,7 @@
     <div class="container-lg">
       <div class="row">
         <div class="col-lg-5">
-          <img src="{% static 'images/web13.jpg' %}" class="card-img mx-auto d-block mb-3" alt="...">
+          <img src="{% static 'images/web13.jpg' %}" class="card-img-top mx-auto d-block mb-3" alt="...">
         </div>
         <div class="col-lg-7 px-5 py-3">
           <h2 class="h5">We build custom web application that’s responsive (mobile-ready), reactive (light-speed fast), with a full-featured admin interface to manage the content and more...</h2>
@@ -43,7 +43,10 @@
       </div>
     </div>
   </section>
-  <section class="featured-posts">
+
+
+
+<section class="featured-posts">
   <div class="container-lg px-3">
     <h1>Featured posts</h1>
     <!-- Blog post -->
@@ -52,9 +55,9 @@
         {% for post in featured_posts %}
         <div class="col-lg-4 col-md-6 col-sm-12">
           <div class="card mb-3">
-            <img class="card-img-top" src="{{ post.thumbnail.url }}" alt="{{ post.title }}">
+            <img class="card-img" src="{{ post.thumbnail.url }}" alt="{{ post.title }}">
             <div class="card-body">
-              <h3 class="card-title"><a class="text-dark" href="{{ post.get_absolute_url }}">{{ post.title }}</a></h3>
+              <h3 class="card-title"><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h3>
               <small class="text-muted">
                 Published on:&nbsp;
                 {{ post.timestamp.date }} |&nbsp;
@@ -69,7 +72,9 @@
                 {% endfor %}
               </small>
               <p class="card-text">{{ post.content | markdown | safe | truncatewords:15 }}</p>
-              <a href="{{ post.get_absolute_url }}" class="blog-home__cta">Read More</a>
+              <div class="buttons">
+                <button class="primary ghost"><a href="{{ post.get_absolute_url }}">Read More</a></button>
+              </div>
           </div>
       </div>
   </div>
@@ -96,6 +101,8 @@
         <div class="col-md-7">
           <h2>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</h2><a href="#" class="hero-link">View More</a>
         </div>
+        <div class="col-md-5">
+          <blockquote class="twitter-tweet"><p lang="en" dir="ltr">Test purpose only:<br>You can use your skills to build your own websites and web applications. Want to make a profitable website or application? With this skill, you won’t http://127.0.0.1:8000/blogs/responsibility-of-web-developer/ <a href="https://twitter.com/hashtag/python?src=hash&amp;ref_src=twsrc%5Etfw">#python</a> <a href="https://twitter.com/hashtag/django?src=hash&amp;ref_src=twsrc%5Etfw">#django</a></p>&mdash; Mahfuz Khandaker (@MahfuzKhandake2) <a href="https://twitter.com/MahfuzKhandake2/status/1364645028400828416?ref_src=twsrc%5Etfw">February 24, 2021</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>        </div>
       </div>
     </div>
   </section>
@@ -111,7 +118,7 @@
           {% for post in most_recent %}
           <div class="col-lg-4 col-md-6 col-sm-12">
             <div class="card">
-              <img src="{{ post.thumbnail.url }}" class="card-img-top" alt="{{ post.title }}">
+              <img src="{{ post.thumbnail.url }}" class="card-img" alt="{{ post.title }}">
               <div class="card-body">
                 <h5 class="card-title"><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h5>
                 <small class="text-muted">
@@ -135,3 +142,4 @@
     </section>   
     
 {% endblock content %}
+

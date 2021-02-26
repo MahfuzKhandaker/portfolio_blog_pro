@@ -54,7 +54,6 @@ INSTALLED_APPS = [
     'contact.apps.ContactConfig',
     'newsletters.apps.NewslettersConfig',
 ]
-
 # django-crispy-forms
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 

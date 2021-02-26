@@ -1,5 +1,7 @@
 {% extends "_base.html" %}
 
+{% load urlify %}
+
 {% load markdown_extras %}
 
 {% block head_title %}
@@ -17,11 +19,12 @@
       <div class="col-md-12 mt-3 left">
           <div class="card mb-4">
               {% if post.thumbnail %}
-                <img class="img-responsive" src="{{ post.thumbnail.url }}" alt="{{ post.title }}" />
+                <img class="card-img-top" src="{{ post.thumbnail.url }}" alt="{{ post.title }}" />
               {% endif %}
           
           <div class="card-body">
               <h3 class="card-title">{{ post.title }} </h3>
+          
               <small class="text-muted">
                   Published on:&nbsp;
                   {{ post.published_date.date }} |&nbsp;
@@ -38,8 +41,21 @@
                     </a>&nbsp;
                   {% endfor %}
                 </small>
-                  <p class="card-text">{{ post.content | markdown | safe }}</p>
-              <br>
+                <p class="card-text">{{ post.content | markdown | safe }}</p>
+                <br>
+                <div class="container">
+                  <h5>Share this post</h5>
+                    <a href="https://www.facebook.com/sharer.php?u={{ request.build_absolute_uri }}" target="_blank">
+                      <i class="fa fa-facebook-square fa-4x" style="color:#3b5998"></i>
+                    </a>
+                
+                    <a href="https://twitter.com/intent/tweet?url={{ request.build_absolute_uri }}&text={{ post.content|truncatechars:80|urlify }}&hashtags=python,django" target="_blank">
+                      <i class="fa fa-twitter-square fa-4x" style="color:#4099FF"></i>
+                    </a>
+                </div>
+            
+
+                  
               
               <div id="like-section">
                   {% include 'blogs/like_section.html' %}
@@ -62,3 +78,7 @@
 </div>
 
 {% endblock content %}
+
+{% block javascript %}
+
+{% endblock javascript %}

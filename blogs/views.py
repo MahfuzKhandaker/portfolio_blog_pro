@@ -15,6 +15,9 @@ from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST
 from django.db.models import Count
 from django.db.models import Q
+
+from urllib.parse import quote_plus
+
 try:
     from django.utils import simplejson as json
 except ImportError:
@@ -73,6 +76,8 @@ def post_category(request, category):
 def post_detail(request, slug):
     post = get_object_or_404(Post, slug=slug)
 
+    share_string = quote_plus(post.overview[:150])
+
     post.number_of_views = post.number_of_views+1
     post.save()
     
@@ -107,6 +112,7 @@ def post_detail(request, slug):
         'total_likes': post.total_likes,
         'total_comments': post.comments.count(),
         'comment_form': comment_form,
+        'share_string': share_string,
     }
     if request.is_ajax():
         html = render_to_string('blogs/comment_section.html', context, request=request)

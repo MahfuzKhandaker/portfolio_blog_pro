@@ -5,20 +5,7 @@ from django.db.models.signals import pre_save
 from django.dispatch import receiver
 from django.utils.text import slugify
 from django.utils.safestring import mark_safe   
-from blogs.utils import get_read_time 
-
-
-class Author(models.Model):
-    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    profile_picture = models.ImageField(upload_to='images/', null=True, blank=True)
-
-    objects = models.Manager()
-
-    def __str__(self):
-        return self.user.username
-    
-    class Meta:
-        verbose_name_plural = 'authors'
+from blogs.utils import get_read_time
 
 
 class Category(models.Model):
@@ -33,6 +20,8 @@ class Category(models.Model):
         ordering = ['-title']
         verbose_name_plural = 'categories'
 
+class Tag(models.Model):
+    name = models.CharField(max_length=60, null=True)
 
 class PublishedManager(models.Manager):
     def get_queryset(self):
@@ -54,11 +43,12 @@ class Post(models.Model):
     timestamp   = models.DateTimeField(auto_now_add=True)
     updated     = models.DateTimeField(auto_now=True)
     content     = models.TextField()
-    author      = models.ForeignKey(Author, on_delete=models.CASCADE)
+    author      = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='author_posts')
     thumbnail   = models.ImageField(upload_to='images/', blank=True)
     image_caption   = models.CharField(max_length=125, blank=True, null=True)
     categories  = models.ManyToManyField(Category)
     featured    = models.BooleanField()
+    tags        = models.ManyToManyField(Tag)
     status      = models.CharField(max_length=10, choices=STATUS_CHOICES, default='draft')
     likes       = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True, related_name='likes')
     favourite   = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='favourite', blank=True)
@@ -90,19 +80,6 @@ def pre_save_post_receiver(sender, instance, *args, **kwargs):
         instance.read_time = read_time_var
 pre_save.connect(pre_save_post_receiver, sender=Post)
 
-
-class Profile(models.Model):
-    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    dob = models.DateField(null=True, blank=True)
-    photo = models.ImageField(upload_to='images/', blank=True)
-
-
-    def __str__(self):
-        return "Profile of user {}".format(self.user.username)
-
-    class Meta:
-        ordering = ['-dob']
-        verbose_name_plural = 'profiles'
 
 class Comment(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)

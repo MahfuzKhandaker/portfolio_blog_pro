@@ -39,46 +39,6 @@
         <script src="{% static 'js/base.js' %}"></script>
         
         {% block javascript %}
-        <script>
-            $(document).on('click', '#favourite', function(event){
-                event.preventDefault();
-                var slug = $(this).attr('value');
-                $.ajax({
-                    type: 'POST',
-                    url: '{% url "favourite_post" %}',
-                    data: {'post_slug':slug, 'csrfmiddlewaretoken': '{{ csrf_token }}'},
-                    dataType: 'json',
-                    success: function(response){
-                        $('#favourite-section').html(response['form'])
-                        console.log($('#favourite-section').html(response['form']));
-                    },
-                    error: function(rs, e){
-                        console.log(rs.responseText);
-                    },
-                
-                });
-            });
-        </script>
-        <script>
-            $(document).on('click', '#like', function(event){
-                event.preventDefault();
-                var slug = $(this).attr('value');
-                $.ajax({
-                    type: 'POST',
-                    url: '{% url "likes" %}',
-                    data: {'post_slug':slug, 'csrfmiddlewaretoken': '{{ csrf_token }}'},
-                    dataType: 'json',
-                    success: function(response){
-                        $('#like-section').html(response['form'])
-                        console.log($('#like-section').html(response['form']));
-                    },
-                    error: function(rs, e){
-                        console.log(rs.responseText);
-                    },
-                
-                });
-            });
-        </script>
 
         {% endblock javascript %}
     </body>

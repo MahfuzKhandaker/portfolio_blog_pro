@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Author, Post, Profile, Category, Comment
+from .models import Post, Category, Tag, Comment
 
 from blogs.forms import PostForm
 
@@ -11,11 +11,10 @@ class PostAdmin(admin.ModelAdmin):
     search_fields = ['title', 'content']
     prepopulated_fields = {'slug': ('title',)}
     form = PostForm
-    fields = ['title', 'slug', 'author', 'categories', 'overview', 'content', 'thumbnail', 'image_caption', 'likes', 'featured', 'status']
+    fields = ['title', 'slug', 'author', 'categories', 'overview', 'content', 'thumbnail', 'image_caption', 'likes', 'featured', 'tags', 'status']
     
 
-admin.site.register(Author)
 admin.site.register(Post, PostAdmin)
-admin.site.register(Profile)
 admin.site.register(Category)
+admin.site.register(Tag)
 admin.site.register(Comment)

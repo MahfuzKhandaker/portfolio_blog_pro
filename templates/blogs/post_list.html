@@ -16,11 +16,22 @@
           <div class="col-md-6">
             <div class="card mb-3">
               <img class="card-img" src="{{ post.thumbnail.url }}" alt="{{ post.title }}">
+              
+              <div class="row">
+                <div class="col-sm-4">
+                  By  <img src="{{ post.author.profile.photo.url }}" class="avatar mx-auto d-block mb-3" alt="">
+                </div>
+                <div class="col-sm-8">
+                  <a href="{% url 'user_profile' post.author.profile.id %}">{{ post.author }}</a>
+                  
+                </div>
+              </div>
+              
               <div class="card-body">
-                <h3 class="card-title"><a class="text-dark" href="{{ post.get_absolute_url }}">{{ post.title }}</a></h3>
-                <small class="text-muted">
+                <h3 class="card-title"><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h3>
+                <small class="text-muted">                                
                   Published on:&nbsp;
-                  {{ post.timestamp.date }} |&nbsp;
+                  {{ post.timestamp|timesince }} ago |&nbsp;
                   <i class="fa fa-thumbs-up"> {{ post.total_likes }} Like{{ post.total_likes|pluralize }}</i> |&nbsp;
                   <i class="fa fa-clock text-info"></i> {% if post.read_time <= 1 %} 1 Minute read  {% else %} {{ post.read_time }} Minute{{ post.read_time|pluralize }} read {% endif %} |&nbsp;
                   <i class="fa fa-eye"></i> {{ post.number_of_views }} views |&nbsp;
@@ -34,6 +45,9 @@
                 <p class="card-text">{{ post.content | markdown | safe | truncatewords:15 }}</p>
                 <div class="buttons">
                   <button class="primary ghost"><a href="{{ post.get_absolute_url }}">Read More</a></button>
+                </div>
+                <div>
+                
                 </div>
             </div>
         </div>
@@ -56,8 +70,8 @@
 </div>
 </main>
 
-{% include 'sidebar.html' %}
-  
+  {% include 'sidebar.html' %}
+ 
   </div>
 </div>
 {% endblock content %}

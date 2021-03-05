@@ -31,6 +31,7 @@ urlpatterns = [
     path('blogs/', include('blogs.urls')),
     path('projects/', include('projects.urls')),
     path('contact/', include('contact.urls')),
+    path('profile/', include('users.urls')),
     path('newsletters/', include('newsletters.urls', namespace='newsletters')),
     path('newsletter_control/', include('newsletter_control_panel.urls')),
 ]

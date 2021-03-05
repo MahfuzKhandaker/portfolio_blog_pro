@@ -9,7 +9,9 @@
 {% block content %}
 
 <!-- Hero Section-->
-<section style="background-image: url('media/images/web3.jpg'); background-size: cover; background-position: center center" class="hero">
+
+
+<section class="hero">
   <div class="container">
       <div class="row">
         <div class="col-lg-auto">
@@ -27,12 +29,13 @@
       </a>
     </div>
   </section>
+
   <!-- Intro Section-->
   <section class="intro">
     <div class="container-lg">
       <div class="row">
         <div class="col-lg-5">
-          <img src="{% static 'images/web13.jpg' %}" class="card-img-top mx-auto d-block mb-3" alt="...">
+          <img src="{% static 'images/moonred.jpg' %}" class="card-img-top mx-auto d-block mb-3" alt="...">
         </div>
         <div class="col-lg-7 px-5 py-3">
           <h2 class="h5">We build custom web application that’s responsive (mobile-ready), reactive (light-speed fast), with a full-featured admin interface to manage the content and more...</h2>
@@ -95,7 +98,7 @@
   </section>
   
    <!-- Divider Section-->
-   <section style="background: url('media/images/web3.jpg'); background-size: cover; background-position: center bottom" class="divider">
+   <section class="divider">
     <div class="container">
       <div class="row">
         <div class="col-md-7">
@@ -120,7 +123,7 @@
             <div class="card">
               <img src="{{ post.thumbnail.url }}" class="card-img" alt="{{ post.title }}">
               <div class="card-body">
-                <h5 class="card-title"><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h5>
+                <h3 class="card-title"><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h3>
                 <small class="text-muted">
                   <i class="fa fa-eye"></i> {{ post.number_of_views }} views
                   <i class="fa fa-comment"></i> {{ post.comments.count }} comments
@@ -133,8 +136,13 @@
                 </small>
                 <p class="card-text">{{ post.overview|linebreaks|truncatewords:30 }}</p>
                 <p><small class="text-muted">Last updated {{ post.updated|timesince }} ago</small></p>
+              
+                <div class="buttons">
+                  <button class="primary ghost"><a href="{{ post.get_absolute_url }}">Read More</a></button>
+                </div>
               </div>
             </div>
+
           </div>
           {% endfor %}
         </div>

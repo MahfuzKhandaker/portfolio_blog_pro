@@ -11,7 +11,7 @@
 {% block content %}
 <div class="edit-post">
     <h1>Edit Post</h1>
-    <form method="post" action="{% 'edit-post' post.slug %}" enctype="multipart/form-data">
+    <form method="post" action="{% url 'post-edit' post.slug %}" enctype="multipart/form-data">
       {% csrf_token %}
       {{ form|crispy }}
       <button type="submit">Edit Post</button>

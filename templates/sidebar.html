@@ -47,7 +47,9 @@
         {% for post in most_recent %}
         <a href="{{ post.get_absolute_url }}">
             <div class="item d-flex align-items-center">
+            {% if post.thumbnail %}
             <div class="image"><img src="{{ post.thumbnail.url }}" alt="..." class="img-fluid"></div>
+            {% endif %}
             <div class="title"><strong>{{ post.title }}</strong>
                 <div class="d-flex align-items-center">
                 <div class="views"><i class="fa fa-eye"></i> {{ post.number_of_views }}</div> |&nbsp;

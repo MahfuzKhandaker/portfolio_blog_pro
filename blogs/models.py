@@ -23,6 +23,13 @@ class Category(models.Model):
 class Tag(models.Model):
     name = models.CharField(max_length=60, null=True)
 
+    def __str__(self):
+        return self.name
+    
+    class Meta:
+        ordering = ['-name']
+        verbose_name_plural = 'tags'
+
 class PublishedManager(models.Manager):
     def get_queryset(self):
         return super(PublishedManager, self).get_queryset().filter(status="published")

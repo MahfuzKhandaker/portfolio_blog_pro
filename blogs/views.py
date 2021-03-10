@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.shortcuts import render, get_object_or_404, redirect, reverse
 from django.views.generic import FormView, CreateView, ListView, DetailView
 from django.views.generic.edit import FormMixin
@@ -6,7 +7,7 @@ from .forms import PostForm, CommentForm
 from blogs.utils import get_read_time
 from .models import Post, Comment, Category
 from .mixins import AjaxFormMixin
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, Http404
 from django.template.loader import render_to_string
 from django.http import HttpResponse
 from django.urls import reverse_lazy
@@ -30,11 +31,22 @@ except ImportError:
 #     success_url = '/form-success/'
 
 
-class PostCreateView(AjaxFormMixin, CreateView):
-    form_class = PostForm
-    template_name = 'blogs/create_post.html'
+def post_create(request):
+	# if not request.user.is_staff or not request.user.is_superuser:
+	# 	raise Http404
+	form = PostForm(request.POST or None, request.FILES or None)
+	if form.is_valid():
+		instance = form.save(commit=False)
+		instance.author = request.user
+		instance.save()
 
-
+		# message success
+		messages.success(request, "Successfully Created")
+		return HttpResponseRedirect(instance.get_absolute_url())
+	context = {
+		"form": form,
+	}
+	return render(request, "blogs/create_post.html", context)
 
 class PostListView(ListView):
     model = Post
@@ -120,6 +132,30 @@ def post_detail(request, slug):
         return JsonResponse({'form': html, 'comments': comments})
 
     return render(request, 'blogs/post_detail.html', context)
+
+
+def post_edit(request, slug):
+    # if not request.user.is_staff or not request.user.is_superuser:
+	#     raise Http404
+    post = get_object_or_404(Post, slug=slug)
+
+    if request.method == 'POST':
+        form = PostForm(request.POST or None, request.FILES or None, instance=post)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.author = request.user
+            post.save()
+            messages.success(request, "<a href='#'>Item</a> Saved", extra_tags='html_safe')
+            return HttpResponseRedirect(post.get_absolute_url())
+    else:
+        form = PostForm(instance=post)
+    
+    context = {
+        'post': post,
+        'form': form,
+    }
+    return render(request, 'blogs/post_edit.html', context)
+
 
 def post_favourite_list(request):
     user = request.user

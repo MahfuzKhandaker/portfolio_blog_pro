@@ -94,13 +94,23 @@ h1:hover a {
 	opacity: 1;
 } */
 
-.form-control, .form-select {
+/* .input-group.form-control{
+  width: 100%;
+	height: 40px;
+	line-height: 40px;
+	font-size: 0.95em;
+	font-family: "Open Sans", sans-serif;
+	font-weight: 400;
+	background: none;
+
+} */
+.input-group .form-control, .form-select {
   padding: 5px 12px;
   font-size: 14px;
   line-height: 20px;
   color: #c9d1d9;
   vertical-align: middle;
-  background-color: #0d1117;
+  background: #0d1117;
   background-repeat: no-repeat;
   background-position: right 8px center;
   border: 1px solid #21262d;
@@ -114,8 +124,8 @@ svg.bi.bi-search {
   vertical-align: middle;
 }
 .widget {
-	padding: 15px;
-	border: 1px solid rgba(206, 189, 130, 0.2);
+	padding: 20px;
+	border: 1px solid rgba(63, 63, 63, 0.2);
 	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
 }
   
@@ -248,6 +258,10 @@ section.divider {
   margin-right: auto;
   margin-left: auto;
 }
+.row {
+  margin-right: -15px;
+  margin-left: -15px;
+}
 
 .flex-auto {
   -ms-flex: 0 0 auto;
@@ -347,7 +361,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .card{
-  padding: 10px;
+  margin-bottom: 20px;
   background-color: #0d1117;
   color: #f8f7f7;
   border: 1px solid #30363d;
@@ -360,11 +374,10 @@ h1, h2, h3, h4, h5, h6 {
 	box-shadow: 0 2px 4px 0 #11ddf8;
 }
 
-.card-title, h3 a {
-  margin-bottom: 0;
-  font-size: 1.5rem;
+.card-title, h5 a {
+  font: "Roboto", sans-serif;
   font-weight: 600;
-  color: #58a6ff;
+  /* color: #58a6ff; */
 }
 .card-text {
   font-size: 1.1rem;
@@ -435,9 +448,50 @@ h1, h2, h3, h4, h5, h6 {
     line-height: 1.25;
     color: #b6b0ae;
     background-color: #353232;
-    border: 1px solid #dee2e6;
+    border: 1px solid #130812;
 }
-
+.create-post {
+  background-color: #031f30;
+  min-height: 100vh;
+  padding: 50px 100px;
+}
+.create-post .wmd-panel {
+  margin-right: auto;
+  margin-left: auto;
+  width: 100%;
+  min-width: 500px;
+}
+.create-post .wmd-input {
+  height: 300px;
+  width: 100%;
+  color: #d3d4d4;
+  background-color: #0d1117;
+  border: 1px solid  #21262d;
+}
+.create-post .wmd-preview {
+  background-color: rgba(13, 17, 23, 0.5);
+}
+.edit-post {
+  background-color: #031f30;
+  min-height: 100vh;
+  padding: 50px 100px;
+}
+.edit-post .wmd-panel {
+  margin-right: auto;
+  margin-left: auto;
+  width: 100%;
+  min-width: 500px;
+}
+.edit-post .wmd-input {
+  height: 300px;
+  width: 100%;
+  color: #d3d4d4;
+  background-color: #0d1117;
+  border: 1px solid  #21262d;
+}
+.edit-post .wmd-preview {
+  background-color: rgba(13, 17, 23, 0.5);
+}
 /* About Section */
 .cta {
 	display: inline-block;

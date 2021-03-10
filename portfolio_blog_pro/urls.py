@@ -35,9 +35,5 @@ urlpatterns = [
     path('newsletters/', include('newsletters.urls', namespace='newsletters')),
     path('newsletter_control/', include('newsletter_control_panel.urls')),
 ]
-
 if settings.DEBUG:
-    urlpatterns += static(settings.STATIC_URL,
-                          document_root=settings.STATIC_ROOT)
-    urlpatterns += static(settings.MEDIA_URL,
-                          document_root=settings.MEDIA_ROOT)
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

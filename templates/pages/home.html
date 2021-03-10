@@ -19,7 +19,7 @@
           <a href="{% url 'project_index' %}" class="hero-link">{{ project_num }} Projects</a>
           <h1>Build your ideas faster and easier with Python & Django Web Development Services</h1>
         </div>
-      </div><a href="#" class="continue link-scroll">
+      </div><a href="#here" class="continue link-scroll">
         Scroll Down
         <br>
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-double-down" viewBox="0 0 16 16">
@@ -58,7 +58,9 @@
         {% for post in featured_posts %}
         <div class="col-lg-4 col-md-6 col-sm-12">
           <div class="card mb-3">
+            {% if post.thumbnail %}
             <img class="card-img" src="{{ post.thumbnail.url }}" alt="{{ post.title }}">
+            {% endif %}
             <div class="card-body">
               <h3 class="card-title"><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h3>
               <small class="text-muted">
@@ -121,7 +123,9 @@
           {% for post in most_recent %}
           <div class="col-lg-4 col-md-6 col-sm-12">
             <div class="card">
+              {% if post.thumbnail %}
               <img src="{{ post.thumbnail.url }}" class="card-img" alt="{{ post.title }}">
+              {% endif %}
               <div class="card-body">
                 <h3 class="card-title"><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h3>
                 <small class="text-muted">
@@ -136,7 +140,6 @@
                 </small>
                 <p class="card-text">{{ post.overview|linebreaks|truncatewords:30 }}</p>
                 <p><small class="text-muted">Last updated {{ post.updated|timesince }} ago</small></p>
-              
                 <div class="buttons">
                   <button class="primary ghost"><a href="{{ post.get_absolute_url }}">Read More</a></button>
                 </div>
@@ -147,7 +150,7 @@
           {% endfor %}
         </div>
       </div>
-    </section>   
+    </section>
     
 {% endblock content %}
 

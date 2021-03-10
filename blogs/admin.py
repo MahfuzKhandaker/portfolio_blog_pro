@@ -2,7 +2,7 @@ from django.contrib import admin
 
 from .models import Post, Category, Tag, Comment
 
-from blogs.forms import PostForm
+from blogs.forms import AdminPostForm
 
 class PostAdmin(admin.ModelAdmin):
 
@@ -10,7 +10,7 @@ class PostAdmin(admin.ModelAdmin):
     list_filter = ('timestamp', 'updated')
     search_fields = ['title', 'content']
     prepopulated_fields = {'slug': ('title',)}
-    form = PostForm
+    form = AdminPostForm
     fields = ['title', 'slug', 'author', 'categories', 'overview', 'content', 'thumbnail', 'image_caption', 'likes', 'featured', 'tags', 'status']
     
 

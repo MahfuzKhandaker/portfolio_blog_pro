@@ -41,6 +41,8 @@
                     </a>&nbsp;
                   {% endfor %}
                 </small>
+                <p class="card-text">{{ post.overview | markdown | safe }}</p>
+                <br>
                 <p class="card-text">{{ post.content | markdown | safe }}</p>
                 <br>
                 <div class="container">

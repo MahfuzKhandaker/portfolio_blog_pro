@@ -14,21 +14,14 @@
           <!-- post -->
           {% for post in posts %}
           <div class="col-md-6">
-            <div class="card mb-3">
+            <div class="card">
+              {% if post.thumbnail %}
               <img class="card-img" src="{{ post.thumbnail.url }}" alt="{{ post.title }}">
-              
-              <div class="row">
-                <div class="col-sm-4">
-                  By  <img src="{{ post.author.profile.photo.url }}" class="avatar mx-auto d-block mb-3" alt="">
-                </div>
-                <div class="col-sm-8">
-                  <a href="{% url 'user_profile' post.author.profile.id %}">{{ post.author }}</a>
-                  
-                </div>
-              </div>
-              
+              {% endif %}
+          
               <div class="card-body">
-                <h3 class="card-title"><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h3>
+                <h5 class="card-title"><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h5>
+                <h6 class="card-subtitle mb-2 text-muted">By <a href="{% url 'user_profile' post.author.profile.id %}">{{ post.author }}</a></h6>
                 <small class="text-muted">                                
                   Published on:&nbsp;
                   {{ post.timestamp|timesince }} ago |&nbsp;
@@ -42,7 +35,7 @@
                   </a>&nbsp;
                   {% endfor %}
                 </small>
-                <p class="card-text">{{ post.content | markdown | safe | truncatewords:15 }}</p>
+                <p class="card-text">{{ post.overview | markdown | safe | truncatewords:30 }}</p>
                 <div class="buttons">
                   <button class="primary ghost"><a href="{{ post.get_absolute_url }}">Read More</a></button>
                 </div>
@@ -50,6 +43,10 @@
                 
                 </div>
             </div>
+            <div class="card-footer">
+              <small class="text-muted">{{ post.updated|timesince }} ago</small>
+            </div>
+
         </div>
     </div>
     {% empty %}
@@ -75,3 +72,10 @@
   </div>
 </div>
 {% endblock content %}
+
+{% block javascript %}
+<script>
+ 
+</script>
+
+{% endblock javascript %}

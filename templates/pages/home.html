@@ -11,7 +11,7 @@
 <!-- Hero Section-->
 
 
-<section class="hero">
+<section style="background-image: url('static/images/moon.jpg'); background-size: cover; background-position: center center" class="hero">
   <div class="container">
       <div class="row">
         <div class="col-lg-auto">
@@ -65,16 +65,14 @@
               <h3 class="card-title"><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h3>
               <small class="text-muted">
                 Published on:&nbsp;
-                {{ post.timestamp.date }} |&nbsp;
-                <i class="fa fa-thumbs-up"> {{ post.total_likes }} Like{{ post.total_likes|pluralize }}</i> |
-                <i class="fas fa-clock text-info"></i> {% if post.read_time <= 1 %} 1 Minute read  {% else %} {{ post.read_time }} Minute{{ post.read_time|pluralize }} read {% endif %} |&nbsp;
-                <i class="fa fa-eye"></i> {{ post.number_of_views }} views |
-                <i class="fa fa-comment"></i> {{ post.comments.count }} comments
-                {% for category in post.categories.all %}
-                <a href="{% url 'post_category' category.title %}">
-                  {{ category.title }}
-                </a>&nbsp;
-                {% endfor %}
+{{ post.published_date.date }} |&nbsp;
+<i class="fa fa-thumbs-up"> {{ total_likes }} Like{{ total_likes|pluralize }}</i>
+<i class="fa fa-clock text-info"></i> {% if post.read_time <= 1 %} 1 Minute read  {% else %} {{ post.read_time }} Minute{{ post.read_time|pluralize }} read {% endif %} |&nbsp;
+<i class="fa fa-eye"></i> {{ post.number_of_views }} views |&nbsp;
+<i class="fa fa-comment"></i> {{ post.comments.count }} comments |&nbsp;
+
+{% include 'blogs/post_info.html' %}
+
               </small>
               <p class="card-text">{{ post.content | markdown | safe | truncatewords:15 }}</p>
               <div class="buttons">
@@ -129,14 +127,15 @@
               <div class="card-body">
                 <h3 class="card-title"><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h3>
                 <small class="text-muted">
-                  <i class="fa fa-eye"></i> {{ post.number_of_views }} views
-                  <i class="fa fa-comment"></i> {{ post.comments.count }} comments
+                  Published on:&nbsp;
+                  {{ post.published_date.date }} |&nbsp;
+          
+                  <i class="fa fa-thumbs-up"> {{ total_likes }} Like{{ total_likes|pluralize }}</i>
+                  <i class="fa fa-clock text-info"></i> {% if post.read_time <= 1 %} 1 Minute read  {% else %} {{ post.read_time }} Minute{{ post.read_time|pluralize }} read {% endif %} |&nbsp;
+                  <i class="fa fa-eye"></i> {{ post.number_of_views }} views |&nbsp;
+                  <i class="fa fa-comment"></i> {{ post.comments.count }} comments |&nbsp;
   
-                  {% for category in post.categories.all %}
-                  <a href="{% url 'post_category' category.title %}">
-                    {{ category.title }}
-                  </a>&nbsp;
-                  {% endfor %}
+                  {% include 'blogs/post_info.html' %}
                 </small>
                 <p class="card-text">{{ post.overview|linebreaks|truncatewords:30 }}</p>
                 <p><small class="text-muted">Last updated {{ post.updated|timesince }} ago</small></p>

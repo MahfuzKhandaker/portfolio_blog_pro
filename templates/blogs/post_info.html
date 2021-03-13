@@ -1,0 +1,8 @@
+<span>Category : <a href="{{ post.category.get_absolute_url }}">{{ post.category }}</a></span> |
+<span>Tag :
+  {% for tag in post.tags.all %}
+      <a href="{% url 'post-by-tag' tag.slug %}">{{ tag }}</a>
+  {% empty %}
+      None
+  {% endfor %}
+</span>

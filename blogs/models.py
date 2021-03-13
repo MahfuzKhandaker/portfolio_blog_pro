@@ -9,7 +9,8 @@ from blogs.utils import get_read_time
 
 
 class Category(models.Model):
-    title = models.CharField(max_length=20)
+    title = models.CharField(max_length=60)
+    slug = models.SlugField(max_length=60, unique=True)
 
     objects = models.Manager()
 
@@ -20,15 +21,26 @@ class Category(models.Model):
         ordering = ['-title']
         verbose_name_plural = 'categories'
 
+    def get_absolute_url(self):
+        return reverse('post-by-category', kwargs={'category_slug': self.slug})
+
+
 class Tag(models.Model):
     name = models.CharField(max_length=60, null=True)
+    slug = models.SlugField(max_length=60, unique=True)
 
+    objects = models.Manager()
+    
     def __str__(self):
         return self.name
     
     class Meta:
         ordering = ['-name']
         verbose_name_plural = 'tags'
+
+    def get_absolute_url(self):
+        return reverse('post-by-tag', kwargs={'tag_slug': self.slug})
+
 
 class PublishedManager(models.Manager):
     def get_queryset(self):
@@ -52,10 +64,10 @@ class Post(models.Model):
     content     = models.TextField()
     author      = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='author_posts')
     thumbnail   = models.ImageField(upload_to='images/', blank=True)
-    image_caption   = models.CharField(max_length=125, blank=True, null=True)
-    categories  = models.ManyToManyField(Category)
+    image_caption  = models.CharField(max_length=125, blank=True, null=True)
+    category    = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, related_name='posts')
     featured    = models.BooleanField()
-    tags        = models.ManyToManyField(Tag)
+    tags        = models.ManyToManyField(Tag, related_name='posts')
     status      = models.CharField(max_length=10, choices=STATUS_CHOICES, default='draft')
     likes       = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True, related_name='likes')
     favourite   = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='favourite', blank=True)
@@ -68,6 +80,10 @@ class Post(models.Model):
  
     def __str__(self): 
         return self.title
+    
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.title)
+        super(Post, self).save(*args, **kwargs)
 
     def total_likes(self):
         return self.likes.count()
@@ -75,10 +91,6 @@ class Post(models.Model):
     def get_absolute_url(self):
         return reverse('post-detail', kwargs={'slug': self.slug})
 
-@receiver(pre_save, sender=Post)
-def pre_save_slug(sender, **kwargs):
-    slug = slugify(kwargs['instance'].title)
-    kwargs['instance'].slug = slug
 
 def pre_save_post_receiver(sender, instance, *args, **kwargs):
     if instance.content:

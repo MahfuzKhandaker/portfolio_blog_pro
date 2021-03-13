@@ -26,24 +26,20 @@
               <h3 class="card-title">{{ post.title }} </h3>
           
               <small class="text-muted">
-                  Published on:&nbsp;
-                  {{ post.published_date.date }} |&nbsp;
-          
-                  <i class="fa fa-thumbs-up"> {{ total_likes }} Like{{ total_likes|pluralize }}</i>
-                  <i class="fa fa-clock text-info"></i> {% if post.read_time <= 1 %} 1 Minute read  {% else %} {{ post.read_time }} Minute{{ post.read_time|pluralize }} read {% endif %} |&nbsp;
-                  <i class="fa fa-eye"></i> {{ post.number_of_views }} views |&nbsp;
-                  <i class="fa fa-comment"></i> {{ post.comments.count }} comments |&nbsp;
+                Published on:&nbsp;
+                {{ post.published_date.date }} |&nbsp;
+        
+                <i class="fa fa-thumbs-up"> {{ total_likes }} Like{{ total_likes|pluralize }}</i>
+                <i class="fa fa-clock text-info"></i> {% if post.read_time <= 1 %} 1 Minute read  {% else %} {{ post.read_time }} Minute{{ post.read_time|pluralize }} read {% endif %} |&nbsp;
+                <i class="fa fa-eye"></i> {{ post.number_of_views }} views |&nbsp;
+                <i class="fa fa-comment"></i> {{ post.comments.count }} comments |&nbsp;
 
-                  Categories:&nbsp;
-                  {% for category in post.categories.all %}
-                  <a href="{% url 'post_category' category.title %}">
-                    {{ category.title }}
-                    </a>&nbsp;
-                  {% endfor %}
-                </small>
-                <p class="card-text">{{ post.overview | markdown | safe }}</p>
+                {% include 'blogs/post_info.html' %}
+              </small>
+                <p class="card-text py-3">{{ post.overview | markdown | safe }}</p>
                 <br>
-                <p class="card-text">{{ post.content | markdown | safe }}</p>
+                <p class="card-text py-3">{{ post.content | markdown | safe }}</p>
+                <br>
                 <br>
                 <div class="container">
                   <h5>Share this post</h5>

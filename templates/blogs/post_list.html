@@ -13,7 +13,7 @@
         <div class="row">
           <!-- post -->
           {% for post in posts %}
-          <div class="col-md-6">
+          <div class="col-lg-6">
             <div class="card">
               {% if post.thumbnail %}
               <img class="card-img" src="{{ post.thumbnail.url }}" alt="{{ post.title }}">
@@ -22,18 +22,16 @@
               <div class="card-body">
                 <h5 class="card-title"><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h5>
                 <h6 class="card-subtitle mb-2 text-muted">By <a href="{% url 'user_profile' post.author.profile.id %}">{{ post.author }}</a></h6>
-                <small class="text-muted">                                
+                <small class="text-muted">
                   Published on:&nbsp;
-                  {{ post.timestamp|timesince }} ago |&nbsp;
-                  <i class="fa fa-thumbs-up"> {{ post.total_likes }} Like{{ post.total_likes|pluralize }}</i> |&nbsp;
+                  {{ post.published_date.date }} |&nbsp;
+          
+                  <i class="fa fa-thumbs-up"> {{ total_likes }} Like{{ total_likes|pluralize }}</i>
                   <i class="fa fa-clock text-info"></i> {% if post.read_time <= 1 %} 1 Minute read  {% else %} {{ post.read_time }} Minute{{ post.read_time|pluralize }} read {% endif %} |&nbsp;
                   <i class="fa fa-eye"></i> {{ post.number_of_views }} views |&nbsp;
                   <i class="fa fa-comment"></i> {{ post.comments.count }} comments |&nbsp;
-                  {% for category in post.categories.all %}
-                  <a href="{% url 'post_category' category.title %}">
-                    {{ category.title }}
-                  </a>&nbsp;
-                  {% endfor %}
+  
+                  {% include 'blogs/post_info.html' %}
                 </small>
                 <p class="card-text">{{ post.overview | markdown | safe | truncatewords:30 }}</p>
                 <div class="buttons">

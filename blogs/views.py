@@ -1,11 +1,11 @@
 from django.contrib import messages
-from django.shortcuts import render, get_object_or_404, redirect, reverse
+from django.shortcuts import render, get_object_or_404, get_list_or_404, redirect, reverse
 from django.views.generic import FormView, CreateView, ListView, DetailView
 from django.views.generic.edit import FormMixin
 from django.http import JsonResponse
 from .forms import PostForm, CommentForm
 from blogs.utils import get_read_time
-from .models import Post, Comment, Category
+from .models import Post, Comment, Category, Tag
 from .mixins import AjaxFormMixin
 from django.http import HttpResponseRedirect, Http404
 from django.template.loader import render_to_string
@@ -58,7 +58,7 @@ class PostListView(ListView):
         context['posts'] = Post.published.order_by('-timestamp')
         context['post_num'] = Post.published.count()
         context['most_recent'] = Post.published.order_by('-timestamp')[:3]
-        context['post_by_category_count']  = Post.published.values('categories__title').annotate(Count('categories__title')).order_by('categories')
+        context['post_by_category_count']  = Post.published.values('category__title').annotate(Count('category__title')).order_by('category')
         return context
 
 
@@ -70,20 +70,8 @@ class SearchResultsListView(ListView):
     def get_queryset(self):
         query = self.request.GET.get('q')
         return Post.published.filter(
-            Q(title__icontains=query) | Q(categories__title__icontains=query)
+            Q(title__icontains=query) | Q(category__title__icontains=query)
         )
-
-def post_category(request, category):
-    category_posts = Post.published.filter(
-        categories__title__contains=category
-    ).order_by(
-        '-timestamp'
-    )
-    context = {
-        'category': category,
-        'category_posts': category_posts
-    }
-    return render(request, 'blogs/post_category.html', context)
 
 def post_detail(request, slug):
     post = get_object_or_404(Post, slug=slug)
@@ -133,7 +121,24 @@ def post_detail(request, slug):
 
     return render(request, 'blogs/post_detail.html', context)
 
+def post_by_category(request, category_slug):
+    category = get_object_or_404(Category, slug=category_slug)
+    post_by_category = get_list_or_404(Post, category=category)
+    context = {
+        'category': category,
+        'post_by_category': post_by_category,
+    }
+    return render(request, 'blogs/post_by_category.html', context)
 
+def post_by_tag(request, tag_slug):
+    tag = get_object_or_404(Tag, slug=tag_slug)
+    post_by_tag = get_list_or_404(Post, tags=tag)
+    context = {
+        'tag': tag,
+        'post_by_tag': post_by_tag,
+    }
+    return render(request, 'blogs/post_by_tag.html', context )
+    
 def post_edit(request, slug):
     # if not request.user.is_staff or not request.user.is_superuser:
 	#     raise Http404

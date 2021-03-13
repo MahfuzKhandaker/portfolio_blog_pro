@@ -9,7 +9,7 @@ class AdminPostForm(forms.ModelForm):
 
     class Meta:
         model = Post
-        fields = ['title', 'slug', 'author', 'categories', 'overview', 'content', 'thumbnail', 'image_caption', 'likes', 'featured', 'tags', 'status']
+        fields = ['title', 'slug', 'author', 'category', 'overview', 'content', 'thumbnail', 'image_caption', 'likes', 'featured', 'tags', 'status']
 
 class PostForm(forms.ModelForm):
     overview = forms.CharField(widget=PagedownWidget())
@@ -17,7 +17,7 @@ class PostForm(forms.ModelForm):
 
     class Meta:
         model = Post
-        fields = ['title', 'slug', 'author', 'categories', 'overview', 'content', 'thumbnail', 'image_caption', 'likes', 'featured', 'tags', 'status']
+        fields = ['title', 'slug', 'author', 'category', 'overview', 'content', 'thumbnail', 'image_caption', 'likes', 'featured', 'tags', 'status']
 
 class CommentForm(forms.ModelForm):
     content = forms.CharField(widget=forms.Textarea(attrs={

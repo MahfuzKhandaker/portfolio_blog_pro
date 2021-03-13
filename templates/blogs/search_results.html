@@ -20,12 +20,9 @@
                   <i class="far fa-clock text-info"></i> {% if post.read_time <= 1 %} < 1 Minute {% else %}{{ post.read_time }} minutes read {% endif %} |&nbsp;
                   <i class="far fa-eye"></i> {{ post.number_of_views }} views
                   <i class="far fa-comment"></i> {{ post.comments.count }} comments
-                  Categories:&nbsp;
-                  {% for category in post.categories.all %}
-                  <a href="{% url 'post_category' category.title %}">
-                    {{ category.title }}
-                    </a>&nbsp;
-                  {% endfor %}
+                  
+                  {% include 'blogs/post_info.html' %}
+
                 </small>
                 <div class="buttons">
                   <button class="primary ghost"><a href="{{ post.get_absolute_url }}">Read More</a></button>

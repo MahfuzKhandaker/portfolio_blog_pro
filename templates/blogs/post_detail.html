@@ -26,8 +26,8 @@
               <h3 class="card-title">{{ post.title }} </h3>
           
               <small class="text-muted">
-                Published on:&nbsp;
-                {{ post.published_date.date }} |&nbsp;
+                Published:&nbsp;
+                {{ post.timestamp | timesince }} ago |&nbsp;
         
                 <i class="fa fa-thumbs-up"> {{ total_likes }} Like{{ total_likes|pluralize }}</i>
                 <i class="fa fa-clock text-info"></i> {% if post.read_time <= 1 %} 1 Minute read  {% else %} {{ post.read_time }} Minute{{ post.read_time|pluralize }} read {% endif %} |&nbsp;

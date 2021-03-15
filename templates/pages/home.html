@@ -58,9 +58,11 @@
         {% for post in featured_posts %}
         <div class="col-lg-4 col-md-6 col-sm-12">
           <div class="card mb-3">
-            {% if post.thumbnail %}
-            <img class="card-img" src="{{ post.thumbnail.url }}" alt="{{ post.title }}">
-            {% endif %}
+            <div class="card-img-wrapper">
+              {% if post.thumbnail %}
+              <img class="card-img" src="{{ post.thumbnail.url }}" alt="{{ post.title }}">
+              {% endif %}
+            </div>
             <div class="card-body">
               <h3 class="card-title"><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h3>
               <small class="text-muted">
@@ -121,9 +123,11 @@
           {% for post in most_recent %}
           <div class="col-lg-4 col-md-6 col-sm-12">
             <div class="card">
-              {% if post.thumbnail %}
-              <img src="{{ post.thumbnail.url }}" class="card-img" alt="{{ post.title }}">
-              {% endif %}
+              <div class="card-img-wrapper">
+                {% if post.thumbnail %}
+                <img class="card-img" src="{{ post.thumbnail.url }}" alt="{{ post.title }}">
+                {% endif %}
+              </div>
               <div class="card-body">
                 <h3 class="card-title"><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h3>
                 <small class="text-muted">

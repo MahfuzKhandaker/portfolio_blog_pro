@@ -1,0 +1,29 @@
+{% load markdown_extras %}
+<div class="container">
+  <div class="row">
+    <!-- post -->
+    {% for post in posts %}
+    <div class="col-md-6">
+      <div class="card mb-3">
+        <div class="card-img-wrapper">
+          {% if post.thumbnail %}
+          <img class="card-img" src="{{ post.thumbnail.url }}" alt="{{ post.title }}">
+          {% endif %}
+        </div>
+        <div class="card-body">
+          <h3 class="card-title"><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h3>
+          <small class="text-muted">                  
+            {% include 'blogs/post_info.html' %}
+          </small>
+          <p class="card-text">{{ post.content | markdown | safe | truncatewords:30 }}</p>
+          <a href="{{ post.get_absolute_url }}" class="blog-home__cta">Read More &rarr;</a>
+        </div>
+      </div>
+    </div>
+    {% empty %}
+    <center>
+      <h5>No post found</h5>
+    </center>
+    {% endfor %}
+  </div>
+</div>

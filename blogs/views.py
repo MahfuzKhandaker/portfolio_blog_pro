@@ -16,7 +16,9 @@ from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST
 from django.db.models import Count
 from django.db.models import Q
-
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.template.loader import render_to_string
+from django.http import JsonResponse
 from urllib.parse import quote_plus
 
 try:
@@ -48,18 +50,18 @@ def post_create(request):
 	}
 	return render(request, "blogs/create_post.html", context)
 
-class PostListView(ListView):
-    model = Post
-    template_name = 'blogs/post_list.html'
-    paginate_by = 10
 
-    def get_context_data(self, **kwargs):
-        context = super(PostListView, self).get_context_data(**kwargs)
-        context['posts'] = Post.published.order_by('-timestamp')
-        context['post_num'] = Post.published.count()
-        context['most_recent'] = Post.published.order_by('-timestamp')[:3]
-        context['post_by_category_count']  = Post.published.values('category__title').annotate(Count('category__title')).order_by('category')
-        return context
+def post_list(request):
+    return render(request, 'blogs/post_list.html')
+
+def post_load(request):
+    start = request.GET.get('start')
+    limit = request.GET.get('limit')
+    post_list = Post.published.all()[int(start):int(start) + int(limit)]
+    context = {
+        'posts': post_list,
+    }
+    return render(request, 'blogs/posts.html', context)
 
 
 class SearchResultsListView(ListView):

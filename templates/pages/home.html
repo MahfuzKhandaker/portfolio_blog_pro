@@ -53,11 +53,10 @@
   <div class="container-lg px-3">
     <h1>Featured posts</h1>
     <!-- Blog post -->
-      
-      <div class="row py-3">
+      <div  class="row py-3" >
         {% for post in featured_posts %}
-        <div class="col-lg-4 col-md-6 col-sm-12">
-          <div class="card mb-3">
+        <div id="blog-pg" class="col-lg-4 col-md-6 col-sm-12">
+          <div class="card mb-3" >
             <div class="card-img-wrapper">
               {% if post.thumbnail %}
               <img class="card-img" src="{{ post.thumbnail.url }}" alt="{{ post.title }}">
@@ -88,15 +87,13 @@
         <h5>Oops!No post found</h5>
       </center>
       {% endfor %}
-      </div>
+    </div>
+      <!-- loop pagination -->
 
-  
-      {% if is_paginated %}
-      <div class="container-fluid mb-3">
-        {% include 'pagination.html' %}
-      </div>
-    {% endif %}
+      {% include 'pagination.html' %}
   </div>
+  
+
   </section>
   
    <!-- Divider Section-->
@@ -151,9 +148,40 @@
 
           </div>
           {% endfor %}
+          
         </div>
       </div>
     </section>
     
 {% endblock content %}
 
+{% block javascript %}
+<script>
+  function ajaxPagination() {
+    $('#pagination a.page-link').each((index, el)=> {
+      $(el).click((e) => {
+        e.preventDefault()
+        let page_url = $(el).attr('href')
+        console.log(page_url)
+
+        $.ajax({
+          url:page_url,
+          type: 'GET',
+          success: (data) => {
+            $('#blog-pg').empty()
+            $('#blog-pg').append( $(data).filter('#blog-pg').html())
+            $('#pagination').empty()
+            $('#pagination').append( $(data).find('#pagination').html() )
+          }
+        })
+      })
+    })
+  }
+  $(document).ready(function() {
+    ajaxPagination()
+  });
+  $(document).ajaxStop(function() {
+    ajaxPagination()
+  })
+</script>
+{% endblock javascript %}

@@ -2,13 +2,24 @@
 
 {% load crispy_forms_tags %}
 
+{% block title %}
+    Contact - {{ block.super }}
+{% endblock %}
+
 {% block content %}
 
+{% if messages %}
+<ul class="messages">
+  {% for message in messages %}
+  <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+  {% endfor %}
+</ul>
+{% endif %}
 
   <div class="container contact">      
     <h2 class="text-center pt-4">Contact Us</h2>
 
-    <form action="{% url 'contact' %}" method="post" novalidate>
+    <form action="{% url 'contact' %}" method="post">
       {% csrf_token %}
     
       <div class="row">

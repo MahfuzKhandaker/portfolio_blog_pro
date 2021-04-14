@@ -53,44 +53,35 @@
   <div class="container-lg px-3">
     <h1>Featured posts</h1>
     <!-- Blog post -->
-      <div  class="row py-3" >
-        {% for post in featured_posts %}
-        <div id="blog-pg" class="col-lg-4 col-md-6 col-sm-12">
-          <div class="card mb-3" >
-            <div class="card-img-wrapper">
-              {% if post.thumbnail %}
-              <img class="card-img" src="{{ post.thumbnail.url }}" alt="{{ post.title }}">
-              {% endif %}
-            </div>
-            <div class="card-body">
-              <h3 class="card-title"><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h3>
-              <small class="text-muted">
-                Published on:&nbsp;
-{{ post.published_date.date }} |&nbsp;
-<i class="fa fa-thumbs-up"> {{ total_likes }} Like{{ total_likes|pluralize }}</i>
-<i class="fa fa-clock text-info"></i> {% if post.read_time <= 1 %} 1 Minute read  {% else %} {{ post.read_time }} Minute{{ post.read_time|pluralize }} read {% endif %} |&nbsp;
-<i class="fa fa-eye"></i> {{ post.number_of_views }} views |&nbsp;
-<i class="fa fa-comment"></i> {{ post.comments.count }} comments |&nbsp;
-
-{% include 'blogs/post_info.html' %}
-
-              </small>
-              <p class="card-text">{{ post.content | markdown | safe | truncatewords:15 }}</p>
-              <div class="buttons">
-                <button class="primary ghost"><a href="{{ post.get_absolute_url }}">Read More</a></button>
-              </div>
+    <div class="row mb-2">
+      {% for post in featured_posts %}
+      <div class="col-md-6">
+        <div class="card flex-md-row mb-4 box-shadow h-md-250">
+          <div class="card-img-wrapper">
+            {% if post.thumbnail %}
+            <img class="card-img-left flex-auto d-none d-md-block" src="{{ post.thumbnail.url }}" data-holder-rendered="true">
+            {% endif %}
           </div>
+          <div class="card-body d-flex flex-column align-items-start">
+            <strong class="d-inline-block mb-2 text-primary"><a href="{{ post.category.get_absolute_url }}">{{ post.category }}</a></strong>
+            <h3 class="card-title"><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h3>
+            <div class="mb-1 text-muted">             
+                {% include 'blogs/post_info.html' %}
+            </div>
+            <div class="card-footer">
+              <div class="buttons my-3">
+                <button class="primary ghost"><a href="{{ post.get_absolute_url }}">Read More</a></button>
+              </div>            
+            </div>
+          </div>
+        </div>
       </div>
-  </div>
       {% empty %}
       <center>
-        <h5>Oops!No post found</h5>
+        <h5>No post found</h5>
       </center>
       {% endfor %}
     </div>
-      <!-- loop pagination -->
-
-      {% include 'pagination.html' %}
   </div>
   
 
@@ -112,76 +103,32 @@
     <!-- Latest Posts -->
     <section class="latest-posts"> 
       <div class="container-lg px-3">
-        <header> 
+         <header> 
           <h2>Latest from the blog</h2>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
         </header>
-        <div class="row">
+
+        <div class="card-deck mb-3 text-center">
           {% for post in most_recent %}
-          <div class="col-lg-4 col-md-6 col-sm-12">
-            <div class="card">
-              <div class="card-img-wrapper">
-                {% if post.thumbnail %}
-                <img class="card-img" src="{{ post.thumbnail.url }}" alt="{{ post.title }}">
-                {% endif %}
-              </div>
-              <div class="card-body">
-                <h3 class="card-title"><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h3>
-                <small class="text-muted">
-                  Published on:&nbsp;
-                  {{ post.published_date.date }} |&nbsp;
-          
-                  <i class="fa fa-thumbs-up"> {{ total_likes }} Like{{ total_likes|pluralize }}</i>
-                  <i class="fa fa-clock text-info"></i> {% if post.read_time <= 1 %} 1 Minute read  {% else %} {{ post.read_time }} Minute{{ post.read_time|pluralize }} read {% endif %} |&nbsp;
-                  <i class="fa fa-eye"></i> {{ post.number_of_views }} views |&nbsp;
-                  <i class="fa fa-comment"></i> {{ post.comments.count }} comments |&nbsp;
-  
-                  {% include 'blogs/post_info.html' %}
-                </small>
-                <p class="card-text">{{ post.overview|linebreaks|truncatewords:30 }}</p>
-                <p><small class="text-muted">Last updated {{ post.updated|timesince }} ago</small></p>
-                <div class="buttons">
-                  <button class="primary ghost"><a href="{{ post.get_absolute_url }}">Read More</a></button>
-                </div>
+          <div class="card mb-4 box-shadow">
+            <div class="card-header">
+              <h4 class="my-0 font-weight-normal"><a href="{{ post.category.get_absolute_url }}">{{ post.category }}</a></h4>
+            </div>
+            <img class="card-img-top" src="{{ post.thumbnail.url }}" alt="{{ post.title }}">
+            <div class="card-body">
+              <h3 class="card-title"><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h3>
+
+              <div class="card-footer">              
+                <button type="button" class="btn btn-lg btn-block btn-outline-primary"><a href="{{ post.get_absolute_url }}">Read More</a></button>
               </div>
             </div>
-
           </div>
           {% endfor %}
-          
         </div>
       </div>
     </section>
-    
+
 {% endblock content %}
 
 {% block javascript %}
-<script>
-  function ajaxPagination() {
-    $('#pagination a.page-link').each((index, el)=> {
-      $(el).click((e) => {
-        e.preventDefault()
-        let page_url = $(el).attr('href')
-        console.log(page_url)
 
-        $.ajax({
-          url:page_url,
-          type: 'GET',
-          success: (data) => {
-            $('#blog-pg').empty()
-            $('#blog-pg').append( $(data).filter('#blog-pg').html())
-            $('#pagination').empty()
-            $('#pagination').append( $(data).find('#pagination').html() )
-          }
-        })
-      })
-    })
-  }
-  $(document).ready(function() {
-    ajaxPagination()
-  });
-  $(document).ajaxStop(function() {
-    ajaxPagination()
-  })
-</script>
 {% endblock javascript %}

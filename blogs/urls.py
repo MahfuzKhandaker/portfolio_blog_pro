@@ -1,10 +1,11 @@
 from django.urls import path
-from blogs.views import post_create, post_list, post_load, SearchResultsListView, post_detail, post_edit, favourite_post, post_favourite_list, likes, post_by_category, post_by_tag
+from blogs.views import post_create, post_list, lazy_load_posts, SearchResultsListView, post_detail, post_edit, favourite_post, post_favourite_list, likes, post_by_category, post_by_tag
 
 
 urlpatterns = [
     path('', post_list, name='post-list'),
-    path('post_load/', post_load, name='post-load'),
+    path('lazy_load_posts/', lazy_load_posts, name='lazy_load_posts'),
+    # path('post_load/', post_load, name='post-load'),
     path('create/', post_create, name='create-post'),
     path('search/', SearchResultsListView.as_view(), name='search_results'),
     path('favourite_post/', favourite_post, name='favourite_post'),

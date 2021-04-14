@@ -52,16 +52,32 @@ def post_create(request):
 
 
 def post_list(request):
-    return render(request, 'blogs/post_list.html')
+    posts = Post.published.all()[:5]
+    return render(request, 'blogs/post_list.html', {'posts': posts})
 
-def post_load(request):
-    start = request.GET.get('start')
-    limit = request.GET.get('limit')
-    post_list = Post.published.all()[int(start):int(start) + int(limit)]
-    context = {
-        'posts': post_list,
+
+def lazy_load_posts(request):
+    page = request.POST.get('page')
+    posts = Post.published.all()
+    results_per_page = 5
+    paginator = Paginator(posts, results_per_page)
+    try:
+        posts = paginator.page(page)
+    except PageNotAnInteger:
+        posts = paginator.page(2)
+    except EmptyPage:
+        posts = paginator.page(paginator.num_pages)
+    # build a html posts list with the paginated posts
+    posts_html = render_to_string(
+        'blogs/posts.html',
+        {'posts': posts}
+    )
+    # package output data and return it as a JSON object
+    output_data = {
+        'posts_html': posts_html,
+        'has_next': posts.has_next()
     }
-    return render(request, 'blogs/posts.html', context)
+    return JsonResponse(output_data)
 
 
 class SearchResultsListView(ListView):

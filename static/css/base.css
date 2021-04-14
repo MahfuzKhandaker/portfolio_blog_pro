@@ -402,10 +402,12 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .card-img-wrapper {
+  max-width: 35%; 
   height: 100%;
   overflow: hidden;
 }
-.card-img {
+
+.card-img-left {
   height: 100%;
   border-radius: 0 3px 3px 0;
   width: 100%;
@@ -419,104 +421,10 @@ h1, h2, h3, h4, h5, h6 {
 	transition: all 4s ease;
 }
 
-.card:hover .card-img {
+.card:hover .card-img-left {
 	opacity: 0.6;
 	transform: scale(1.2);
 }
-
-/* card animation */
-/* .card-wrapper {
-  margin-bottom: 30px;
-}
-.card-image .card .card-img-wrapper {
-  height: 100%;
-}
-.card-image .card .card-body {
-  display: none;
-}
-.card-image-title-description .card .card-img-wrapper {
-  max-height: 160px;
-}
-.card-image-title-description .card {
-  position: relative;
-  min-height: 300px;
-}
-.card-image-title-description .card .card-body {
-  height: auto;
-  position: relative;
-  top: 0;
-  margin-bottom: -70px;
-}
-.card-image-title-description .card:hover .card-body {
-  top: -70px;
-}
-.card-image-title-description .card .card-body .card-title .card-subtitle {
-  margin-bottom: .75rem;
-}
-.card {
-  min-height: 400px;
-  height: 100%;
-  /* display: inline-block; */
-  /* position: relative; */
-  /* overflow: hidden; */
-  /* background-color: #0d1117;
-  overflow: hidden;
-  color: #f8f7f7;
-  border: 1px solid #30363d;
-  border-radius: 6px;
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-}
-.card:hover {
-  cursor: pointer;
-	box-shadow: 0 2px 4px 0 #11ddf8;
-}
-.card-img-wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 50%;
-  overflow: hidden;
-}
-.card-img-wrapper img {
-  opacity: 0.5;
-  transition: 1.5s ease;
-}
-.card:hover .card-img-wrapper img {
-  opacity: 0.2;
-  transform: scale(1.15);
-}
-.card-body .card-title {
-  margin-bottom: calc(50% + 20px);
-  transition: 1.5s ease;
-}
-.card:hover .card-body .card-title {
-  margin-bottom: .75rem;
-}
-
-
-.card-body {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 50%;
-  transition: 1.5s ease;
-}
-.card-content {
-  left: 0;
-  right: 0;
-  overflow: hidden;
-  width: 100%;
-  height: auto;
-  transition: 1.5s ease;
-}
-.card:hover .card-body {
-  height: 80%;
-}
-.card:hover .card-content {
-  bottom: 0;
-}  */
-/* end blog card animation */
 
 .flex-auto {
   -ms-flex: 0 0 auto;

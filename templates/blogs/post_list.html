@@ -6,12 +6,10 @@
 
   <!-- Blog Posts -->
     <main class="posts-listing col-lg-8">
-      <div class="content" id="post-container">
-        <!-- 'post_load' function fetch post from models by jquery ajax 'GET' method -->
+      <div class="content" id="posts">
+        {% include 'blogs/posts.html' %}
       </div>
-      <div class="load-img" id="more-data">
-
-      </div>
+      <div><a id="lazyLoadLink" href="javascript:void(0);" data-page="2">Load More Posts</a></div>
     </main>
 
     {% include 'sidebar.html' %}
@@ -22,47 +20,34 @@
 {% block javascript %}
 <script>
   $(document).ready(function(){
-      var limit=4;
-      var start=0;
-      var action='inactive'
-      function load_post_data(limit, start)
-      {
-          $.ajax({
-              url:'post_load/',
-              method:"GET",
-              data:{
-                  limit:limit,
-                  start:start
-              },
-              caches:false,
-              success:function(response){
-                  $("#post-container").append(response);
-                  if(response==""){
-                      $('#more-data').html("<button type='button' class='btn btn-info'>No Post Found</button>")
-                       action='active';
-                  }else{
-                      $('#more-data').html("<button class='btn btn-success'>Loading more post...</button>")
-                       action='inactive';
-                  }
-              }
-              
-          })
-      }
-      if(action=='inactive'){
-          action='active',
-          load_post_data(limit, start);
-      }
-      $(window).scroll(function(){
-        if($(window).scrollTop() + $(window).height() > $('#post-container').height() && action =='inactive'){
-            action='active';
-            start=start + limit;
-            setTimeout(function(){
-                load_post_data(limit, start);
-            }, 1000)
-            
+    $('#lazyLoadLink').on('click', function() {
+    var link = $(this);
+    var page = link.data('page');
+    
+    $.ajax({
+      type: 'POST',
+      url: 'lazy_load_posts/',
+      data: {
+        'page': page,
+        'csrfmiddlewaretoken': '{{ csrf_token }}' // from index.html
+      },
+      success: function(data) {
+        // if there are still more pages to load,
+        // add 1 to the "Load More Posts" link's page data attribute
+        // else hide the link
+        if (data.has_next) {
+            link.data('page', page+1);
+        } else {
+          link.hide();
         }
-        
-    })
+        // append html to the posts div
+        $('#posts').append(data.posts_html);
+      },
+      error: function(xhr, status, error) {
+        // shit happens friends!
+      }
+    });
+  });
   })
 </script>
 {% endblock javascript %}

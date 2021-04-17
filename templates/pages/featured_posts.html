@@ -1,0 +1,29 @@
+<div class="row mb-2">
+    {% for post in featured_posts %}
+    <div class="col-md-6">
+      <div class="card flex-md-row mb-4 box-shadow h-md-250">
+        <div class="card-img-wrapper">
+          {% if post.thumbnail %}
+          <img class="card-img-left flex-auto d-none d-md-block" src="{{ post.thumbnail.url }}" data-holder-rendered="true">
+          {% endif %}
+        </div>
+        <div class="card-body d-flex flex-column align-items-start">
+          <strong class="d-inline-block mb-2 text-primary"><a href="{{ post.category.get_absolute_url }}">{{ post.category }}</a></strong>
+          <h3 class="card-title"><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h3>
+          <div class="mb-1 text-muted">             
+              {% include 'blogs/post_info.html' %}
+          </div>
+          <div class="card-footer">
+            <div class="buttons my-3">
+              <button class="primary ghost"><a href="{{ post.get_absolute_url }}">Read More</a></button>
+            </div>            
+          </div>
+        </div>
+      </div>
+    </div>
+    {% empty %}
+    <center>
+      <h5>No post found</h5>
+    </center>
+    {% endfor %}
+  </div>

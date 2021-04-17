@@ -17,15 +17,15 @@ class HomePageView(generic.ListView):
 
     def get_context_data(self, **kwargs):
         context = super(HomePageView, self).get_context_data(**kwargs)
-        context['featured_posts'] = Post.published.filter(featured=True)[:4]
-        # paginator = Paginator(context['featured_posts'], 3)
-        # page = self.request.GET.get('page')
-        # try:
-        #     context['featured_posts'] = paginator.page(page)
-        # except PageNotAnInteger:
-        #     context['featured_posts'] = paginator.page(1)
-        # except EmptyPage:
-        #     context['featured_posts'] = paginator.page(paginator.num_pages)
+        context['featured_posts'] = Post.published.filter(featured=True)[:]
+        paginator = Paginator(context['featured_posts'], 4)
+        page = self.request.GET.get('page')
+        try:
+            context['featured_posts'] = paginator.page(page)
+        except PageNotAnInteger:
+            context['featured_posts'] = paginator.page(1)
+        except EmptyPage:
+            context['featured_posts'] = paginator.page(paginator.num_pages)
 
         context['post_num'] = Post.published.count()
         context['project_num'] = Project.objects.count()
@@ -38,6 +38,7 @@ class HomePageView(generic.ListView):
             return JsonResponse({'form': html, 'featured_posts': featured_posts})
 
         return context
+
 
 class AboutPageView(TemplateView):
     template_name = 'pages/about.html'

@@ -5,45 +5,48 @@
 
 <div class="container">
     <!-- Blog post -->
-      <div class="row py-3">
-        {% for project in projects %}
-        <div class="col-lg-12">
-          <div class="card mb-3">
-            <div class="row no-gutters">
-              {% if forloop.first or forloop.last %}
-              <div class="col-lg-5">
-                <img src="{{ project.image.url }}" class="card-img" alt="{{ project.title }}">
-              </div>
-              {% endif %}
-              <div class="col-lg-7">
-                <div class="card-body">
-                    <h5 class="card-title">
-                        <a href="{{ project.get_absolute_url }}">{{ project.title }}</a>
-                    </h5>
-                    <span><p class="text-muted">Technology used:&nbsp;{{ project.technology }}</p></span>
-                  <p class="card-text">{{ project.description | truncatewords:15 }}</p>
-                </div>
-              </div>
-              {% if not forloop.first and not forloop.last %}
-              <div class="col-lg-5">
-                <img src="{{ project.image.url }}" class="card-img" alt="{{ project.title }}">
-              </div>
-              {% endif %}
-            </div>
-          </div>       
-      </div>
-      {% empty %}
-      <center>
-        <h5>Oops!No projects found</h5>
-      </center>
-      {% endfor %}
-      </div>
-  
-      {% if is_paginated %}
-      <div class="container mb-3">
-        {% include 'pagination.html' %}
-      </div>
-    {% endif %}
+    <div class="content" id="projects">
+      {% include 'projects/projects.html' %}
+    </div>
+
+      <div class="mb-5"><a id="lazyLoadProjects" href="javascript:void(0);" data-page="2">Load More Projects</a></div>
+
   </div>
 
 {% endblock %}
+
+{% block javascript %}
+<script>
+  $(document).ready(function(){
+    $('#lazyLoadProjects').on('click', function() {
+    var link = $(this);
+    var page = link.data('page');
+    
+    $.ajax({
+      type: 'POST',
+      url: 'lazy_load_projects/',
+      data: {
+        'page': page,
+        'csrfmiddlewaretoken': '{{ csrf_token }}' // from index.html
+      },
+      success: function(data) {
+        // if there are still more pages to load,
+        // add 1 to the "Load More Posts" link's page data attribute
+        // else hide the link
+        if (data.has_next) {
+            link.data('page', page+1);
+        } else {
+          link.hide();
+        }
+        // append html to the posts div
+        $('#projects').append(data.projects_html);
+        console.log(data.projects_html)
+      },
+      error: function(xhr, status, error) {
+        // shit happens friends!
+      }
+    });
+  });
+  })
+</script>
+{% endblock javascript %}

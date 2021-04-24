@@ -10,7 +10,6 @@
 
 <!-- Hero Section-->
 
-
 <section style="background-image: url('static/images/moon.jpg'); background-size: cover; background-position: center center" class="hero">
   <div class="container">
       <div class="row">
@@ -70,26 +69,38 @@
       </div>
     </div>
   </section>
-  
     <!-- Latest Posts -->
     <section class="latest-posts"> 
       <div class="container-lg px-3">
          <header> 
           <h2>Latest from the blog</h2>
-        </header>
-
-        <div class="card-deck mb-3 text-center">
+        </header> 
+        <div class="card-deck text-center">
           {% for post in most_recent %}
-          <div class="card mb-4 box-shadow">
+          <div class="card box-shadow">
             <div class="card-header">
-              <h4 class="my-0 font-weight-normal"><a href="{{ post.category.get_absolute_url }}">{{ post.category }}</a></h4>
+              <h4 class="my-0 font-weight-normal "><a href="{{ post.category.get_absolute_url }}">{{ post.category }}</a></h4>
             </div>
-            <img class="card-img-top" src="{{ post.thumbnail.url }}" alt="{{ post.title }}">
+              {% if post.thumbnail %}
+              <img class="card-img-top" src="{{ post.thumbnail.url }}" alt="{{ post.title }}">
+              {% endif %}
             <div class="card-body">
               <h3 class="card-title"><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h3>
+              <p class="text-justify">{{post.overview|truncatewords:20}}</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <button type="button" class="btn btn-sm btn-outline-secondary">
+                  <a href="{{ post.get_absolute_url }}">Read more</a>
+                </button>
 
-              <div class="card-footer">              
-                <button type="button" class="btn btn-lg btn-block btn-outline-primary"><a href="{{ post.get_absolute_url }}">Read More</a></button>
+                <small class="text-muted">9 mins</small>
+              </div>
+              <br>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  {% for tag in post.tags.all %}
+                  <button type="button" class="btn btn-sm btn-outline-secondary"><a href="{% url 'post-by-tag' tag.slug %}">{{ tag }}</a></button>
+                  {% endfor %}
+                </div>
               </div>
             </div>
           </div>

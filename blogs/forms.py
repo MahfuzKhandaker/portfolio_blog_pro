@@ -1,6 +1,6 @@
 from django import forms
 from pagedown.widgets import  PagedownWidget, AdminPagedownWidget
-from .models import Post, Comment
+from .models import Post, Comment, Tag
 
 
 class AdminPostForm(forms.ModelForm):
@@ -14,7 +14,7 @@ class AdminPostForm(forms.ModelForm):
 class PostForm(forms.ModelForm):
     overview = forms.CharField(widget=PagedownWidget())
     content =  forms.CharField(widget=PagedownWidget())
-
+    tags = forms.ModelMultipleChoiceField(queryset=Tag.objects.all(), widget=forms.CheckboxSelectMultiple)
     class Meta:
         model = Post
         fields = ['title', 'slug', 'author', 'category', 'overview', 'content', 'thumbnail', 'image_caption', 'likes', 'featured', 'tags', 'status']

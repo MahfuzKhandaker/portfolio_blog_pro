@@ -20,6 +20,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.template.loader import render_to_string
 from django.http import JsonResponse
 from urllib.parse import quote_plus
+from django.contrib.auth.decorators import login_required
 
 try:
     from django.utils import simplejson as json
@@ -32,28 +33,43 @@ except ImportError:
 #     template_name  = 'forms/ajax.html'
 #     success_url = '/form-success/'
 
-
+@login_required
 def post_create(request):
 	# if not request.user.is_staff or not request.user.is_superuser:
 	# 	raise Http404
-	form = PostForm(request.POST or None, request.FILES or None)
-	if form.is_valid():
-		instance = form.save(commit=False)
-		instance.author = request.user
-		instance.save()
+    if request.method == 'POST':
 
-		# message success
-		messages.success(request, "Successfully Created")
-		return HttpResponseRedirect(instance.get_absolute_url())
-	context = {
-		"form": form,
-	}
-	return render(request, "blogs/create_post.html", context)
+        form = PostForm(request.POST or None, request.FILES or None)
+        if form.is_valid():
+            instance = form.save(commit=False)
+            instance.author = request.user
+            instance.save()
+            form.save_m2m()
+            # message success
+            messages.success(request, "Successfully Created")
+            return HttpResponseRedirect(instance.get_absolute_url())
+    else:
+        form = PostForm()
+    
+    context = {
+        "form": form,
+    }
+	
+    return render(request, "blogs/create_post.html", context)
 
 
 def post_list(request):
     posts = Post.published.all()[:5]
-    return render(request, 'blogs/post_list.html', {'posts': posts})
+    most_recent = Post.published.all().order_by('-timestamp', '-updated')[:3]
+    # category_count = Post.published.values('category__title').annotate(Count('category__title')).order_by('category')
+    category_count = Category.objects.all().annotate(posts_count=Count('posts'))
+    # Post.objects.filter(published_date__lte=timezone.now()).values('categories__name').annotate(Count('categories__name')).order_by('categories')
+    context = {
+        'posts': posts,
+        'most_recent': most_recent,
+        'category_count': category_count
+    }
+    return render(request, 'blogs/post_list.html', context)
 
 
 def lazy_load_posts(request):

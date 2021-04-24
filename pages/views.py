@@ -17,8 +17,8 @@ class HomePageView(generic.ListView):
 
     def get_context_data(self, **kwargs):
         context = super(HomePageView, self).get_context_data(**kwargs)
-        context['featured_posts'] = Post.published.filter(featured=True)[:]
-        paginator = Paginator(context['featured_posts'], 4)
+        context['featured_posts'] = Post.published.filter(featured=True)[:2]
+        paginator = Paginator(context['featured_posts'], 2)
         page = self.request.GET.get('page')
         try:
             context['featured_posts'] = paginator.page(page)

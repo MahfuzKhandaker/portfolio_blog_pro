@@ -3,7 +3,9 @@ from projects.models import Project
 from django.http import JsonResponse
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.template.loader import render_to_string
+from django.contrib.auth.decorators import login_required
 
+@login_required
 def project_index(request):
     projects = Project.objects.all()[:2]
     return render(request, 'projects/project_index.html', {'projects': projects})

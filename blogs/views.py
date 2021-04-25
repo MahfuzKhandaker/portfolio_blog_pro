@@ -61,13 +61,13 @@ def post_create(request):
 def post_list(request):
     posts = Post.published.all()[:5]
     most_recent = Post.published.all().order_by('-timestamp', '-updated')[:3]
-    # category_count = Post.published.values('category__title').annotate(Count('category__title')).order_by('category')
     category_count = Category.objects.all().annotate(posts_count=Count('posts'))
-    # Post.objects.filter(published_date__lte=timezone.now()).values('categories__name').annotate(Count('categories__name')).order_by('categories')
+    tags = Tag.objects.all()
     context = {
         'posts': posts,
         'most_recent': most_recent,
-        'category_count': category_count
+        'category_count': category_count,
+        'tags': tags
     }
     return render(request, 'blogs/post_list.html', context)
 

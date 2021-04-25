@@ -12,13 +12,13 @@
 
 <section style="background-image: url('static/images/moon.jpg'); background-size: cover; background-position: center center" class="hero">
   <div class="container">
-      <div class="row">
+      <div class="row mb-2">
         <div class="col-lg-auto">
           <a href="{% url 'post-list' %}" class="hero-link">{{ post_num }} Posts</a> |
           <a href="{% url 'project_index' %}" class="hero-link">{{ project_num }} Projects</a>
           <h1>Build your ideas faster and easier with Python & Django Web Development Services</h1>
         </div>
-      </div><a href="#here" class="continue link-scroll">
+      </div><a href="#intro" class="continue link-scroll">
         Scroll Down
         <br>
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-double-down" viewBox="0 0 16 16">
@@ -30,8 +30,8 @@
   </section>
 
   <!-- Intro Section-->
-  <section class="intro">
-    <div class="container-lg">
+  <section class="intro" id="intro">
+    <div class="container">
       <div class="row">
         <div class="col-lg-5">
           <img src="{% static 'images/moonred.jpg' %}" class="card-img-top mx-auto d-block mb-3" alt="...">
@@ -85,7 +85,7 @@
               <img class="card-img-top" src="{{ post.thumbnail.url }}" alt="{{ post.title }}">
               {% endif %}
             <div class="card-body">
-              <h3 class="card-title"><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h3>
+              <h5 class="card-title"><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h5>
               <p class="text-justify">{{post.overview|truncatewords:20}}</p>
               <div class="d-flex justify-content-between align-items-center">
                 <button type="button" class="btn btn-sm btn-outline-secondary">

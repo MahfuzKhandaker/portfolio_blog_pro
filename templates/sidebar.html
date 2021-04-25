@@ -1,81 +1,73 @@
 <aside class="col-lg-4">
-    <div class="blog-sidebar">
-      <div class="make-me-sticky">
-
-      
-    <!-- Widget [Search Bar Widget]-->
-    <div class="widget search">
-    <form action="{% url 'search_results' %}" class="search-form">
-      <div class="input-group">
-        <input type="text" class="form-control" placeholder="Search blog" name="q">
-        <div class="input-group-btn">
-            <button class="btn btn-sm" type="submit">
+  <div class="blog-sidebar">
+    <div class="make-me-sticky">    
+      <!-- Widget [Search Bar Widget]-->
+      <div class="widget search">
+        <form action="{% url 'search_results' %}" class="search-form">
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="Search blog" name="q">
+            <div class="input-group-btn">
+              <button class="btn btn-sm" type="submit">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
-              </svg>
-            </button>
-        </div>
-    </div>
-    </form>
-    </div>
-
-      
-      
-
-      
-
-    <!-- Widget [Latest Posts Widget] -->
-    <div class="widget latest-posts">
-    <header>
-        <h3 class="h6">Latest Posts</h3>
-    </header>
-    <div class="blog-post">
-        {% for post in most_recent %}
-        <a href="{{ post.get_absolute_url }}">
-            <div class="d-flex item justify-content-start align-items-center">
-            {% if post.thumbnail %}
-            <div class="image"><img src="{{ post.thumbnail.url }}" alt="..." class="img-fluid"></div>
-            {% endif %}
-            <div class="title"><strong>{{ post.title }}</strong>
-                <div class="d-flex  align-items-center">
-                <div class="views"><i class="fa fa-eye"></i> {{ post.number_of_views }}</div> |&nbsp;
-                <div class="comments"><i class="fa fa-comment"></i> {{ post.comments.count }}</div>
-                </div>
-            </div>
-            </div>
-        </a>
-        {% endfor %}
-    </div>
-  </div>
-    <!-- Widget [Categories Widget]-->
-    <div class="widget categories">
-    <header>
-        <h3 class="h6">Categories:</h3>
-    </header>
-    
-    {% for cat in category_count %}
-    <div class="d-flex justify-content-start align-items-center">
-      <a href="{% url 'post-by-category' cat.slug %}">{{cat}}</a><span class="badge badge-dark">{{cat.posts_count}}</span>
-    </div>
-    {% endfor %}
-    </div>
-
-    <div class="widget categories">
-      <header>
-        <h3 class="h6">Tags:</h3>
-      </header>
-        {% for post in posts %}
-        <div class="d-flex align-content-start flex-wrap">
-          <div class="btn-group mr-2">
-            {% for tag in post.tags.all %}
-              <button type="button" class="btn btn-sm btn-outline-secondary">
-                <a href="{% url 'post-by-tag' tag.slug %}">{{ tag }}</a>
+                  <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                </svg>
               </button>
-            {% endfor %}
+            </div>
           </div>
+        </form>
+      </div>
+
+      <!-- Widget [Latest Posts Widget] -->
+      <div class="widget latest-posts">
+        <header>
+          <h3 class="h6">Latest Posts</h3>
+        </header>
+        <div class="blog-post">
+          {% for post in most_recent %}
+          <a href="{{ post.get_absolute_url }}">
+            <div class="d-flex item justify-content-start align-items-center">
+              {% if post.thumbnail %}
+              <div class="image">
+                <img src="{{ post.thumbnail.url }}" alt="..." class="img-fluid">
+              </div>
+              {% endif %}
+              <div class="title"><strong>{{ post.title }}</strong>
+                <div class="d-flex  align-items-center">
+                  <div class="views"><i class="fa fa-eye"></i> {{ post.number_of_views }}</div> |&nbsp;
+                  <div class="comments"><i class="fa fa-comment"></i> {{ post.comments.count }}</div>
+                </div>
+              </div>
+            </div>
+          </a>
+          {% endfor %}
+        </div>
+      </div>
+      <!-- Widget [Categories Widget]-->
+      <div class="widget categories">
+        <header>
+          <h3 class="h6">Categories:</h3>
+        </header>
+        {% for cat in category_count %}
+        <div class="d-flex justify-content-start align-items-center">
+          <a href="{% url 'post-by-category' cat.slug %}">{{cat}}</a><span class="badge badge-dark">{{cat.posts_count}}</span>
         </div>
         {% endfor %}
-    </div>
+      </div>
+
+      <div class="widget tags">
+        <header>
+          <h3 class="h6">Tags:</h3>
+        </header>
+        <div class="d-flex flex-wrap justify-content-between align-items-start">
+          {% for tag in tags %}
+          <div class="btn-group mr-2 mb-2">
+            <button type="button" class="btn btn-sm btn-outline-secondary">
+              <a href="{% url 'post-by-tag' tag.slug %}">{{ tag }}</a>
+            </button>
+          </div>
+          {% endfor %}        
+        </div>
       </div>
     </div>
-  </aside>
+  </div>
+</aside>

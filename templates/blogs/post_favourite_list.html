@@ -17,7 +17,10 @@
     <div class="card blogcard bounce-up cf" style="width: 18rem;">
         <img class="card-img-top" src="{{ favourite_post.thumbnail.url }}" alt="Card image cap">
         <div class="card-body cf">
-          <h5 class="card-title"><a href="{{ favourite_post.get_absolute_url }}">{{favourite_post.title}}</a></h5>
+          <h3 class="card-title"><a href="{{ favourite_post.get_absolute_url }}">{{favourite_post.title}}</a></h3>
+          <div class="mb-1 text-muted">             
+            {% include 'blogs/post_info.html' %}
+          </div>
           <p class="card-text">{{favourite_post.overview}}</p>
           <a href="{{ favourite_post.get_absolute_url }}" class="btn btn-primary">READ MORE</a>
         </div>

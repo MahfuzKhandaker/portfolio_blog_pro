@@ -19,23 +19,22 @@
       <div class="col-md-12 mt-3 left">
           <div class="card mb-4">
               {% if post.thumbnail %}
-                <img class="card-img-top" src="{{ post.thumbnail.url }}" alt="{{ post.title }}" />
+              <img class="card-img-top" src="{{ post.thumbnail.url }}" alt="{{ post.title }}">
               {% endif %}
           
-          <div class="card-body">
+            <div class="card-body">
               <h3 class="card-title">{{ post.title }} </h3>
           
-              <small class="text-muted">
-                Published:&nbsp;
-                {{ post.timestamp | timesince }} ago |&nbsp;
-        
-                <i class="fa fa-thumbs-up"> {{ total_likes }} Like{{ total_likes|pluralize }}</i>
-                <i class="fa fa-clock text-info"></i> {% if post.read_time <= 1 %} 1 Minute read  {% else %} {{ post.read_time }} Minute{{ post.read_time|pluralize }} read {% endif %} |&nbsp;
-                <i class="fa fa-eye"></i> {{ post.number_of_views }} views |&nbsp;
-                <i class="fa fa-comment"></i> {{ post.comments.count }} comments |&nbsp;
+                
 
-                {% include 'blogs/post_info.html' %}
+                <small class="text-muted">
+                  {% include 'blogs/post_info.html' %}
+                  <i class="fa fa-clock text-info"></i> {% if post.read_time <= 1 %} 1 Minute read  {% else %} {{ post.read_time }} Minute{{ post.read_time|pluralize }} read {% endif %} |&nbsp;
+                  <i class="fa fa-eye"></i> {{ post.number_of_views }} views |&nbsp;
+                  <i class="fa fa-thumbs-up"> {{ post.total_likes }} Like{{ post.total_likes|pluralize }}</i> |&nbsp;
+                  <i class="fa fa-comment"></i> {{ post.comments.count }} comments
               </small>
+
                 <p class="card-text py-3">{{ post.overview | markdown | safe }}</p>
                 <br>
                 <p class="card-text py-3">{{ post.content | markdown | safe }}</p>

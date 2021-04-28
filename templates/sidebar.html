@@ -49,7 +49,7 @@
         </header>
         {% for cat in category_count %}
         <div class="d-flex justify-content-start align-items-center">
-          <a href="{% url 'post-by-category' cat.slug %}">{{cat}}</a><span class="badge badge-dark">{{cat.posts_count}}</span>
+          <a href="{% url 'post-by-category' cat.slug %}">{{cat}}</a><span class="badge bg-info text-dark">{{cat.posts_count}}</span>
         </div>
         {% endfor %}
       </div>

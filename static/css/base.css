@@ -60,12 +60,6 @@ ul {
 	padding: 0;
 }
   
-/* section {
-	padding: 100px 0;
-	overflow-x: hidden;
-	min-height: 100vh;
-} */
-  
 button,
 input {
 	outline: none !important;
@@ -241,18 +235,21 @@ section.hero .continue i {
 }
 
 section.intro {
-  padding: 150px 50px;
+  padding: 50px 20px;
   position: relative;
 	font: normal 14px/1.618em "Roboto", sans-serif;
-  text-align: justify;
-}
-@media (max-width: 767px) {
-	section.intro .container {
-	  padding: 50px 20px;
-	}
 }
 
- 
+section.intro .container {
+	padding: 50px;
+	position: relative;
+}
+
+@media (max-width: 767px) {
+	section.intro .container {
+	  padding: 30px 10px;
+	}
+}
   /*
   * ==========================================================
   *     DIVIDER SECTION
@@ -262,6 +259,13 @@ section.divider {
 	color: #fff;
 }
 
+.container-fluid, .container-lg, .container-md, .container-sm, .container-xl {
+  width: 100%;
+  padding-right: 0;
+  padding-left: 0;
+  margin-right: auto;
+  margin-left: auto;
+}
 .flex-auto {
   -ms-flex: 0 0 auto;
   -webkit-box-flex: 0;
@@ -304,6 +308,9 @@ a:hover {
 
 /* END blog-main */
 /* Header */
+header {
+  padding: 0%;
+}
 .blog-header {
   width: 100%;
   background-color: #161b22;
@@ -390,16 +397,6 @@ h1, h2, h3, h4, h5, h6 {
   color: #58a6ff;
 }
 
-.card-body {
-  -ms-flex: 1 1 auto;
-  flex: 1 1 auto;
-  min-height: 1px;
-  padding: 10px 20px;
-}
-.card-text {
-  font-size: 1rem;
-  color: #EDEAE5;
-}
 .card-img-top {
   height: 60vh;
   width: 100vw;
@@ -565,11 +562,11 @@ h1, h2, h3, h4, h5, h6 {
   word-break: normal;
 }
 
-pre {
+/* pre {
   display: block;
   font-size: 87.5%;
   color: #c3c9b3;
-}
+} */
 
 pre {
   margin-top: 3rem;

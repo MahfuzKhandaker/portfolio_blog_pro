@@ -2,9 +2,9 @@
     {% for project in projects %}
     <div class="col-md-12">
       <div class="card flex-md-row mb-4 box-shadow h-md-300">
-        <div class="card-img-wrapper">
+        <div class="card-img-wrapper flex-auto d-none d-md-block">
           {% if project.image %}
-          <img class="card-img-left flex-auto d-none d-md-block" src="{{ project.image.url }}" data-holder-rendered="true">
+          <img class="card-img-left" src="{{ project.image.url }}" data-holder-rendered="true">
           {% endif %}
         </div>
         <div class="card-body d-flex flex-column align-items-start">
@@ -16,7 +16,7 @@
                 {{ project.technology }}
             </h5>
             </small>
-            <p class="card-text">{{ project.description }}</p>
+            <p class="card-text">{{ project.description|truncatewords:20 }}</p>
 
             <a class="blog-home__cta" href="{{ project.get_absolute_url }}">Continue reading</a>
         </div>

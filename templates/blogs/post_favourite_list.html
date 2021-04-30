@@ -4,29 +4,36 @@
 {% block content %}
 
 <div class="container">
-    <h1>Favourite Posts</h1>
-    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Totam perferendis cupiditate veniam, facere ipsam praesentium. Maxime explicabo, magnam nobis temporibus repudiandae enim! Praesentium maiores, accusantium hic at soluta commodi quae.</p>
-    <br>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa excepturi inventore sed nobis? Enim exercitationem libero magni, perspiciatis deserunt porro illo nisi dolore cum? Itaque earum corrupti architecto at iure.</p>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam modi unde excepturi voluptatem velit a accusantium accusamus, tempore officia nam. In ipsa quam laudantium voluptate quod possimus reiciendis, voluptas officiis.</p>
-</div>
-
-{% for favourite_post in favourite_posts %}
-<div class="container cf">
-
-    <div class="card blogcard bounce-up cf" style="width: 18rem;">
-        <img class="card-img-top" src="{{ favourite_post.thumbnail.url }}" alt="Card image cap">
-        <div class="card-body cf">
-          <h3 class="card-title"><a href="{{ favourite_post.get_absolute_url }}">{{favourite_post.title}}</a></h3>
+  <h1 class="my-3 text-center">All the favourite posts:</h1>
+  <div class="row my-3">
+    {% for post in favourite_posts %}
+    <div class="col-md-12">
+      <div class="card flex-md-row mb-4 box-shadow h-md-300">
+        <div class="card-img-wrapper flex-auto d-none d-md-block">
+          {% if post.thumbnail %}
+          <img class="card-img-left" src="{{ post.thumbnail.url }}" alt="{{ post.title }}">
+          {% endif %}
+        </div>
+        <div class="card-body d-flex flex-column align-items-start">
+          <strong class="d-inline-block mb-2 text-primary"><a href="{{ post.category.get_absolute_url }}">{{ post.category }}</a></strong>
+          <h3 class="card-title"><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h3>
           <div class="mb-1 text-muted">             
             {% include 'blogs/post_info.html' %}
           </div>
-          <p class="card-text">{{favourite_post.overview}}</p>
-          <a href="{{ favourite_post.get_absolute_url }}" class="btn btn-primary">READ MORE</a>
+          <p class="text-justify mb-auto">{{post.overview|truncatewords:20}} <a class="btn btn-sm btn-outline-dark" href="{{ post.get_absolute_url }}" role="button">Read more</a></p>
+
+          <div class="d-flex justify-content-start align-items-start">
+            <div class="btn-group mb-2">
+              {% for tag in post.tags.all %}
+              <button type="button" class="btn btn-sm btn-outline-info"><a href="{% url 'post-by-tag' tag.slug %}">{{ tag }}</a></button>
+              {% endfor %}
+            </div>
+          </div>
         </div>
       </div>
-
+      
+    </div>
+    {% endfor %}
+  </div>
 </div>
-{% endfor %}
-
 {% endblock content %}

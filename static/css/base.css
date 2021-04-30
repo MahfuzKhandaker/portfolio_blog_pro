@@ -235,19 +235,19 @@ section.hero .continue i {
 }
 
 section.intro {
-  padding: 50px 20px;
+  padding: 50px;
   position: relative;
 	font: normal 14px/1.618em "Roboto", sans-serif;
 }
 
 section.intro .container {
-	padding: 50px;
+	padding: 100px 50px;
 	position: relative;
 }
 
 @media (max-width: 767px) {
 	section.intro .container {
-	  padding: 30px 10px;
+	  padding: 50px 20px;
 	}
 }
   /*
@@ -454,17 +454,6 @@ h1, h2, h3, h4, h5, h6 {
     height: 300px; 
   }
 }
-/* .image {
-  max-height: 300px;
-  width: auto;
-  overflow: hidden;
-  padding: 0;
-} */
-/* .card-img-top {
-  width: 100%;
-  height: 50vh;
-  object-fit:cover;
-} */
 
 .rounded-circle {
   top: 50%;
@@ -611,8 +600,8 @@ pre {
     margin: 0;
   } 
   
-  .about .pro {
-	background-color: #e99607;
+.about .pro {
+	background-color: #ffa200;
 	border-radius: 3px;
 	font-size: 14px;
 	font-weight: bold;
@@ -771,7 +760,7 @@ pre {
 	}
   }
 
-  .flex-item-footer {
+.flex-item-footer {
 	padding: 10px;
 	flex: 60%;
 	padding: 50px;

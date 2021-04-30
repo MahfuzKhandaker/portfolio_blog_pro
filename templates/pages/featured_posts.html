@@ -1,8 +1,9 @@
-<div class="row mb-2">
+<div class="container">
+  <h1 class="my-3">Featured Posts:</h1>
+  <div class="row mb-2">
     {% for post in featured_posts %}
     <div class="col-md-6">
       <div class="card flex-md-row mb-4 box-shadow h-md-300">
-      
         <div class="card-img-wrapper flex-auto d-none d-md-block">
           {% if post.thumbnail %}
           <img class="card-img-left" src="{{ post.thumbnail.url }}" alt="{{ post.title }}">
@@ -14,8 +15,7 @@
           <div class="mb-1 text-muted">             
             {% include 'blogs/post_info.html' %}
           </div>
-          <p class="text-justify mb-auto">{{post.overview|truncatewords:15}} <a class="btn btn-sm btn-outline-dark" href="{{ post.get_absolute_url }}" role="button">Read more</a></p>
-
+          <p class="text-justify mb-auto">{{post.overview|truncatewords:12}} <a class="btn btn-sm btn-outline-dark" href="{{ post.get_absolute_url }}" role="button">Read more</a></p>
           <div class="d-flex justify-content-start align-items-start">
             <div class="btn-group mb-2">
               {% for tag in post.tags.all %}
@@ -32,3 +32,4 @@
     </center>
     {% endfor %}
   </div>
+</div>

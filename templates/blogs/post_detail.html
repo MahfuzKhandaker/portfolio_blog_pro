@@ -33,7 +33,7 @@
                   <i class="fa fa-eye"></i> {{ post.number_of_views }} views |&nbsp;
                   <i class="fa fa-thumbs-up"> {{ post.total_likes }} Like{{ post.total_likes|pluralize }}</i> |&nbsp;
                   <i class="fa fa-comment"></i> {{ post.comments.count }} comments
-              </small>
+                </small>
 
                 <p class="card-text py-3">{{ post.overview | markdown | safe }}</p>
                 <br>

@@ -7,7 +7,6 @@
 {% endblock %}
 
 {% block content %}
-
 {% if messages %}
 <ul class="messages">
   {% for message in messages %}
@@ -16,7 +15,8 @@
 </ul>
 {% endif %}
 
-  <div class="container contact">      
+
+  <div class="container contact">    
     <h2 class="text-center pt-4">Contact Us</h2>
 
     <form action="{% url 'contact' %}" method="post">

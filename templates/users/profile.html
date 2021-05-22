@@ -5,124 +5,94 @@
 {% block title %}Profile{% endblock title %}
 
 {% block content %}
+<header>
 
+	<div class="container-profile">
+		<div class="profile">
+			<div class="profile-image">
 
-<div class="container-profile">
+				{% if request.user.profile.photo %}
+				<img src="{{ request.user.profile.photo.url }}" alt="">
+			  	{% else %}
+				<img src="/media/default.jpg" alt="">
+			  {% endif %}
+				
+			</div>
 
-  <div class="profile">
+			<div class="profile-user-settings">
+				<h1 class="profile-user-name">{{ page_user|capfirst }}</h1>
+				<button class="btn profile-edit-btn"><a href="{% url 'profile_update' request.user.username %}">Edit Profile</a></button>
+				<button class="btn profile-settings-btn" aria-label="profile settings"><i class="fa fa-cog" aria-hidden="true"></i></button>
+			</div>
+			<div class="profile-stats">
+				<ul>
+					<li><span class="profile-stat-count">{{ user_posts.count }}</span> posts</li>
+					<li><span class="profile-stat-count">188</span> followers</li>
+					<li><span class="profile-stat-count">206</span> following</li>
+				</ul>
+			</div>
 
-    <div class="profile-image">
+			<div class="profile-bio">
+				<p><span class="profile-real-name">{{ page_user|capfirst }}</span> {{ page_user.profile.bio }}</p>
+			</div>
+		</div>
+		<!-- End of profile section -->
+	</div>
+</header>
 
-      <img src="{{ page_user.photo.url }}" alt="">
+<main>
+<div class="container-blog-posts">
+	{% if user_posts %} 
+    <h1>{{ page_user|capfirst }}'s Posts:</h1>
+    <section class="blog-posts">
+		{% for post in user_posts %}
+		<div class="blog-card">
+			<div class="blog-card-image">
+				{% if post.thumbnail %}
+				<img src="{{ post.thumbnail.url }}">
+				{% endif %}
+			</div>
+			<div class="blog-card-info">
+				<h5><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h5>
+				<div class="mb-1 text-muted">
+				  {% include 'blogs/post_info.html' %}
+				</div>
+		
+				<div class="d-inline mb-auto">
+				  {% for tag in post.tags.all %}
+					<a class="card-link btn-outline-info" href="{% url 'post-by-tag' tag.slug %}">#{{ tag }}</a>
+				  {% endfor %}
+				</div>
+			  </div>
+		</div>
+		{% endfor %}
+	</section>
+	{% endif %}
 
-    </div>
-
-    <div class="profile-user-settings">
-
-      <h1 class="profile-user-name">{{ page_user }}</h1>
-
-      <button class="btn profile-edit-btn">Edit Profile</button>
-
-      <button class="btn profile-settings-btn" aria-label="profile settings"><i class="fa fa-cog" aria-hidden="true"></i></button>
-
-    </div>
-
-    <div class="profile-stats">
-
-      <ul>
-        <li><span class="profile-stat-count">{{ user_posts.count }}</span> posts</li>
-        <li><span class="profile-stat-count">188</span> followers</li>
-      </ul>
-
-    </div>
-
-    <div class="profile-bio">
-
-      <p><span class="profile-real-name">{{ page_user }}</span> {{ page_user.bio }} 📷✈️🏕️</p>
-
-    </div>
-
-  
-    <div class="container-lg px-3">
-      <div class="row">
-        <div class="col-lg-12">
-          <div class="container">
-          <header>
-            <h2>{{ page_user|capfirst }}'s Posts</h2>
-          </header>
-          
-          <div class="row">
-            {% for user_post in user_posts %}
-            <div class="col-lg-4">
-              <div class="card">
-                <img src="{{ user_post.thumbnail.url }}" class="card-img" alt="{{ user_post.title }}">
-                <div class="card-body">
-                  <h5 class="card-title"><a href="{{ user_post.get_absolute_url }}">{{ user_post.title }}</a></h5>
-                  <small class="text-muted">
-                    <i class="fa fa-eye"></i> {{ user_post.number_of_views }} views
-                    <i class="fa fa-comment"></i> {{ user_post.comments.count }} comments
-    
-                    {% for category in user_post.categories.all %}
-                    <a href="{% url 'post_category' category.title %}">
-                      {{ category.title }}
-                    </a>&nbsp;
-                    {% endfor %}
-                  </small>
-                  <p class="card-text">{{ user_post.overview|linebreaks|truncatewords:30 }}</p>
-                  <p><small class="text-muted">Last updated {{ user_post.updated|timesince }} ago</small></p>
-                  <div class="buttons">
-                    <button class="primary ghost"><a href="{{ user_post.get_absolute_url }}">Read More</a></button>
-                  </div>
-                </div>
-              </div>
-
-            </div>
-            {% endfor %}
-          </div>
-        </div>
-
-        </div>
-        <div class="col-lg-12">
-          <div class="container">
-          <h2>{{ page_user|capfirst }}'s Favourite Posts</h2>
-          <div class="row">
-            {% for user_post in user_fav_posts %}
-            <div class="col-lg-4">
-              <div class="card">
-                <img src="{{ user_post.thumbnail.url }}" class="card-img" alt="{{ user_post.title }}">
-                <div class="card-body">
-                  <h5 class="card-title"><a href="{{ user_post.get_absolute_url }}">{{ user_post.title }}</a></h5>
-                  <small class="text-muted">
-                    <i class="fa fa-eye"></i> {{ user_post.number_of_views }} views
-                    <i class="fa fa-comment"></i> {{ user_post.comments.count }} comments
-    
-                    {% for category in user_post.categories.all %}
-                    <a href="{% url 'post_category' category.title %}">
-                      {{ category.title }}
-                    </a>&nbsp;
-                    {% endfor %}
-                  </small>
-                  <p><small class="text-muted">Last updated {{ user_post.updated|timesince }} ago</small></p>
-                  <div class="buttons">
-                    <button class="primary ghost"><a href="{{ user_post.get_absolute_url }}">Read More</a></button>
-                  </div>
-                </div>
-              </div>
-
-            </div>
-            {% endfor %}
-          </div>
-          </div>
-        </div>
-  </div>
-
-        
-  
-    </div>
+	{% if user_fav_posts %}
+	<h1>{{ page_user|capfirst }}'s Favourite Posts:</h1>
+    <section class="blog-posts">
+    {% for post in user_fav_posts %}
+		<div class="blog-card">
+			<div class="blog-card-image">
+				<img src="{{ post.thumbnail.url }}">
+			</div>
+			<div class="blog-card-info">
+				<h5><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h5>
+				<div class="mb-1 text-muted">
+				  {% include 'blogs/post_info.html' %}
+				</div>
+		
+				<div class="d-inline mb-auto">
+				  {% for tag in post.tags.all %}
+					<a class="card-link btn-outline-info" href="{% url 'post-by-tag' tag.slug %}">#{{ tag }}</a>
+				  {% endfor %}
+				</div>
+			  </div>
+		</div>
+		{% endfor %}
+	</section>
+	{% endif %}
 </div>
-  <!-- End of profile section -->
-</div>
-<!-- End of container -->
-
-
+</main>
 {% endblock content %}

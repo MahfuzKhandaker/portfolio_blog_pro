@@ -17,7 +17,7 @@ class HomePageView(generic.ListView):
 
     def get_context_data(self, **kwargs):
         context = super(HomePageView, self).get_context_data(**kwargs)
-        context['featured_posts'] = Post.published.filter(featured=True)[:2]
+        context['featured_posts'] = Post.published.filter(featured=True)[:5]
         # paginator = Paginator(context['featured_posts'], 2)
         # page = self.request.GET.get('page')
         # try:
@@ -28,7 +28,7 @@ class HomePageView(generic.ListView):
         #     context['featured_posts'] = paginator.page(paginator.num_pages)
         context['post_num'] = Post.published.count()
         context['project_num'] = Project.objects.count()
-        context['most_recent'] = Post.published.all().order_by('-timestamp', '-updated')[:2]
+        context['most_recent'] = Post.published.all().order_by('-timestamp', '-updated')[:5]
         context['post_by_category_count']  = Post.published.values('category__title').annotate(Count('category__title')).order_by('category')        
 
         # if self.request.is_ajax():

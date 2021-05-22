@@ -1,1 +1,4 @@
-By {{ post.author }}, {{ post.timestamp | timesince }} ago 
+<span>
+    {{ post.timestamp | timesince }} ago
+    - by <a class="card-link" href="{% url 'profile' post.author.username %}">{{ post.author }}</a>
+</span>

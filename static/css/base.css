@@ -240,20 +240,36 @@ section.hero .continue svg {
 	}
 }
 
-section.intro {
+section.intro, section.divider {
   padding: 50px;
   position: relative;
 	font: normal 14px/1.618em "Roboto", sans-serif;
 }
 
-section.intro .container {
-	padding: 100px 50px;
+section.intro .container-intro, section.divider .container-divider  {
+	padding: 30px 20px;
 	position: relative;
 }
 
 @media (max-width: 767px) {
-	section.intro .container {
-	  padding: 50px 20px;
+	section.intro .container-intro, section.divider .container-divider {
+	  padding: 20px 0;
+	}
+}
+
+section.featured-posts, section.latest-posts {
+  padding: 50px;
+  position: relative;
+}
+
+section.featured-posts .container-blog-posts, section.latest-posts .container-blog-posts {
+	padding: 30px 20px;
+	position: relative;
+}
+
+@media (max-width: 767px) {
+	section.featured-posts .container-blog-posts, section.latest-posts .container-blog-posts {
+	  padding: 20px 0;
 	}
 }
 
@@ -263,6 +279,7 @@ section.intro .container {
   margin: 0 auto;
   padding: 0 2rem;
 }
+
 .blog-posts {
 	display: flex;
 	flex-wrap: wrap;
@@ -275,6 +292,7 @@ section.intro .container {
     flex: 1 0 22rem;
     margin: 1rem;
     color: #fff;
+    background-color: #020914;
     cursor: pointer;
 }
 .blog-card:hover {
@@ -293,15 +311,8 @@ section.intro .container {
 	text-align: center;
 }
 
-/* START BLOG POST */
-  /*
-  * ==========================================================
-  *     DIVIDER SECTION
-  * ==========================================================
-  */
-section.divider {
-	color: #fff;
-}
+/* END BLOG POST */
+
 
 .container-fluid, .container-lg, .container-md, .container-sm, .container-xl {
   width: 100%;
@@ -540,12 +551,12 @@ a.card-link {
 .page-link {
     position: relative;
     display: block;
-    margin: 2rem 0;
-    padding: .5rem .75rem;
+    margin: 1rem 0;
+    padding: .5rem;
     letter-spacing: 1px;
     background-color: transparent;
     border: 1px solid #17a2b8;
-    border-radius: 2rem;
+    border-radius: 1.5rem;
 }
 .page-link a {
   padding: .5rem .75rem;
@@ -643,7 +654,7 @@ pre {
 	transition: .3s ease;
 	transition-property: background-color, color;
 }
-.cta:hover a {
+.cta:hover {
 	color: crimson;
   text-decoration: none;
 }
@@ -766,7 +777,7 @@ pre {
   }
 
 .subscribe {
-	background-color: #231e39;
+	background-color: #010409;
 	font-family: Montserrat, sans- serif;
 	/* box-shadow: 0px 10px 20px -10px rgba(0, 0, 0, 0.75); */
 	color: #b3b8cd; 
@@ -798,225 +809,84 @@ pre {
 }
 
 
-/* Flexbox */
-.flex-container {
+/* Start Footer Container */
+.footer-container {
 	background-color: #0d1117;
 	display: flex;
+  flex-direction: row;
 	flex-wrap: wrap;
-	justify-content: space-between;
-	font-size: 30px;
-	text-align: center;
+	justify-content: center;
+  align-items: center;
+	font-size: 24px;
   }
   
-  .flex-item-left {
-	padding: 50px;
-	flex: 40%;
+  .footer-item-left {
+	  padding: 50px;
+	  flex: 30%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  
   }
   
-  .flex-item-right {
-	padding: 50px;
-	flex: 60%;
+  .footer-item-right {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    align-content: center;
+    align-items: center;
+    padding: 50px;
+    flex: 70%;
   }
-  
+
   /* Responsive layout - makes a one column-layout instead of a two-column layout */
   @media (max-width: 800px) {
-	.flex-item-right, .flex-item-left {
-	  flex: 100%;
-	}
+	  .footer-item-left, .footer-item-right {
+	    flex: 100%;
+	  }
   }
 
-.flex-item-footer {
-	padding: 10px;
-	flex: 60%;
-	padding: 50px;
+.links {
+  flex-basis: 100%;
+  margin-top: 1rem;
 }
-
 .links ul {
-	list-style: none;
-	padding: 0;
-	margin: 0 0 20px 0;
-  }
+  text-align: center;
+  border-top: 0.1rem solid #dadada;
+  border-bottom: 0.1rem solid #dadada;
+}
   
   .links li {
-	font-size: 16px;
-	text-align: center;
-	cursor: pointer;
+    display: inline-block;
+    font-size: 1.6rem;
+    line-height: 1.5;
+    padding: 10px;
+    cursor: pointer;
   }
   
   .links li:hover {
 	text-decoration: underline;
   }
-  .footer-icons {
-	background-color: #231e39;
-  }
-
-
-  
-  /* Footer main | Newsletter form */
-  /* ul {
-    margin: 0px;
-    padding: 0px;
-} */
-.footer-section {
-  background-color: #0d1117;
-  position: relative;
-}
-.footer-cta {
-  border-bottom: 1px solid #373636;
-}
-.single-cta i {
-  color: #ff5e14;
-  font-size: 30px;
-  float: left;
-  margin-top: 8px;
-}
-.cta-text {
-  padding-left: 15px;
-  display: inline-block;
-}
-.cta-text h4 {
-  color: #fff;
-  font-size: 20px;
-  font-weight: 600;
-  margin-bottom: 2px;
-}
-.cta-text span {
-  color: #757575;
-  font-size: 15px;
-}
-.footer-content {
-  position: relative;
-  z-index: 2;
-}
-.footer-pattern img {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 330px;
-  background-size: cover;
-  background-position: 100% 100%;
-}
-.footer-logo {
-  margin-bottom: 30px;
-}
-.footer-logo img {
-    max-width: 200px;
-}
-.footer-text p {
-  margin-bottom: 14px;
-  font-size: 14px;
-  color: #7e7e7e;
-  line-height: 28px;
-}
-.footer-social-icon span {
-  color: #fff;
-  display: block;
-  font-size: 20px;
-  font-weight: 700;
-  font-family: 'Poppins', sans-serif;
-  margin-bottom: 20px;
-}
-.footer-social-icon a {
-  color: #fff;
-  font-size: 16px;
-  margin-right: 15px;
-}
-.footer-social-icon i {
-  height: 40px;
-  width: 40px;
+.copyright-text{
+  margin-top: 1rem;
+  flex-basis: 100%;
+  font-size: 1.3rem;
   text-align: center;
-  line-height: 38px;
-  border-radius: 50%;
+  color: #17a2b8;
 }
-.facebook-bg{
-  background: #3B5998;
+.copyright-text a {
+  color: crimson;
+  font-size: 1.1rem;
+  letter-spacing: .33rem;
+  font-weight: 300;
 }
-.twitter-bg{
-  background: #55ACEE;
-}
-.linkedin-bg{
-  background: #DD4B39;
-}
-.footer-widget-heading h3 {
-  color: #fff;
-  font-size: 20px;
-  font-weight: 600;
-  margin-bottom: 40px;
-  position: relative;
-}
-.footer-widget-heading h3::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: -15px;
-  height: 2px;
-  width: 50px;
-  background: #ff5e14;
-}
-.footer-widget ul li {
-  /* display: inline-block; */
-  float: left;
-  width: 50%;
-  margin-bottom: 12px;
-}
-.footer-widget ul li a:hover{
-  color: #ff5e14;
-}
-.footer-widget ul li a {
-  color: #878787;
-  text-transform: capitalize;
-}
-.subscribe-form {
-  position: relative;
-  overflow: hidden;
-}
-.subscribe-form input {
-  width: 100%;
-  padding: 14px 28px;
-  background: #2E2E2E;
-  border: 1px solid #2E2E2E;
-  color: #fff;
-}
-.subscribe-form button {
-    position: absolute;
-    right: 0;
-    background: #ff5e14;
-    padding: 13px 20px;
-    border: 1px solid #ff5e14;
-    top: 0;
-}
-.subscribe-form button i {
-  color: #fff;
-  font-size: 22px;
-  transform: rotate(-6deg);
-}
-.copyright-area{
-  background: #010409;
-  padding: 25px 0;
-}
-.copyright-text p {
-  margin: 0;
-  font-size: 14px;
-  color: #878787;
-}
-.copyright-text p a{
-  color: #ff5e14;
-}
-.footer-menu li {
-  display: inline-block;
-  margin-left: 20px;
-}
-.footer-menu li:hover a{
-  color: #ff5e14;
-}
-.footer-menu li a {
-  font-size: 14px;
-  color: #878787;
-}
+
+/* END Footer Container */
 
 
 /* Profile Section */
-.container-profile {
+/* .container-profile {
+  display: flex;
   max-width: 93.5rem;
   margin: 0 auto;
   padding: 0 2rem;
@@ -1030,23 +900,25 @@ pre {
   padding: 0;
   cursor: pointer;
 }
-.profile {
-  padding: 5rem 0;
+
+.btn:focus {
+  outline: 0.5rem auto #4d90fe;
 }
 
-.profile::after {
-  content: "";
-  display: block;
-  clear: both;
+.profile {
+  padding: 5rem 0;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
 }
 
 .profile-image {
-  float: left;
   width: calc(33.333% - 1rem);
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-right: 3rem;
+
 }
 
 .profile-image img {
@@ -1060,48 +932,49 @@ pre {
 .profile-user-settings,
 .profile-stats,
 .profile-bio {
-  float: left;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
   width: calc(66.666% - 2rem);
 }
 
 .profile-user-settings {
+
   margin-top: 1.1rem;
 }
 
 .profile-user-name {
-  display: inline-block;
-  font-size: 3.2rem;
+  font-size: 3rem;
   font-weight: 300;
 }
 
 .profile-edit-btn {
-  font-size: 1.4rem;
+  font-size: 1.1rem;
   line-height: 1.8;
   border: 0.1rem solid #dbdbdb;
   border-radius: 0.3rem;
-  padding: 0 2.4rem;
-  margin-left: 2rem;
-}
+  padding: 0 1.1rem;
+} */
 
-.profile-settings-btn {
+/* .profile-settings-btn {
   font-size: 2rem;
   margin-left: 1rem;
-}
+} */
 
-.profile-stats {
+/* .profile-stats {
+  margin: 0;
+} */
+/* .profile-stats {
   margin-top: 2.3rem;
 }
-
 .profile-stats li {
   display: inline-block;
   font-size: 1.6rem;
   line-height: 1.5;
-  margin-right: 4rem;
+  margin-right: 1rem;
   cursor: pointer;
-}
-
-.profile-stats li:last-of-type {
-  margin-right: 0;
 }
 
 .profile-bio {
@@ -1115,7 +988,7 @@ pre {
 .profile-stat-count,
 .profile-edit-btn {
   font-weight: 600;
-}
+} */
 
 /* Loader */
 
@@ -1131,51 +1004,53 @@ pre {
 
 /* Media Query */
 
-@media screen and (max-width: 40rem) {
+/* @media screen and (max-width: 40rem) {
   .profile {
-      display: flex;
-      flex-wrap: wrap;
-      padding: 4rem 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 4rem 0;
   }
-
-  .profile::after {
-      display: none;
-  }
-
   .profile-image,
   .profile-user-settings,
   .profile-bio,
   .profile-stats {
-      float: none;
-      width: auto;
+    width: auto;
+    margin: 0;
   }
-
   .profile-image img {
       width: 7.7rem;
       height: 7.7rem;
       border-radius: 50%;
-  }
-
-  .profile-user-settings {
+  } */
+  /* .profile-user-settings {
+    margin: 0 1rem;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+  } */
+  /* .profile-user-settings {
       flex-basis: calc(100% - 10.7rem);
-      display: flex;
-      flex-wrap: wrap;
       margin-top: 1rem;
+      display: flex;
+      flex-flow: row wrap;
+      justify-content: center;
+      align-items: center;
+      align-content: center;
   }
 
   .profile-user-name {
-      font-size: 2.2rem;
-  }
+    font-size: 2.2rem;
+  } */
 
-  .profile-edit-btn {
+  /* .profile-edit-btn {
       order: 1;
-      padding: 0;
+      padding: 0 1rem;
       text-align: center;
       margin-top: 1rem;
-  }
-
-  .profile-edit-btn {
-      margin-left: 0;
   }
 
   .profile-bio {
@@ -1190,12 +1065,11 @@ pre {
   }
 
   .profile-stats {
-      order: 1;
+      order: 3;
       margin-top: 1.5rem;
   }
 
   .profile-stats ul {
-      display: flex;
       text-align: center;
       padding: 1.2rem 0;
       border-top: 0.1rem solid #dadada;
@@ -1203,15 +1077,14 @@ pre {
   }
 
   .profile-stats li {
-      font-size: 1.4rem;
-      flex: 1;
-      margin: 0;
+    display: inline-block;
+    font-size: 1.6rem;
+    line-height: 1.5;
+    margin-right: 3rem;
+    cursor: pointer;
   }
 
-  .profile-stat-count {
-      display: block;
-  }
-}
+} */
 
 /* Spinner Animation */
 
@@ -1228,7 +1101,7 @@ The following code will only run if your browser supports CSS grid.
 Remove or comment-out the code block below to see how the browser will fall-back to flexbox & floated styling. 
 
 */
-
+/* 
 @supports (display: grid) {
   .profile {
       display: grid;
@@ -1241,7 +1114,6 @@ Remove or comment-out the code block below to see how the browser will fall-back
   .profile-image {
       grid-row: 1 / -1;
   }
-
 
   .profile-image,
   .profile-user-settings,
@@ -1281,41 +1153,6 @@ Remove or comment-out the code block below to see how the browser will fall-back
           margin: 0;
       }
   }
-}
-/* 
-.blog-posts {
-	display: flex;
-	flex-wrap: wrap;
-}
-
-.blog-card {
-	display: flex;
-	flex-direction: column;
-	
-	padding: 1%;
-	flex: 1 32%;
-	margin: 10px 5px;
-  background-color: #040404;
-  overflow: hidden;
-  color: #f8f7f7;
-  border: 1px solid #1a1919;
-  border-radius: 8px;
-  box-shadow: 0 1px 2px 0 rgba(0,0,0,0.2);
-
-}
-.blog-card:hover {
-  cursor: pointer;
-	box-shadow: 0 1px 2px 0 #11ddf8;
-}
-.blog-card-image img {
-  width: 100%;
-  height: 40vh;
-  object-fit: cover;
-}
-
-.blog-card-info {
-	padding: 10px;
-	text-align: center;
 } */
 
 @media ( max-width: 920px ) {
@@ -1323,10 +1160,6 @@ Remove or comment-out the code block below to see how the browser will fall-back
 	.blog-card {
 		flex: 1 33%;
 	}
-	
-  /* .profile-blog-card-image img {
-    height: 220px;
-  } */
 
 	.blog-posts .blog-card:first-child, 
 	.blog-posts .blog-card:nth-child(2) {
@@ -1340,9 +1173,6 @@ Remove or comment-out the code block below to see how the browser will fall-back
 	.blog-card {
 		flex: 1 46%;
 	}
-  /* .profile-blog-card-image img {
-    height: 200px;
-  } */
 	
 }
 
@@ -1354,15 +1184,97 @@ Remove or comment-out the code block below to see how the browser will fall-back
 	h5 {
     font-size: 0.6em;
   }
-	.container-profile {
-		flex-direction: column;
-	}
-	
-	.profile {
-		align-self: flex-start;
-	}
-	
 }
+
+.pf-container {
+  background-color: #0d1117;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+}
+  
+  .pf-item-left {
+    padding: 50px;
+    flex: 30%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  
+  }
+  
+  .pf-item-left img {
+    height: 9.5rem;
+    width: 9.5rem;
+    border-radius: 50%;
+    border: 3px solid rgb(180 112 61 / 20%);
+    object-fit: cover;
+  }
+  
+  .pf-item-right {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+    padding: 50px;
+    flex: 60%;
+  }
+  .pf-settings{
+    display: flex;
+    flex: 100%;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .pf-name{
+    font-size: 3rem;
+  }
+  .pf-stats {
+    flex-basis: 100%;
+    margin-top: 1rem;
+  }
+  .pf-stats ul{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    padding: 1.2rem 0;
+    border-top: 0.1rem solid #dadada;
+    border-bottom: 0.1rem solid #dadada;
+  }
+  .pf-stats li {
+    display: inline-block;
+    font-size: 1.6rem;
+    line-height: 1.5;
+    cursor: pointer;
+  }
+
+  .pf-bio{
+    margin-top: 1rem;
+    flex-basis: 100%;
+  }
+  
+
+  /* Responsive layout - makes a one column-layout instead of a two-column layout */
+  @media (max-width: 800px) {
+    .pf-item-right, .pf-item-left {
+      flex: 100%;
+    }
+    .pf-settings{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    .pf-name{
+      font-size: 2.5rem;
+    }
+    .pf-stats {
+      order: 3;
+    }
+  }
 
 .container-accounts {
 	padding:100px 50px;
@@ -1373,3 +1285,93 @@ Remove or comment-out the code block below to see how the browser will fall-back
   min-height: 100vh;
   padding: 50px 100px;
 }
+/* 
+.flex-container {
+	background-color: #0d1117;
+	display: flex;
+  flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: center;
+  align-items: center;
+	font-size: 24px;
+  }
+  
+  .flex-item-left {
+	  padding: 50px;
+	  flex: 30%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  
+  }
+  
+  .flex-item-left img {
+    height: 9.5rem;
+    width: 9.5rem;
+    border-radius: 50%;
+    border: 3px solid rgb(180 112 61 / 20%);
+    object-fit: cover;
+  }
+  
+  .flex-item-right {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+    padding: 50px;
+    flex: 60%;
+  }
+  .pf-settings{
+    display: flex;
+    flex: 100%;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .pf-name{
+    font-size: 3rem;
+  }
+  .pf-stats {
+    flex-basis: 100%;
+    margin-top: 1rem;
+  }
+  .pf-stats ul{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    padding: 1.2rem 0;
+    border-top: 0.1rem solid #dadada;
+    border-bottom: 0.1rem solid #dadada;
+  }
+  .pf-stats li {
+    display: inline-block;
+    font-size: 1.6rem;
+    line-height: 1.5;
+    cursor: pointer;
+  }
+
+  .pf-bio{
+    margin-top: 1rem;
+    flex-basis: 100%;
+  }
+   */
+
+  /* Responsive layout - makes a one column-layout instead of a two-column layout */
+  /* @media (max-width: 800px) {
+	  .flex-item-right, .flex-item-left {
+	    flex: 100%;
+	  }
+    .pf-settings{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    .pf-name{
+      font-size: 2.5rem;
+    }
+    .pf-stats {
+      order: 3;
+    }
+  } */

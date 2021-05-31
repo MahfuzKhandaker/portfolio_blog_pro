@@ -6,40 +6,33 @@
 
 {% block content %}
 <header>
-
-	<div class="container-profile">
-		<div class="profile">
-			<div class="profile-image">
-
-				{% if request.user.profile.photo %}
-				<img src="{{ request.user.profile.photo.url }}" alt="">
-			  	{% else %}
-				<img src="/media/default.jpg" alt="">
-			  {% endif %}
-				
+	<div class="pf-container">
+		<div class="pf-item-left">
+			{% if request.user.profile.photo %}
+			<img src="{{ request.user.profile.photo.url }}" alt="">
+			{% else %}
+			<img src="/media/default.jpg" alt="">
+			{% endif %}
+			
+		</div>
+		<div class="pf-item-right">
+			<div class="pf-settings">
+				<h1 class="pf-name">{{ page_user|capfirst }}</h1>
+				<button class="page-link"><a href="{% url 'profile_update' request.user.username %}" >Edit Profile</a></button>
 			</div>
-
-			<div class="profile-user-settings">
-				<h1 class="profile-user-name">{{ page_user|capfirst }}</h1>
-				<button class="btn profile-edit-btn"><a href="{% url 'profile_update' request.user.username %}">Edit Profile</a></button>
-				<button class="btn profile-settings-btn" aria-label="profile settings"><i class="fa fa-cog" aria-hidden="true"></i></button>
-			</div>
-			<div class="profile-stats">
+			<div class="pf-stats">
 				<ul>
-					<li><span class="profile-stat-count">{{ user_posts.count }}</span> posts</li>
-					<li><span class="profile-stat-count">188</span> followers</li>
-					<li><span class="profile-stat-count">206</span> following</li>
+					<li><span class="pf-stat-count">{{ user_posts.count }}</span> posts</li>
+					<li><span class="pf-stat-count">188</span> followers</li>
+					<li><span class="pf-stat-count">206</span> following</li>
 				</ul>
 			</div>
-
-			<div class="profile-bio">
-				<p><span class="profile-real-name">{{ page_user|capfirst }}</span> {{ page_user.profile.bio }}</p>
+			<div class="pf-bio">
+				<p><span class="pf-bio-info">{{ page_user|capfirst }}</span> {{ page_user.profile.bio }}</p>
 			</div>
 		</div>
-		<!-- End of profile section -->
-	</div>
+	  </div>
 </header>
-
 <main>
 <div class="container-blog-posts">
 	{% if user_posts %} 

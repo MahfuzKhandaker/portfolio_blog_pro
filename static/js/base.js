@@ -11,7 +11,7 @@ $(window).on('load', function() { // makes sure the whole site is loaded
 $(document).ready(function(){
 
   // Fixed Header
-  var offset = $('.blog-header').offset();
+  var offset = $('.site-header').offset();
   checkOffset();
 
   $(window).scroll(function() {
@@ -19,9 +19,9 @@ $(document).ready(function(){
   });
   function checkOffset() {
     if ($(document).scrollTop() > offset.top) {
-      $('.blog-header').addClass('fixed');
+      $('.site-header').addClass('fixed');
     } else {
-      $('.blog-header').removeClass('fixed');
+      $('.site-header').removeClass('fixed');
     }
   }
   // markdown content image resized to bootstrap card-img-top class

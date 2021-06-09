@@ -2,7 +2,7 @@
 
 {% block content %}
 
-<div class="col-md-12">
+<div class="col-md-12 p-4">
     <div class="card">
       <img class="card-img-top" src="{{ project.image.url }}" alt="Card image cap">
       <div class="card-body pt-5">
@@ -16,10 +16,7 @@
         <p class="card-text">{{ project.description }}</p>
 
         <div class="icon-block">
-            <a class="btn btn-primary" href="{% url 'contact' %}">Contact</a>
-          <!-- <a href="#"><i class="fab fa-facebook"></i></a>
-          <a href="#"> <i class="fab fa-twitter"></i></a>
-          <a href="#"> <i class="fab fa-google-plus"></i></a> -->
+          <button class="page-link"><a href="{% url 'contact' %}">Contact</a></button>
         </div>
       </div>
     </div>

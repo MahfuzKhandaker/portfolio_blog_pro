@@ -1,53 +1,11 @@
 {% extends "_base.html" %}
 
 {% block content %}
-
-
 <div class="container">
   <h1 class="my-3 text-center">All Projects:</h1>
-    <div class="content" id="projects">
-      {% include 'projects/projects.html' %}
-    </div>
-
-    <nav class="blog-pagination" aria-label="Pagination">
-      <a class="btn btn-outline-info" id="lazyLoadLink" href="javascript:void(0);" data-page="2">Load More Projects</a>        
-    </nav>
+  
+  <div class="container-blog-posts">
+    {% include 'projects/projects.html' %}
   </div>
-
+</div>
 {% endblock %}
-
-{% block javascript %}
-<script>
-  $(document).ready(function(){
-    $('#lazyLoadProjects').on('click', function() {
-    var link = $(this);
-    var page = link.data('page');
-    
-    $.ajax({
-      type: 'POST',
-      url: 'lazy_load_projects/',
-      data: {
-        'page': page,
-        'csrfmiddlewaretoken': '{{ csrf_token }}' // from index.html
-      },
-      success: function(data) {
-        // if there are still more pages to load,
-        // add 1 to the "Load More Posts" link's page data attribute
-        // else hide the link
-        if (data.has_next) {
-            link.data('page', page+1);
-        } else {
-          link.hide();
-        }
-        // append html to the posts div
-        $('#projects').append(data.projects_html);
-        console.log(data.projects_html)
-      },
-      error: function(xhr, status, error) {
-        // shit happens friends!
-      }
-    });
-  });
-  })
-</script>
-{% endblock javascript %}

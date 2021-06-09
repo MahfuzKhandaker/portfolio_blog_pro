@@ -3,7 +3,7 @@
 
 {% block content %}
 <div class="container-blog-posts">
-  <h1 class="my-3 text-center">All favourite posts:</h1>
+  <h1 class="my-3 text-center">Favourite posts:</h1>
   <section class="blog-posts">
     {% for post in favourite_posts %}
     <div class="blog-card">
@@ -24,11 +24,12 @@
           {% endfor %}
         </div>
       </div>
-    </div>
+    
     {% empty %}
-    <center>
+    <center>    
       <h5>No favourite post found.</h5>
-    </center>
+</center>
+</div>
     {% endfor %}
   </section>
 </div>

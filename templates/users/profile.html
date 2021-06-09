@@ -13,22 +13,25 @@
 			{% else %}
 			<img src="/media/default.jpg" alt="">
 			{% endif %}
-			
 		</div>
 		<div class="pf-item-right">
 			<div class="pf-settings">
 				<h1 class="pf-name">{{ page_user|capfirst }}</h1>
-				<button class="page-link"><a href="{% url 'profile_update' request.user.username %}" >Edit Profile</a></button>
+				<button class="page-link"><a href="{% url 'profile_update' request.user.username %}">Edit Profile</a></button>
 			</div>
 			<div class="pf-stats">
 				<ul>
-					<li><span class="pf-stat-count">{{ user_posts.count }}</span> posts</li>
-					<li><span class="pf-stat-count">188</span> followers</li>
-					<li><span class="pf-stat-count">206</span> following</li>
+					<li><span class="pf-stat-count"><a href="{{ page_user.profile.facebook_url }}" target="_blank"> <i class="fa fa-facebook"></i> facebook</a></span></li>
+					<li><span class="pf-stat-count"><a href="{{ page_user.profile.twitter_url }}" target="_blank"><i class="fa fa-twitter"></i> twitter</a></span></li>
+					<li><span class="pf-stat-count"><a href="{{ page_user.profile.linkedin_url }}" target="_blank"><i class="fa fa-linkedin"></i> linkedin</a></span> </li>
+					<li><span class="pf-stat-count"><a href="{{ page_user.profile.github_url }}" target="_blank"><i class="fa fa-github"></i> github</a></span> </li>
+					<li><span class="pf-stat-count"><a href="{{ page_user.profile.youtube_url }}" target="_blank"><i class="fa fa-youtube"></i> youtube</a></span> </li>
 				</ul>
 			</div>
 			<div class="pf-bio">
+				{% if page_user.profile.bio %}
 				<p><span class="pf-bio-info">{{ page_user|capfirst }}</span> {{ page_user.profile.bio }}</p>
+				{% endif %}
 			</div>
 		</div>
 	  </div>
@@ -36,7 +39,7 @@
 <main>
 <div class="container-blog-posts">
 	{% if user_posts %} 
-    <h1>{{ page_user|capfirst }}'s Posts:</h1>
+    <h1>{{user_posts.count}} posts:</h1>
     <section class="blog-posts">
 		{% for post in user_posts %}
 		<div class="blog-card">

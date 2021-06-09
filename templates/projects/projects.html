@@ -1,30 +1,22 @@
-<div class="row py-3">
+  <section class="blog-posts">
     {% for project in projects %}
-    <div class="col-md-12">
-      <div class="card flex-md-row mb-4 box-shadow h-md-300">
-        <div class="card-img-wrapper flex-auto d-none d-md-block">
-          {% if project.image %}
-          <img class="card-img-left" src="{{ project.image.url }}" data-holder-rendered="true">
-          {% endif %}
-        </div>
-        <div class="card-body d-flex flex-column align-items-start">
-          <strong class="d-inline-block mb-2 text-primary"><a href="{{ project.category.get_absolute_url }}">{{ project.category }}</a></strong>
-          <h3 class="card-title"><a href="{{ project.get_absolute_url }}">{{ project.title }}</a></h3>
+    <div class="blog-card">
+      <div class="blog-card-image">
+        {% if project.image %}
+        <img src="{{ project.image.url }}">
+        {% endif %}
+      </div>
+      <div class="blog-card-info">
+        <h5><a href="{{ project.get_absolute_url }}">{{ project.title }}</a></h5>
+        <div class="mb-1 text-muted">
           <small>
             <h5>
                 Technology used:&nbsp;
                 {{ project.technology }}
             </h5>
-            </small>
-            <p class="card-text">{{ project.description|truncatewords:20 }}</p>
-
-            <a class="blog-home__cta" href="{{ project.get_absolute_url }}">Continue reading</a>
+          </small>
         </div>
       </div>
     </div>
-  {% empty %}
-  <center>
-    <h5>Oops!No projects found</h5>
-  </center>
-  {% endfor %}
-  </div>
+    {% endfor %}
+  </section>

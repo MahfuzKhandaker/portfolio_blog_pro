@@ -13,10 +13,10 @@ class Profile(models.Model):
     location = models.CharField(max_length=30, blank=True)
     website_url = models.URLField(max_length = 255, blank=True)
     facebook_url = models.URLField(max_length = 255, blank=True)
-    tweeter_url = models.URLField(max_length = 255, blank=True)
+    twitter_url = models.URLField(max_length = 255, blank=True)
     linkedin_url = models.URLField(max_length = 255, blank=True)
-    instagram_url = models.URLField(max_length = 255, blank=True)
-    pinterest_url = models.URLField(max_length = 255, blank=True)
+    github_url = models.URLField(max_length = 255, blank=True)
+    youtube_url = models.URLField(max_length = 255, blank=True)
 
     objects = models.Manager()
 

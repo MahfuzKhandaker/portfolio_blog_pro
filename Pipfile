@@ -13,6 +13,7 @@ django-allauth = "*"
 pillow = "*"
 markdown = "*"
 django-pagedown = "*"
+django-debug-toolbar = "*"
 
 [requires]
 python_version = "3.7"

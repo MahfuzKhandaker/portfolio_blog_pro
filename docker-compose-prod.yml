@@ -3,12 +3,12 @@ version: '3.7'
 services:
   web:
    build: .
-  #  command: python /portfolio_blog/manage.py runserver 0.0.0.0:8000
+    # command: python /portfolio_blog/manage.py runserver 0.0.0.0:8000
    command: gunicorn portfolio_blog_pro.wsgi -b 0.0.0.0:8000
    environment:
-    - ENVIRONMENT=development
+    - ENVIRONMENT=production
     - SECRET_KEY=i!3#zqe%cl_qzl$$fv_u!6r-*guo17)ngx_+8_1tttou_ya!dpg
-    - DEBUG=1
+    - DEBUG=0
    volumes:
      - .:/portfolio_blog
    ports:

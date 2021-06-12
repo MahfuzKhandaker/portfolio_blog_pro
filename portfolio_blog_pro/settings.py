@@ -27,9 +27,6 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 
 DEBUG = int(os.environ.get('DEBUG', default=0))
 
-# SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
-
-# DEBUG = os.getenv('DJANGO_DEBUG', False)
 
 
 # ALLOWED_HOSTS = ['*']
@@ -187,6 +184,8 @@ STATICFILES_FINDERS = [
     "django.contrib.staticfiles.finders.FileSystemFinder",
     "django.contrib.staticfiles.finders.AppDirectoriesFinder",
 ]
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = Path(BASE_DIR, 'media') 

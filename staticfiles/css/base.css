@@ -198,10 +198,9 @@ section {
   /* min-height: 100vh; */
 }
 
-
 section.hero {
   height: 100vh;
-  background-image: url( '/static/images/moon.jpg');
+  background-color: #011431;
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -342,7 +341,7 @@ section.featured-posts .container-blog-posts, section.latest-posts .container-bl
 @media ( max-width: 920px ) {
 	
 	.blog-card {
-		flex: 1 33%;
+		flex: 100%;
 	}
 
 	.blog-posts .blog-card:first-child, 
@@ -350,6 +349,12 @@ section.featured-posts .container-blog-posts, section.latest-posts .container-bl
 		flex: 2 66%;
 	}
 	
+}
+
+@media (max-width: 800px){
+  .blog-card {
+		flex: 1 33%;
+	}
 }
 
 @media ( max-width: 600px ) {
@@ -425,7 +430,7 @@ a:hover {
 /* END blog-main */
 /* Header */
 
-@media (max-width: 600px) {
+@media (max-width: 800px) {
   .site-header {
     flex-wrap: wrap;
  }

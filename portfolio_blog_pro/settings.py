@@ -30,7 +30,7 @@ DEBUG = int(os.environ.get('DEBUG', default=0))
 
 
 # ALLOWED_HOSTS = ['*']
-ALLOWED_HOSTS = ['infinite-escarpment-03169.herokuapp.com', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['letsflyonthewebsky.herokuapp.com', 'localhost', '127.0.0.1']
 
 
 # Application definition

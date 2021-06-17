@@ -1,46 +1,4 @@
 {% comment %}
-<header class="blog-header">
-    <div class="d-flex flex-column flex-md-row align-items-center p-1 px-md-4 border-bottom shadow-sm">
-        <a href="{% url 'home' %}" class="navbar-brand my-0 mr-md-auto font-weight-normal">Letsflyonthewebsky</a>
-        
-        <div class="my-0 my-md-0 px-md-2">
-            <form id="search" class="search-form" action="{% url 'search_results' %}" method="get">
-                <div class="input-group">
-                    <input type="text" class="form-control mr-2" placeholder="Search blog" name="q">
-                    <div class="input-group-btn">
-                        <button class="btn btn-sm" type="submit">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-                            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
-                          </svg>
-                        </button>
-                    </div>
-                </div>
-            </form>
-        </div>
-
-        <nav class="my-1 my-md-1 mr-md-2">
-            {% if request.user.is_staff %}
-            <a class="p-1" href="{% url 'create-post' %}">Create</a>
-            {% endif %}
-            <a class="p-1" href="{% url 'post-list' %}">Blog</a>
-            <a class="p-1" href="{% url 'about' %}">About</a>
-            <a class="p-1" href="{% url 'project_index' %}">Project</a>
-            <a class="p-1" href="{% url 'contact' %}">Contact</a>
-            {% if request.user.is_authenticated %}
-            <a class="p-1" href="{% url 'profile' request.user.username %}" >
-              <span>Hi {{ request.user|capfirst }}</span>
-            </a>
-            <a class="p-1" href="{% url 'post_favourite_list' %}">Favourite</a>
-            <a class="p-1" href="{% url 'account_logout' %}">Log Out</a>
-            {% else %}
-            <a class="p-1" href="{% url 'account_login' %}">Log In</a>
-            <a class="p-1" href="{% url 'account_signup' %}">Sign Up</a>
-            {% endif %}
-        </nav>
-    </div>
-</header>
-{% endcomment %}
-
 <header class="site-header">
     <a href="{% url 'home' %}" class="logo">letsflyonthewebsky</a>
     
@@ -94,3 +52,60 @@
       
     </div>
   </header>
+  {% endcomment %}
+
+  <header class="header-container">
+    <div class="header-item-left">
+      <a href="{% url 'home' %}" class="logo">letsflyonthewebsky</a>
+    </div>
+    <div class="header-item-right">
+        <button class="page-link"><a href="{% url 'newsletters:subscribe' %}">Subscribe</a></button>
+
+        <div class="actions">
+          {% if request.user.is_authenticated %}
+            <div class="dropdown">
+              
+                <span>
+                    
+                    <a href="{% url 'profile' request.user.username %}">
+                        Hi {{ request.user|capfirst }}
+                    </a>
+                    
+               </span>
+               <div class="dropdown-content">
+                 <!-- Settings [ User @ Company ] -->
+             <ul>
+                <li>{% if request.user.profile.photo %}
+                 <img src="{{ request.user.profile.photo.url }}" alt="">
+                 {% else %}
+                 <img src="/media/default.jpg" alt="">
+                 {% endif %}</li>
+                <li><a href="{% url 'profile_update' request.user.username %}">Edit Profile</a></li>
+                <li><a href="{% url 'post_favourite_list' %}">Favourite</a></li>
+              </ul>
+                </div>
+                
+          </div>
+          <button class="page-link"><a href="{% url 'account_logout' %}">Sign Out</a></button>
+          {% else %}
+          <button class="page-link"><a href="{% url 'account_login' %}">Log In</a></button>
+          <button class="page-link"><a href="{% url 'account_signup' %}">Sign Up</a></button>
+          {% endif %} 
+          
+        </div>
+        <div class="links">
+            <ul>
+              <li><a href="{% url 'home' %}">Home</a></li>
+              <li><a href="{% url 'about' %}">About</a></li>
+              <li><a href="{% url 'post-list' %}">Blog</a></li>
+              <li><a href="{% url 'project_index' %}">Project</a></li>
+              <li><a href="{% url 'contact' %}">Contact</a></li>
+              {% if request.user.is_staff %}
+              <li><a href="{% url 'create-post' %}">Create</a></li>
+              {% endif %}
+              </ul>
+        </div>
+    </div>
+  </header>
+
+ 

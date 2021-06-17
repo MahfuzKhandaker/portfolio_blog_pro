@@ -195,11 +195,9 @@ textarea.form-control {
 section {
 	padding: 50px 0;
 	overflow-x: hidden;
-  /* min-height: 100vh; */
 }
 
 section.hero {
-  height: 100vh;
   background-color: #011431;
   background-position: center;
   background-size: cover;
@@ -235,56 +233,55 @@ section.hero .continue svg {
 }
   
   /* Hero Section Media Query ------------------------------------- */
-@media (max-width: 767px) {
-	section.hero .container {
-	  padding: 50px 20px;
-	}
-}
-
-section.intro {
-  padding: 150px 50px 50px;
-  position: relative;
-	font: normal 14px/1.618em "Roboto", sans-serif;
-}
-
-section.divider {
-  padding: 50px;
-  position: relative;
-	font: normal 14px/1.618em "Roboto", sans-serif;
-}
-
-section.intro .container-intro, section.divider .container-divider  {
-	padding: 30px 20px;
-	position: relative;
-}
-
-@media (max-width: 767px) {
-	section.intro .container-intro, section.divider .container-divider {
-	  padding: 30px 0;
-	}
-}
-
-section.featured-posts, section.latest-posts {
-  padding: 50px;
-  position: relative;
-}
-
-section.featured-posts .container-blog-posts, section.latest-posts .container-blog-posts {
-	padding: 30px 20px;
-	position: relative;
-}
-
-@media (max-width: 767px) {
-	section.featured-posts .container-blog-posts, section.latest-posts .container-blog-posts {
-	  padding: 20px 0;
-	}
-}
+  @media (max-width: 767px) {
+    section.hero .container {
+      padding: 50px 20px;
+    }
+  }
+  
+  section.intro {
+    padding: 150px 50px 50px;
+    position: relative;
+    font: normal 14px/1.618em "Roboto", sans-serif;
+  }
+  
+  section.divider {
+    padding: 50px;
+    position: relative;
+    font: normal 14px/1.618em "Roboto", sans-serif;
+  }
+  
+  section.intro .container-intro, section.divider .container-divider  {
+    padding: 30px 20px;
+    position: relative;
+  }
+  
+  @media (max-width: 767px) {
+    section.intro .container-intro, section.divider .container-divider {
+      padding: 1rem .5rem;
+    }
+  }
+  
+  section.featured-posts, section.latest-posts {
+    padding: 1rem;
+    position: relative;
+  }
+  
+  section.featured-posts .container-blog-posts, section.latest-posts .container-blog-posts {
+    padding: 2rem 1rem;
+    position: relative;
+  }
+  
+  @media (max-width: 767px) {
+    section.featured-posts .container-blog-posts, section.latest-posts .container-blog-posts {
+      padding: 20px 0;
+    }
+  }
 
 /* START BLOG POST */
 .container-blog-posts{
-  max-width: 93.5rem;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 1rem;
 }
 .container-blog-posts h1{
   font-family: 'Cinzel Decorative', cursive;
@@ -294,14 +291,15 @@ section.featured-posts .container-blog-posts, section.latest-posts .container-bl
 
 .blog-posts {
 	display: flex;
-	flex-wrap: wrap;
-  margin: -1rem -1rem;
+  flex-flow: row wrap;
+  justify-content: space-between;
   padding-bottom: 3rem;
 }
 
 .blog-card {
-  flex: 1 0 22rem;
-  margin: 2rem 1rem;
+  flex: 1 0 calc(33% - 2rem);
+  margin: 1rem;
+  padding: .5rem;
   color: #fff;
   background-color: #020914;
   border: 1px solid #011431;
@@ -337,43 +335,34 @@ section.featured-posts .container-blog-posts, section.latest-posts .container-bl
 	text-align: center;
 }
 
-
-@media ( max-width: 920px ) {
-	
-	.blog-card {
-		flex: 100%;
-	}
-
-	.blog-posts .blog-card:first-child, 
-	.blog-posts .blog-card:nth-child(2) {
-		flex: 2 66%;
-	}
-	
-}
-
-@media (max-width: 800px){
-  .blog-card {
-		flex: 1 33%;
-	}
-}
-
-@media ( max-width: 600px ) {
-	
-	.blog-card {
-		flex: 1 46%;
-	}
-	
-}
-
-@media ( max-width: 480px ) {
-	
-	h1 {
-		margin-bottom: 20px;
-	}
-	h5 {
-    font-size: 0.6em;
+@media ( max-width: 40rem ) {
+  .blog-posts{
+    flex-direction: column;
   }
+  .blog-posts .blog-card {
+		flex: 1 0 100%;
+	}
+	
 }
+
+@media ( max-width: 50rem ) {
+	
+	.blog-card {
+    margin: .5rem;
+    padding: .5rem;
+		flex: 1 0 calc(50% - 2rem);
+	}
+	.blog-posts .blog-card:last-child { 
+		flex: 1 0 calc(50% - 2rem);
+	}
+}
+
+@media ( max-width: 60rem ) {
+	.blog-card:last-child { 
+		flex: 0 0 calc(50% - 2rem);
+	}
+}
+
 
 /* END BLOG POST */
 .container-fluid, .container-lg, .container-md, .container-sm, .container-xl {
@@ -397,10 +386,6 @@ section.featured-posts .container-blog-posts, section.latest-posts .container-bl
   padding-right: 15px;
   padding-left: 15px;
 }
-
-/* .col-md-12 {
-  padding: 0;
-} */
 
 @media (min-width: 768px){
   .col-md-4 {
@@ -429,33 +414,70 @@ a:hover {
 
 /* END blog-main */
 /* Header */
+.header-container {
+  max-width: 100%;
+	background-color: #020914;
+	display: flex;
+  flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: center;
+  align-items: center;
+  }
+  
+  .header-item-left {
+	  padding: 1rem;
+	  flex: 30%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .header-item-right {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    align-content: center;
+    align-items: center;
+    padding: 1rem;
+    flex: 70%;
+  }
 
-@media (max-width: 800px) {
-  .site-header {
-    flex-wrap: wrap;
- }
-  .site-nav {
-    order: 2;
-    /* background: #333; */
-    width: 100%;
- }
+.header-item-right img {
+  height: 60px;
+  width: 60px;
+  border-radius: 50%;
+  border: 2px solid #1c1c38;
+  object-fit: cover;
 }
-.site-header {
+.header-item-right span{
+  font-size: 1rem;
+}
+
+  /* Responsive layout - makes a one column-layout instead of a two-column layout */
+  @media (max-width: 800px) {
+	  .header-item-left, .header-item-right {
+	    flex: 100%;
+	  }
+  }
+
+
+/* .site-header {
   background-color: #020914;
   color: white;
   display: flex;
   justify-content: space-between;
   align-items: center;
-}
+} */
 .logo {
   text-decoration: none;
   color: crimson;
   font-family: 'Shadows Into Light', cursive;
-  font-size: 1.8rem;
+  font-size: 2rem;
   letter-spacing: 1px;
-  padding: 10px;
+  padding: .5rem 1rem;
+  display: flex;
 }
-.site-nav ul {
+/* .site-nav ul {
   list-style: none;
   display: flex;
   justify-content: space-between;
@@ -465,13 +487,12 @@ a:hover {
   text-decoration: none;
   color: #ebebeb;
   padding: 20px 10px;
-  display: inline-block;
 }
 .site-nav .active a {
   font-weight: bold;
   color: #313131;
   background: #115342;
-}
+} */
 .dropdown {
   position: relative;
   display: inline-block;
@@ -489,7 +510,7 @@ a:hover {
 }
 
 .dropdown:hover .dropdown-content {
-  display: block;
+  display: flex;
 }
 .dropdown ul li a{
   color: #010409;
@@ -513,8 +534,19 @@ a:hover {
   font-size: 0.8rem;
   margin-left: 10px;
   text-transform: uppercase;
-}
-
+} 
+/* @media (max-width: 800px) {
+  .site-header {
+    flex-direction: column;
+ }
+  .site-nav {
+    order: 2;
+    display: flex;
+    justify-content: center;
+ 
+    width: 100%;
+ }
+} */
 
 
 
@@ -561,6 +593,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .fixed {
   position: fixed;
+  display: flex;
   width: 100%;
   left: 0;
   top: 0;
@@ -683,7 +716,7 @@ a.card-link {
 }
 
 .page-link {
-    margin: 1rem 0;
+    margin: .5rem;
     padding: .3rem;
     letter-spacing: 1px;
     background-color: transparent;
@@ -940,7 +973,7 @@ pre {
   }
   
   .footer-item-left {
-	  padding: 50px;
+	  padding: 2rem;
 	  flex: 30%;
     display: flex;
     justify-content: center;
@@ -974,25 +1007,26 @@ pre {
 
 .links {
   flex-basis: 100%;
-  margin-top: 1rem;
+  margin-top: .5rem;
 }
 .links ul {
+  display: flex;
+  justify-content: space-between;
   text-align: center;
   border-top: 0.1rem solid #dadada;
   border-bottom: 0.1rem solid #dadada;
 }
-  
-  .links li {
-    display: inline-block;
-    font-size: 1.6rem;
-    line-height: 1.5;
-    padding: 10px;
-    cursor: pointer;
-  }
-  
-  .links li:hover {
-	text-decoration: underline;
-  }
+.links li {
+  display: inline-block;
+  font-size: 1.6rem;
+  line-height: 1.5;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.links li:hover {
+text-decoration: underline;
+}
 .copyright-text{
   margin-top: 1rem;
   flex-basis: 100%;

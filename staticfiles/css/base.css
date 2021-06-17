@@ -199,7 +199,6 @@ section {
 }
 
 section.hero {
-  height: 100vh;
   background-color: #011431;
   background-position: center;
   background-size: cover;
@@ -430,16 +429,6 @@ a:hover {
 /* END blog-main */
 /* Header */
 
-@media (max-width: 800px) {
-  .site-header {
-    flex-wrap: wrap;
- }
-  .site-nav {
-    order: 2;
-    /* background: #333; */
-    width: 100%;
- }
-}
 .site-header {
   background-color: #020914;
   color: white;
@@ -454,6 +443,7 @@ a:hover {
   font-size: 1.8rem;
   letter-spacing: 1px;
   padding: 10px;
+  display: flex;
 }
 .site-nav ul {
   list-style: none;
@@ -514,7 +504,16 @@ a:hover {
   margin-left: 10px;
   text-transform: uppercase;
 }
-
+@media (max-width: 800px) {
+  .site-header {
+    flex-direction: column;
+ }
+  .site-nav {
+    order: 2;
+ 
+    width: 100%;
+ }
+}
 
 
 
@@ -561,6 +560,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .fixed {
   position: fixed;
+  display: flex;
   width: 100%;
   left: 0;
   top: 0;

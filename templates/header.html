@@ -1,59 +1,3 @@
-{% comment %}
-<header class="site-header">
-    <a href="{% url 'home' %}" class="logo">letsflyonthewebsky</a>
-    
-    <nav class="site-nav">
-      <ul>
-        <li><a href="{% url 'home' %}">Home</a></li>
-        <li><a href="{% url 'about' %}">About</a></li>
-        <li><a href="{% url 'post-list' %}">Blog</a></li>
-        <li><a href="{% url 'project_index' %}">Project</a></li>
-        <li><a href="{% url 'contact' %}">Contact</a></li>
-        {% if request.user.is_staff %}
-        <li><a href="{% url 'create-post' %}">Create</a></li>
-        {% endif %}
-
-      </ul>
-    </nav>
-    
-    <div class="actions">
-      {% if request.user.is_authenticated %}
-        <div class="dropdown">
-          
-            <span>
-                
-                <a href="{% url 'profile' request.user.username %}">
-                    Hi {{ request.user|capfirst }}
-                </a>
-                
-           </span>
-           <div class="dropdown-content">
-             <!-- Settings [ User @ Company ] -->
-         <ul>
-            <li>{% if request.user.profile.photo %}
-             <img src="{{ request.user.profile.photo.url }}" alt="">
-             {% else %}
-             <img src="/media/default.jpg" alt="">
-             {% endif %}</li>
-            <li><a href="{% url 'profile_update' request.user.username %}">Edit Profile</a></li>
-            <li><a href="{% url 'post_favourite_list' %}">Favourite</a></li>
-          </ul>
-            </div>
-            
-      </div>
-      <a href="{% url 'account_logout' %}" class="sign-out-link">Sign Out</a>
-      {% else %}
-      <span>
-        Hi {{ request.user|capfirst }}
-      </span>
-      <a href="{% url 'account_login' %}" class="sign-out-link">Log In</a>
-      <a href="{% url 'account_signup' %}" class="sign-out-link">Sign Up</a>
-      {% endif %} 
-      
-    </div>
-  </header>
-  {% endcomment %}
-
   <header class="header-container">
     <div class="header-item-left">
       <a href="{% url 'home' %}" class="logo">letsflyonthewebsky</a>
@@ -107,5 +51,7 @@
         </div>
     </div>
   </header>
+
+
 
  

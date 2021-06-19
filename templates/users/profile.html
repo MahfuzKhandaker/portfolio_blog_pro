@@ -11,7 +11,7 @@
 			{% if request.user.profile.photo %}
 			<img src="{{ request.user.profile.photo.url }}" alt="">
 			{% else %}
-			<img src="/media/default.jpg" alt="">
+			<img src="{% static 'images/default.jpg' %}" alt="">
 			{% endif %}
 		</div>
 		<div class="pf-item-right">

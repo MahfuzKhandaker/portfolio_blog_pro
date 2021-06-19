@@ -1,3 +1,4 @@
+  {% load static %}
   <header class="header-container">
     <div class="header-item-left">
       <a href="{% url 'home' %}" class="logo">letsflyonthewebsky</a>
@@ -22,7 +23,7 @@
                 <li>{% if request.user.profile.photo %}
                  <img src="{{ request.user.profile.photo.url }}" alt="">
                  {% else %}
-                 <img src="/media/default.jpg" alt="">
+                 <img src="{% static 'images/default.jpg' %}" alt="">
                  {% endif %}</li>
                 <li><a href="{% url 'profile_update' request.user.username %}">Edit Profile</a></li>
                 <li><a href="{% url 'post_favourite_list' %}">Favourite</a></li>

@@ -17,6 +17,8 @@ django-debug-toolbar = "*"
 whitenoise = "*"
 gunicorn = "*"
 dj-database-url = "*"
+cloudinary = "*"
+django-cloudinary-storage = "*"
 
 [requires]
 python_version = "3.7"

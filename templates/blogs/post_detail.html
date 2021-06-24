@@ -1,5 +1,5 @@
 {% extends "_base.html" %}
-{% load static %}
+
 {% load urlify %}
 
 {% load markdown_extras %}
@@ -20,8 +20,6 @@
           <div class="card mb-4">
               {% if post.thumbnail %}
               <img class="card-img-top" src="{{ post.thumbnail.url }}" alt="{{ post.title }}">
-              {% else %}
-              <img class="card-img-top" src="{% static 'images/earth-marbel.jpg' %}" alt="" srcset="">
               {% endif %}
           
             <div class="card-body">

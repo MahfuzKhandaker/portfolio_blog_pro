@@ -1,15 +1,11 @@
 {% extends "_base.html" %}
 
-{% load static %}
-
 {% block content %}
 
 <div class="col-md-12 p-4">
     <div class="card">
       {% if project.image %}
       <img class="card-img-top" src="{{ project.image.url }}" alt="Card image cap">
-      {% else %}
-      <img src="{% static 'images/earth-marbel.jpg' %}" alt="" srcset="">
       {% endif %}
       <div class="card-body pt-5">
         <h3 class="card-title">{{ project.title }}</h3>

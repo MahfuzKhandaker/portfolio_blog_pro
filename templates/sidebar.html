@@ -1,4 +1,3 @@
-{% load static %}
 <div class="position-sticky" style="top: 2rem;">
   <div class="p-2 mb-3 rounded">
       <!-- Widget [Search Bar Widget]-->
@@ -30,8 +29,6 @@
             <div class="image">
               {% if post.thumbnail %}
               <img src="{{ post.thumbnail.url }}" alt="..." class="img-fluid">
-              {% else %}
-              <img src="{% static 'images/snow-cover-rocks-night.jpg' %}" alt="" class="img-fluid">
               {% endif %}
             </div>
             

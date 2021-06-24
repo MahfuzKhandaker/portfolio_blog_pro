@@ -31,10 +31,10 @@
                 </div>
                 
           </div>
-          <button class="page-link"><a href="{% url 'account_logout' %}">Sign Out</a></button>
+          <button class="btn cta page-link"><a href="{% url 'account_logout' %}">Sign Out</a></button>
           {% else %}
-          <button class="page-link"><a href="{% url 'account_login' %}">Log In</a></button>
-          <button class="page-link"><a href="{% url 'account_signup' %}">Sign Up</a></button>
+          <button class="btn cta page-link"><a href="{% url 'account_login' %}">Log In</a></button>
+          <button class="btn cta page-link"><a href="{% url 'account_signup' %}">Sign Up</a></button>
           {% endif %} 
           
         </div>

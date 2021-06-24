@@ -1,4 +1,3 @@
-{% load static %}
 <div class="container-blog-posts">
   <h1 class="my-3 fancy"> Feature Posts:</h1>
  
@@ -8,12 +7,10 @@
       <div class="blog-card-image">
         {% if post.thumbnail %}
         <img src="{{ post.thumbnail.url }}">
-        {% else %}
-        <img src="{% static 'images/earth-marbel.jpg' %}" alt="" srcset="">
         {% endif %}
       </div>
       <div class="blog-card-info">
-        <h5><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h5>
+        <h3><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h3>
         <div class="mb-1 text-muted">
           {% include 'blogs/post_info.html' %}
         </div>

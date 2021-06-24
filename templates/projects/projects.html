@@ -1,12 +1,9 @@
-  {% load static %}
-  <section class="blog-posts">
+<section class="blog-posts">
     {% for project in projects %}
     <div class="blog-card">
       <div class="blog-card-image">
         {% if project.image %}
         <img src="{{ project.image.url }}">
-        {% else %}
-        <img src="{% static 'images/earth-marbel.jpg' %}" alt="" srcset="">
         {% endif %}
       </div>
       <div class="blog-card-info">

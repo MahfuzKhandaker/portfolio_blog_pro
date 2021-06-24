@@ -1,5 +1,5 @@
 {% extends "_base.html" %}
-{% load static %}
+
 {% load markdown_extras %}
 
 {% block content %}
@@ -11,8 +11,6 @@
       <div class="blog-card-image">
         {% if post.thumbnail %}
         <img src="{{ post.thumbnail.url }}">
-        {% else %}
-        <img src="{% static 'images/snow-cover-rocks-night.jpg' %}" alt="" srcset="">
         {% endif %}
       </div>
       <div class="blog-card-info">

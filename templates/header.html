@@ -4,7 +4,7 @@
       <a href="{% url 'home' %}" class="logo">letsflyonthewebsky</a>
     </div>
     <div class="header-item-right">
-        <button class="page-link"><a href="{% url 'newsletters:subscribe' %}">Subscribe</a></button>
+        <button class="btn cta page-link"><a href="{% url 'newsletters:subscribe' %}">Subscribe</a></button>
 
         <div class="actions">
           {% if request.user.is_authenticated %}

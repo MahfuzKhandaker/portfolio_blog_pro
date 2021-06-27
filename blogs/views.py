@@ -172,7 +172,8 @@ def post_by_tag(request, tag_slug):
         'post_by_tag': post_by_tag,
     }
     return render(request, 'blogs/post_by_tag.html', context )
-    
+
+@login_required
 def post_edit(request, slug):
     # if not request.user.is_staff or not request.user.is_superuser:
 	#     raise Http404
@@ -195,7 +196,7 @@ def post_edit(request, slug):
     }
     return render(request, 'blogs/post_edit.html', context)
 
-
+@login_required
 def post_favourite_list(request):
     user = request.user
     favourite_posts = user.favourite.all()
@@ -220,7 +221,6 @@ def favourite_post(request):
     if request.is_ajax():
         html = render_to_string('blogs/favourite_section.html', context, request=request)
         return JsonResponse({'form': html})
-
 
 def likes(request):
     post = get_object_or_404(Post, slug=request.POST.get('post_slug'))

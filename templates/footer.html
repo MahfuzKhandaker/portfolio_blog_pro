@@ -1,4 +1,5 @@
-<div class="footer-container">
+<footer class="footer-container">
+    {% comment %}
     <div class="footer-item-left">
         <ul>
           <li><a href="{% url 'home' %}">Home</a></li>
@@ -8,9 +9,10 @@
           <li><a href="{% url 'contact' %}">Contact</a></li>
         </ul>
     </div>
-    <div class="footer-item-right">
+    {% endcomment %}
+    <div class="footer-item">
         <h2>Stay Updated</h2>
-        <button class="page-link"><a href="{% url 'newsletters:subscribe' %}">Subscribe</a></button>
+        <button class="btn cta page-link"><a href="{% url 'newsletters:subscribe' %}">Subscribe</a></button>
         <div class="links">
             <ul>
                 <li><span class="pf-stat-count"><a href="https://www.facebook.com/letsflyonthewebsky/" target="_blank"><i class="fa fa-facebook"></i> facebook</a></span></li>
@@ -24,4 +26,4 @@
             <p>Copyright &copy; 2021, All Right Reserved By &nbsp; <a href="{% url 'home' %}">letsflyonthewebsky.com</a></p>
         </div>
     </div>
-</div>
+</footer>

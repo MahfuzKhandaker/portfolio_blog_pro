@@ -594,12 +594,16 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .card-title, h3 a {
-  font-size: calc(16px + (48 - 16) * ((100vw - 300px) / (1600 - 300)));
+  font-family: Montserrat, sans- serif;
+  font-size: calc(16px + (54 - 16) * ((100vw - 300px) / (1600 - 300)));
+  font-weight: 700;
   color: #1e4279;
 }
 
-.card-text {
-  font-size: calc(14px + (22 - 14) * ((100vw - 300px) / (1600 - 300)));
+.card p {
+  font-family: Montserrat, sans- serif;
+  font-size: calc(14px + (24 - 14) * ((100vw - 300px) / (1600 - 300)));
+  text-align: justify;
 }
 .card-img-top {
   height: 40vh;
@@ -608,8 +612,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 a.card-link {
   color: #17a2b8;
-	font-size: 16px;
-  font-size: calc(16px + (22 - 16) * ((100vw - 300px) / (1600 - 300)));
+  font-size: calc(14px + (20 - 16) * ((100vw - 300px) / (1600 - 300)));
 }
 .btn-outline-info {
   border-color: #17a2b8;
@@ -690,8 +693,7 @@ a.card-link {
     border-radius: 1.3rem;
 }
 .page-link a {
-  color: #faf4f5;
-  font-size: calc(16px + (32 - 16) * ((100vw - 300px) / (1600 - 300)));
+  font-size: calc(14px + (32 - 14) * ((100vw - 300px) / (1600 - 300)));
   font-weight: 600;
 }
 .page-btn {
@@ -757,11 +759,11 @@ a.card-link {
   word-break: normal;
 }
 
-/* pre {
+pre {
   display: block;
   font-size: 87.5%;
   color: #c3c9b3;
-} */
+}
 
 pre {
   margin-top: 3rem;
@@ -772,19 +774,15 @@ pre {
 /* About Section */
 .cta {
 	display: inline-block;
-	/* padding: 10px; */
 	color: white;
 	background-color: transparent;
-	border: 1px solid crimson;
-	/* font-size: 1.5rem; */
   font-weight: 600;
 	text-transform: uppercase;
 	letter-spacing: .1rem;
-	/* margin-top: 30px; */
 	transition: .3s ease;
 	transition-property: background-color, color;
 }
-.cta:hover {
+.cta a:hover {
 	color: crimson;
   text-decoration: none;
 }
@@ -807,7 +805,6 @@ pre {
 	background-color: #fb9f00;
 	border-radius: 3px;
   color: #fff;
-	/* font-size: 14px; */
 	font-weight: bold;
 	padding: 3px 7px;
 	position: absolute;
@@ -834,7 +831,7 @@ pre {
 .about p {
     padding: 1rem;
     text-align: center;
-    font-size: calc(16px + (26 - 16) * ((100vw - 300px) / (1600 - 300)));
+    font-size: calc(16px + (24 - 16) * ((100vw - 300px) / (1600 - 300)));
   }
 
 
@@ -883,15 +880,22 @@ pre {
 	font-size: calc(14px + (20 - 14) * ((100vw - 300px) / (1600 - 300)));
 	margin: 0 7px 7px 0;
 	padding: 7px;
-  }
-.vertical { 
-	margin-top: 120px;
+}
+.vertical {
+	margin-top: 125px;
 	border-left: 6px solid crimson; 
-	height: 20vh;
+	height: 30vh;
 	position:absolute; 
 	left: 0; 
 } 
-
+@media (max-width: 768px){
+  .about p {
+    padding: .5rem;
+  }
+  .vertical{
+    visibility: hidden;
+  }
+}
 .skills-info {
 	background-color: #0d1117;
 	text-align: left;
@@ -928,49 +932,22 @@ pre {
 
 /* Start Footer Container */
 .footer-container {
+  padding: 1rem;
 	background-color: #020914;
 	display: flex;
   flex-direction: row;
-	flex-wrap: wrap;
 	justify-content: space-between;
   align-items: center;
+  align-content: center;
   min-height: 30vh;
   }
   
-  .footer-item-left {
-	  flex: 20%;
-    display: flex;
-    justify-content: center;
-    /* align-items: center; */
-    padding:.3rem;
-  }
-
-  .footer-item-left ul li a{
-    font-family: 'Cinzel Decorative', cursive;
-    /* font-size: 1rem; */
-    font-weight: 600;
-    letter-spacing: 2px;
-    text-align: center;
-  }
-  
-  .footer-item-right {
+  .footer-item {
     display: flex;
     flex-flow: row wrap;
     justify-content: space-between;
     align-content: center;
     align-items: center;
-    padding: .5rem;
-    flex: 80%;
-  }
-
-  /* Responsive layout - makes a one column-layout instead of a two-column layout */
-  @media (max-width: 40rem) {
-	  .footer-item-left, .footer-item-right {
-	    flex: 100%;
-	  }
-    /* .footer-item-right .links li {
-      font-size: 1rem;
-    } */
   }
 
 .links {

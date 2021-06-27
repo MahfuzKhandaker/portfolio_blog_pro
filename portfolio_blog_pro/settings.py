@@ -15,6 +15,8 @@ from pathlib import Path
 import cloudinary
 import cloudinary_storage
 
+from decouple import config
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -136,11 +138,11 @@ WSGI_APPLICATION = 'portfolio_blog_pro.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'portfolio_blog_db',
-        'USER': 'postgres',
-        'PASSWORD': 'bismillah_19@pg',
+        'NAME': config('POSTGRES_DB'),
+        'USER': config('POSTGRES_USER'),
+        'PASSWORD': config('POSTGRES_PASSWORD'),
         'HOST': 'db',
-        'PORT': 5432
+        'PORT': '5432',
     }
 }
 
@@ -182,9 +184,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 
-DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
-
-
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [Path(BASE_DIR, 'static'),]
 STATIC_ROOT = Path(BASE_DIR, 'staticfiles')
@@ -203,10 +202,12 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Cloudinary stuff
 CLOUDINARY_STORAGE = {
-    'CLOUD_NAME': 'mahfuzkhandaker',
-    'API_KEY': '961335153135462',
-    'API_SECRET': 'Da9RhoJfi32ylWQ3UVpwPdfNIOg',
+    'CLOUD_NAME': config('CLOUD_NAME', default=""),
+    'API_KEY': config('API_KEY', default=""),
+    'API_SECRET': config('API_SECRET', default=""),
 }
+
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 # These are the settings for sending email in Django via Gmail
 from .email_info import EMAIL_BACKEND, EMAIL_HOST, EMAIL_HOST_USER, EMAIL_HOST_PASSWORD, EMAIL_PORT, EMAIL_USE_TLS, EMAIL_USE_SSL

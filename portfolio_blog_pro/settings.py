@@ -138,9 +138,9 @@ WSGI_APPLICATION = 'portfolio_blog_pro.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': config('POSTGRES_DB'),
-        'USER': config('POSTGRES_USER'),
-        'PASSWORD': config('POSTGRES_PASSWORD'),
+        'NAME': 'portfolio_blog_db',
+        'USER': 'postgres',
+        'PASSWORD': 'bismillah_19@pg',
         'HOST': 'db',
         'PORT': '5432',
     }

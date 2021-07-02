@@ -21,6 +21,7 @@ from django.template.loader import render_to_string
 from django.http import JsonResponse
 from urllib.parse import quote_plus
 from django.contrib.auth.decorators import login_required
+from django.conf import settings
 
 try:
     from django.utils import simplejson as json
@@ -222,9 +223,14 @@ def favourite_post(request):
         html = render_to_string('blogs/favourite_section.html', context, request=request)
         return JsonResponse({'form': html})
 
+@login_required
 def likes(request):
+    # if not request.user.is_authenticated:
+    #     return redirect('%s?next=%s' % (settings.LOGIN_URL, request.path))
+    
     post = get_object_or_404(Post, slug=request.POST.get('post_slug'))
     is_liked = False
+
     if post.likes.filter(id=request.user.id).exists():
         post.likes.remove(request.user)
         is_liked = False

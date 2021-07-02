@@ -8,11 +8,7 @@
 <header>
 	<div class="pf-container">
 		<div class="pf-item-left">
-			{% if request.user.profile.photo %}
 			<img src="{{ request.user.profile.photo.url }}" alt="">
-			{% else %}
-			<img src="{% static 'images/default.jpg' %}" alt="">
-			{% endif %}
 		</div>
 		<div class="pf-item-right">
 			<div class="pf-settings">

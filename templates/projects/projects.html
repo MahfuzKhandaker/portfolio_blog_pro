@@ -1,22 +1,24 @@
-<section class="blog-posts">
-    {% for project in projects %}
-    <div class="blog-card">
-      <div class="blog-card-image">
-        {% if project.image %}
-        <img src="{{ project.image.url }}">
-        {% endif %}
-      </div>
-      <div class="blog-card-info">
-        <h5><a href="{{ project.get_absolute_url }}">{{ project.title }}</a></h5>
-        <div class="mb-1 text-muted">
-          <small>
-            <h5>
-                Technology used:&nbsp;
-                {{ project.technology }}
-            </h5>
-          </small>
-        </div>
+<section class="project-intro">
+  {% for project in projects %}
+  <div class="project-card">
+    <div class="project-card-image">
+      {% if project.image %}
+      <img src="{{ project.image.url }}">
+      {% endif %}
+    </div>
+    <div class="project-card-info">
+      <h5><a href="{{ project.get_absolute_url }}">{{ project.title }}</a></h5>
+      <div class="mb-1 text-muted">
+        <small>
+          <h5>
+              Technology used:&nbsp;
+              {{ project.technology }}
+          </h5>
+        </small>
       </div>
     </div>
-    {% endfor %}
-  </section>
+  </div>
+  {% empty %}
+      <h1 class="my-3 text-center">No Project found</h1>
+  {% endfor %}
+</section>

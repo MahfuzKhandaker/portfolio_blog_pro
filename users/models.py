@@ -1,5 +1,6 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+from PIL import Image
 
 class CustomUser(AbstractUser):
     pass
@@ -27,4 +28,5 @@ class Profile(models.Model):
     class Meta:
         ordering = ['-dob']
         verbose_name_plural = 'profiles'
+
 

@@ -1,4 +1,4 @@
-  {% load static %}
+{% load static %}
   <header class="header-container">
     <div class="header-item-left">
       <a href="{% url 'home' %}" class="logo">letsflyonthewebsky</a>
@@ -20,15 +20,14 @@
                <div class="dropdown-content">
                  <!-- Settings [ User @ Company ] -->
              <ul>
-                <li>{% if request.user.profile.photo %}
+                <li>
                  <img src="{{ request.user.profile.photo.url }}" alt="">
-                 {% else %}
-                 <img src="{% static 'images/default.jpg' %}" alt="">
-                 {% endif %}</li>
+                </li>
                 <li><a href="{% url 'profile_update' request.user.username %}">Edit Profile</a></li>
                 <li><a href="{% url 'post_favourite_list' %}">Favourite</a></li>
+                <li><a href="{% url 'account_logout' %}">Log Out</a></li>
               </ul>
-                </div>
+              </div>
                 
           </div>
           <button class="btn cta page-link"><a href="{% url 'account_logout' %}">Sign Out</a></button>

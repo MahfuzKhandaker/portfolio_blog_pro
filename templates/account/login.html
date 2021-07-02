@@ -11,6 +11,10 @@
     <form method="post">
         {% csrf_token %}
         {{ form|crispy }}
+
+        {% if request.GET.next %}
+        <input type="hidden" name="next" value="{{request.GET.next}}">
+        {% endif %}
         <button class="page-btn btn-outline-success btn-lg" type="submit">Log In</button>
     </form>
 </div>

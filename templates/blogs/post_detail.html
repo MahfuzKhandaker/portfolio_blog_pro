@@ -27,7 +27,7 @@
           
                 
 
-                <small class="text-muted">
+                <small class="text-muted">                  
                   {% include 'blogs/post_info.html' %}
                   <i class="fa fa-clock text-info"></i> {% if post.read_time <= 1 %} 1 Minute read  {% else %} {{ post.read_time }} Minute{{ post.read_time|pluralize }} read {% endif %} |&nbsp;
                   <i class="fa fa-eye"></i> {{ post.number_of_views }} views |&nbsp;
@@ -35,38 +35,42 @@
                   <i class="fa fa-comment"></i> {{ post.comments.count }} comments
                 </small>
 
-                <p class="card-text py-3">{{ post.overview | markdown | safe }}</p>
-                <br>
+                <div class="overview">
+                  <p>{{ post.overview | markdown | safe }}</p>
+                </div>
                 <p class="card-text py-3">{{ post.content | markdown | safe }}</p>
                 <br>
                 <br>
                 <div class="container">
-                  <h5>Share this post</h5>
+                  <h5>Share this post with</h5>
                     <a href="https://www.facebook.com/sharer.php?u={{ request.build_absolute_uri }}" target="_blank">
-                      <i class="fa fa-facebook-square fa-4x" style="color:#3b5998"></i>
+                      <i class="fa fa-facebook-square fa-4x mr-4" style="color:#3b5998"></i>
                     </a>
                 
                     <a href="https://twitter.com/intent/tweet?url={{ request.build_absolute_uri }}&text={{ post.content|truncatechars:80|urlify }}&hashtags=python,django" target="_blank">
                       <i class="fa fa-twitter-square fa-4x" style="color:#4099FF"></i>
                     </a>
                 </div>
-            
-                <div class="container">
-                  <div id="like-section" style="display: inline-block; width: 76px; height: 76px; padding: 5px;">
+
+                {% if request.user.is_authenticated %}
+                <div class="react-container">
+                  <div id="like-section">
                     {% include 'blogs/like_section.html' %}
                   </div>
-                  <div id="favourite-section" style="display: inline-block; width: 76px; height: 76px; padding: 5px;">
+                  <div id="favourite-section">
                     {% include 'blogs/favourite_section.html' %}
                   </div>
                 </div>
+                {% endif %}
             
 
               
               <!-- Comment & Reply -->
-              
+              {% if request.user.is_authenticated %}
               <div class="main-comment-section">
                 {% include 'blogs/comment_section.html' %}
               </div>
+              {% endif %}
              
           </div>
           </div>

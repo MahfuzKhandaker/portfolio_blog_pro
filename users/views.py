@@ -43,30 +43,3 @@ def profile_update(request, username):
         'profile_form': profile_form,
     }
     return render(request, 'users/edit_profile.html', context)
-    # page_user = request.user
-    # user_profile =  get_object_or_404(Profile, page_user=page_user)
-
-    # if request.method == "POST":
-    #     form = CustomUserChangeForm(request.POST)
-    #     if form.is_valid():
-            
-
-# class ProfileView(generic.DetailView):
-#     model = Profile
-#     template_name = 'users/profile.html'
-
-#     def get_context_data(self, **kwargs):
-#         context = super(ProfileView, self).get_context_data(**kwargs)
-
-#         page_user = get_object_or_404(Profile, id = self.kwargs['pk'])
-        
-#         context['page_user'] = page_user
-       
-#         context['user_posts'] = page_user.user.author_posts.all()
-#         context['user_fav_posts'] = page_user.user.favourite.all()
-        
-#         context['post_num'] = Post.published.count()
-#         # context['project_num'] = Project.objects.count()
-#         context['most_recent'] = Post.published.all().order_by('-timestamp', '-updated')[:3]
-#         context['post_by_category_count']  = Post.published.values('categories__title').annotate(Count('categories__title')).order_by('categories')
-#         return context

@@ -341,7 +341,7 @@ section.hero .continue svg {
 }
 .blog-card:hover {
   cursor: pointer;
-	box-shadow: 0 4px 6px 0 #11ddf8;
+	box-shadow: 0 6px 8px 0 #11ddf8;
 }
 .blog-card-image {
   overflow: hidden;
@@ -399,8 +399,101 @@ section.hero .continue svg {
 	}
 }
 
-
 /* END BLOG POST */
+
+/* START PROJECT CARD */
+.container-project-card{
+  margin: 0 auto;
+  padding: 1rem;
+}
+.container-project-card h1{
+  font-family: 'Cinzel Decorative', cursive;
+  font-size: calc(16px + (48 - 16) * ((100vw - 300px) / (1600 - 300)));
+  text-align: center;
+}
+
+.project-intro {
+	display: flex;
+	flex-wrap: wrap;
+  margin: -1rem -1rem;
+  padding-bottom: 3rem;
+  min-height: 70vh;
+}
+
+.project-card {
+  flex: 1 0 calc(33% - 2rem);
+  margin: 1rem;
+  padding: .5rem;
+  color: #fff;
+  background-color: #020914;
+  border: 1px solid #011431;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.project-card:hover {
+  cursor: pointer;
+	box-shadow: 0 4px 6px 0 #11ddf8;
+}
+.project-card-image {
+  overflow: hidden;
+}
+.project-card-image img {
+  width: 100%;
+  height: 30vh;
+  object-fit: cover;
+  opacity: 0.6;
+  -webkit-transform: scale(1);
+	transform: scale(1);
+	-webkit-transition: .3s ease-in-out;
+	transition: .3s ease-in-out;
+}
+.project-card-image:hover img {
+  opacity: 1;
+  -webkit-transform: scale(1.3);
+	transform: scale(1.3);
+}
+
+.project-card-info {
+	margin-top: 20px;
+	padding: 10px;
+	text-align: center;
+}
+.project-card-info h3 a {
+  font-size: calc(16px + (48 - 16) * ((100vw - 300px) / (1600 - 300)));
+  color: #1e4279;
+  text-shadow: -1px 0 #011431  0 1px #011431 1px 0 #011431  0 -1px #011431;
+}
+@media ( max-width: 40rem ) {
+  .project-intro{
+    flex-direction: column;
+  }
+  .project-card {
+		flex: 1 0 100%;
+    margin: 1rem 0;
+	}
+	
+}
+
+@media ( max-width: 50rem ) {
+	
+	.project-card {
+		flex: 1 0 calc(50% - 2rem);
+	}
+	.project-intro .project-card:last-child { 
+		flex: 1 0 calc(50% - 2rem);
+	}
+}
+
+@media ( max-width: 60rem ) {
+	.project-card:last-child { 
+		flex: 0 0 calc(50% - 2rem);
+	}
+}
+
+
+/* END PROJECT CARD */
+
+
 .container-fluid, .container-lg, .container-md, .container-sm, .container-xl {
   width: 100%;
   padding-right: 0;
@@ -499,12 +592,6 @@ a:hover {
     .header-item-left .logo{
       font-size: calc(32px + (64 - 32) * ((100vw - 300px) / (1600 - 300)));
     }
-    /* .header-item-right .page-link a{
-      font-size: 1rem;
-    }
-    .header-item-right .links li {
-      font-size: 1rem;
-    } */
   }
 
 .dropdown {
@@ -553,18 +640,6 @@ a:hover {
 h1, h2, h3, h4, h5, h6 {
   font-family: "Playfair Display", Georgia, "Times New Roman", serif;
 }
-/* .h5, h5 {
-  font-size: 1.25rem;
-} */
-/* .display-4 {
-  font-size: 2.5rem;
-} */
-
-/* @media (min-width: 768px) {
-  .display-4 {
-    font-size: 3rem;
-  }
-} */
 
 .fixed {
   position: fixed;
@@ -573,7 +648,7 @@ h1, h2, h3, h4, h5, h6 {
   top: 0;
   z-index: 100;
 }
-/* START Sidebar: make-me-sticky  */
+
 .blog-sidebar{
   width: 100%;
   height: 100%;
@@ -592,12 +667,21 @@ h1, h2, h3, h4, h5, h6 {
   cursor: pointer;
 	box-shadow: 0 2px 4px 0 #11ddf8;
 }
-
+.card-body {
+  padding: 3rem;
+}
 .card-title, h3 a {
   font-family: Montserrat, sans- serif;
   font-size: calc(16px + (54 - 16) * ((100vw - 300px) / (1600 - 300)));
   font-weight: 700;
   color: #1e4279;
+}
+
+.card .overview p {
+  padding-top: 1rem;
+  font-family: Montserrat, sans- serif;
+  font-size: calc(16px + (32 - 16) * ((100vw - 300px) / (1600 - 300)));
+  text-align: justify;
 }
 
 .card p {
@@ -641,14 +725,32 @@ a.card-link {
 .flex-auto {
   flex: 0 0 auto;
 }
-
-/* .h-250 { 
-  height: 250px; 
+.main-comment-section{
+  margin: 2rem;
 }
-@media (min-width: 768px) {
-  .h-md-250 { height: 250px; }
-} */
+.react-container{
+  padding: 50px 0;
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  align-content: center;
+  justify-content: flex-start;
+}
 
+#like-section, #favourite-section{
+  display: flex;
+  flex: 0 0 10%;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  height: 76px;
+  width: 76px;
+  padding: 5px;
+  /* font-size: calc(24px + (64 - 24) * ((100vw - 300px) / (1600 - 300))); */
+}
+a#like.btn{
+  font-size: calc(24px + (64 - 24) * ((100vw - 300px) / (1600 - 300)));
+}
 .rounded-circle {
   top: 50%;
   left: 50%;
@@ -927,6 +1029,10 @@ pre {
 	text-align: center;
   min-height: 100vh;
   margin: 0;
+}
+
+.contact button{
+  font-size: calc(24px + (32 - 24) * ((100vw - 300px) / (1600 - 300)));
 }
 
 

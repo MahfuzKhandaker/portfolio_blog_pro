@@ -14,6 +14,7 @@ Django Docker Portfolio Blog Project
 ![about](https://user-images.githubusercontent.com/41839536/124319602-468da080-db9c-11eb-859e-2cc4bcfba7fd.png)
 
 ![blog-md](https://user-images.githubusercontent.com/41839536/124320263-5e195900-db9d-11eb-9bda-06dbfdc336a5.png)
+![blog-responsive](https://user-images.githubusercontent.com/41839536/124320508-daac3780-db9d-11eb-8c82-5cb1dc547b64.png)
 
 ## Introduction
 Django is a high-level Python Web framework that encourages rapid development and clean, pragmatic design. In this project, I try to figure out how to  containerize a Django project with Docker and deploying to heroku via Docker Compose.

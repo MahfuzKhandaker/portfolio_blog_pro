@@ -372,6 +372,11 @@ section.hero .continue svg {
   color: #1e4279;
   text-shadow: -1px 0 #011431  0 1px #011431 1px 0 #011431  0 -1px #011431;
 }
+.blog-card-info:hover h3 a {
+  font-size: calc(16px + (48 - 16) * ((100vw - 300px) / (1600 - 300)));
+  color: #3f454e;
+  text-shadow: -1px 0 #011431  0 1px #011431 1px 0 #011431  0 -1px #011431;
+}
 @media ( max-width: 40rem ) {
   .blog-posts{
     flex-direction: column;

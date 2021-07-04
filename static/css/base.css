@@ -317,7 +317,6 @@ section.hero .continue svg {
   padding: 1rem;
 }
 .container-blog-posts h1{
-  font-family: 'Cinzel Decorative', cursive;
   font-size: calc(24px + (64 - 24) * ((100vw - 300px) / (1600 - 300)));
   text-align: center;
 }

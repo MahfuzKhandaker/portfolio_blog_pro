@@ -8,7 +8,9 @@
 <header>
 	<div class="pf-container">
 		<div class="pf-item-left">
-			<img src="{{ request.user.profile.photo.url }}" alt="">
+			{% if page_user.profile.photo  %}
+			<img src="{{ page_user.profile.photo.url }}" alt="">
+			{% endif %}
 		</div>
 		<div class="pf-item-right">
 			<div class="pf-settings">

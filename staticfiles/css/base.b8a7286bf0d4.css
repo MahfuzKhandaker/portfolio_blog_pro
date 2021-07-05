@@ -721,7 +721,7 @@ a.card-link {
 
 .card-img-right {
   height: 100%;
-  width: 180px;
+  width: 18vw;
   border-radius: 0 3px 3px 0;
   object-fit: cover;
 }
@@ -995,6 +995,9 @@ pre {
 	left: 0; 
 } 
 @media (max-width: 768px){
+  .about {
+    padding: 2rem;
+  } 
   .about p {
     padding: .5rem;
   }

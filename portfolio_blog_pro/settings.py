@@ -35,7 +35,7 @@ DEBUG = int(os.environ.get('DEBUG', default=0))
 
 
 # ALLOWED_HOSTS = ['*']
-ALLOWED_HOSTS = ['letsflyonthewebsky.herokuapp.com', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['webdevsky.herokuapp.com', 'localhost', '127.0.0.1']
 
 
 # Application definition
@@ -83,7 +83,7 @@ AUTHENTICATION_BACKENDS = (
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
-DEFAULT_FROM_EMAIL = 'admin@letsflyonthewebsky.com'
+DEFAULT_FROM_EMAIL = 'admin@webdevsky.com'
 
 ACCOUNT_SESSION_REMEMBER = True
 ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE = False

@@ -35,7 +35,7 @@ DEBUG = int(os.environ.get('DEBUG', default=0))
 
 
 # ALLOWED_HOSTS = ['*']
-ALLOWED_HOSTS = ['webdevsky.herokuapp.com', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['mkswebsky.herokuapp.com', 'localhost', '127.0.0.1']
 
 
 # Application definition

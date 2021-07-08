@@ -28,7 +28,7 @@
 			</div>
 			<div class="pf-bio">
 				{% if page_user.profile.bio %}
-				<p><span class="pf-bio-info">{{ page_user|capfirst }}</span> {{ page_user.profile.bio }}</p>
+				<p>{{ page_user.profile.bio }}</p>
 				{% endif %}
 			</div>
 		</div>
@@ -69,7 +69,9 @@
     {% for post in user_fav_posts %}
 		<div class="blog-card">
 			<div class="blog-card-image">
+				{% if post.thumbnail %}
 				<img src="{{ post.thumbnail.url }}">
+				{% endif %}
 			</div>
 			<div class="blog-card-info">
 				<h5><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h5>

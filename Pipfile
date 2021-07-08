@@ -19,7 +19,5 @@ gunicorn = "*"
 dj-database-url = "*"
 cloudinary = "*"
 django-cloudinary-storage = "*"
-python-decouple = "*"
-
 [requires]
 python_version = "3.7"

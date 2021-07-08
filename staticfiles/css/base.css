@@ -1196,10 +1196,22 @@ text-decoration: underline;
   }
 
   .pf-bio{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
     margin-top: 1rem;
     flex-basis: 100%;
   }
-  
+
+  .pf-bio p{
+    font-size: calc(16px + (32 - 16) * ((100vw - 300px) / (1600 - 300)));
+    color: #dedfe0;
+  }
+  span.pf-bio-info{
+    font-size: calc(16px + (36 - 16) * ((100vw - 300px) / (1600 - 300)));
+    color: #dedfe0;
+  }
   span.pf-stat-count{
     font-size:calc(14px + (26 - 14) * ((100vw - 300px) / (1600 - 300)));
   }

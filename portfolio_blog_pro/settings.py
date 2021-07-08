@@ -15,7 +15,6 @@ from pathlib import Path
 import cloudinary
 import cloudinary_storage
 
-from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -56,8 +55,6 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'debug_toolbar',
-    'cloudinary',
-    'cloudinary_storage',
     
     # Local
     'users.apps.UsersConfig',
@@ -66,6 +63,10 @@ INSTALLED_APPS = [
     'projects.apps.ProjectsConfig',
     'contact.apps.ContactConfig',
     'newsletters.apps.NewslettersConfig',
+
+     # Media Cloudinary
+    'cloudinary',
+    'cloudinary_storage',
 ]
 # django-crispy-forms
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
@@ -193,7 +194,7 @@ STATICFILES_FINDERS = [
     "django.contrib.staticfiles.finders.AppDirectoriesFinder",
 ]
 
-# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = Path(BASE_DIR, 'media') 
@@ -202,9 +203,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Cloudinary stuff
 CLOUDINARY_STORAGE = {
-    'CLOUD_NAME': config('CLOUD_NAME', default=""),
-    'API_KEY': config('API_KEY', default=""),
-    'API_SECRET': config('API_SECRET', default=""),
+    'CLOUD_NAME': 'mahfuzkhandaker',
+    'API_KEY': '961335153135462',
+    'API_SECRET': 'Da9RhoJfi32ylWQ3UVpwPdfNIOg',
 }
 
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'

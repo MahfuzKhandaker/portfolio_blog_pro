@@ -9,7 +9,7 @@ class CustomUser(AbstractUser):
 class Profile(models.Model):
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
     dob = models.DateField(null=True, blank=True)
-    photo = models.ImageField(default='default.jpg', upload_to='profile', blank=True)
+    photo = models.ImageField(default='profile/default.jpg', upload_to='profile', blank=True)
     bio = models.CharField(max_length=255, null=True, blank=True)
     location = models.CharField(max_length=30, blank=True)
     website_url = models.URLField(max_length = 255, blank=True)

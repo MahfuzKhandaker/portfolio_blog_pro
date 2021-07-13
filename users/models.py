@@ -1,13 +1,14 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from PIL import Image
+from django.conf import settings
 
 class CustomUser(AbstractUser):
     pass
 
 
 class Profile(models.Model):
-    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     dob = models.DateField(null=True, blank=True)
     photo = models.ImageField(default='default.jpg', upload_to='profile', blank=True)
     bio = models.CharField(max_length=255, null=True, blank=True)

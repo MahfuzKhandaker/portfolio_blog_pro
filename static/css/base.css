@@ -603,6 +603,10 @@ a:hover {
   display: inline-block;
 }
 
+.dropdown span a {
+  font-size: calc(12px + (24 - 12) * ((100vw - 300px) / (1600 - 300)));
+}
+
 .dropdown-content {
   display: none;
   position: absolute;
@@ -815,41 +819,88 @@ a#like.btn{
   border: 1px solid #17a2b8;
   border-radius: 2rem;
 }
+
+.wmd-wrapper{
+  overflow: hidden;
+}
+.wmd-button-bar {
+  display: inline-block;
+  width: 90%;
+  background-color: Silver;
+}
 .create-post {
   background-color: #031f30;
   min-height: 100vh;
   padding: 50px 100px;
 }
+@media (max-width: 40rem) {
+  .create-post {
+    padding: 30px;
+  }
+  .create-post .wmd-panel {
+    margin-right: auto;
+    margin-left: auto;
+    width: 70%;
+    min-width: 70vw;
+  }
+}
 .create-post .wmd-panel {
   margin-right: auto;
   margin-left: auto;
   width: 100%;
-  min-width: 500px;
+  min-width: 70vw;
+}
+.create-post .wmd-button-row {
+  position: absolute;
+  margin-left: 5px;
+  margin-right: 5px;
+  margin-bottom: 5px;
+  margin-top: 10px;
+  padding: 0px;
+  height: 20px;
+  width: 100%;
+  min-width: 70vw;
+}
+.create-post .wmd-button {
+  width: 20px;
+  height: 20px;
+  padding-left: 2px;
+  padding-right: 3px;
+  position: absolute;
+  display: inline-block;
+  list-style: none;
+  cursor: pointer;
 }
 .create-post .wmd-input {
   height: 300px;
   width: 100%;
+  padding: 3rem 1rem;
   color: #d3d4d4;
   background-color: #0d1117;
   border: 1px solid  #21262d;
 }
 .create-post .wmd-preview {
+  padding: 3rem 1rem;
   background-color: rgba(13, 17, 23, 0.5);
 }
 .edit-post {
   min-height: 100vh;
   padding: 50px 100px;
 }
+@media (max-width: 40rem) {
+  .edit-post {
+    padding: 50px;
+  }
+}
 .edit-post .wmd-panel {
   margin-right: auto;
   margin-left: auto;
   width: 100%;
-  min-width: 500px;
+  min-width: 70vw;
 }
 .edit-post .wmd-input {
   height: 300px;
   width: 100%;
-  /* color: #d3d4d4; */
   background-color: #1b1c1f;
   border: 1px solid  #21262d;
 }

@@ -4,7 +4,6 @@ from .models import Post, Comment, Tag
 
 
 class AdminPostForm(forms.ModelForm):
-    overview = forms.CharField(widget=AdminPagedownWidget())
     content =  forms.CharField(widget=AdminPagedownWidget())
 
     class Meta:
@@ -12,7 +11,6 @@ class AdminPostForm(forms.ModelForm):
         fields = ['title', 'slug', 'author', 'category', 'overview', 'content', 'thumbnail', 'image_caption', 'likes', 'featured', 'tags', 'status']
 
 class PostForm(forms.ModelForm):
-    overview = forms.CharField(widget=PagedownWidget())
     content =  forms.CharField(widget=PagedownWidget())
     tags = forms.ModelMultipleChoiceField(queryset=Tag.objects.all(), widget=forms.CheckboxSelectMultiple)
     class Meta:

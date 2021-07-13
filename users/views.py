@@ -1,8 +1,9 @@
+from django.contrib.auth import get_user_model
 from django.conf.urls import url
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views import generic
 from django.utils import timezone
-from users.models import Profile, CustomUser
+# from users.models import Profile, CustomUser
 from blogs.models import Post
 from django.views.generic import TemplateView
 from django.db.models import Count
@@ -11,6 +12,7 @@ from .forms import CustomUserChangeForm, ProfileEditForm
 from django.urls import reverse
 from django.contrib import messages
 
+CustomUser = get_user_model()
 
 @login_required
 def profile(request, username):

@@ -12,17 +12,16 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Contact',
+            name='Project',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('from_email', models.EmailField(max_length=254)),
-                ('subject', models.CharField(max_length=200)),
-                ('message', models.TextField()),
-                ('created_at', models.DateTimeField(auto_now_add=True)),
+                ('title', models.CharField(max_length=100)),
+                ('description', models.TextField()),
+                ('technology', models.CharField(max_length=20)),
+                ('image', models.ImageField(blank=True, upload_to='images/')),
             ],
             options={
-                'verbose_name_plural': 'contact',
-                'ordering': ['-created_at'],
+                'verbose_name_plural': 'Projects',
             },
         ),
     ]

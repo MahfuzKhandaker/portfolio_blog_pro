@@ -564,7 +564,6 @@ a:hover {
   }
   .logo {
     text-decoration: none;
-    color: rgb(252, 252, 205);
     font-family: 'Shadows Into Light', cursive;
     font-size: calc(16px + (32 - 16) * ((100vw - 300px) / (1600 - 300)));
     text-shadow: -1px 0 #011431  0 1px #011431 1px 0 #011431  0 -1px #011431;
@@ -1204,7 +1203,7 @@ text-decoration: underline;
     height: 9.5rem;
     width: 9.5rem;
     border-radius: 50%;
-    border: 3px solid #dfdfdf;
+    border: 3px solid #031d46;
     object-fit: cover;
   }
   

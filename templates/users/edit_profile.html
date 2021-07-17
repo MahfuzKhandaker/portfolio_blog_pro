@@ -12,7 +12,6 @@
     <form method="post" action="{% url 'profile_update' request.user.username %}" enctype="multipart/form-data">
       {% csrf_token %}
       {{ user_form|crispy }}
-      {{ profile_form|crispy }}
       <button class="btn cta page-btn" type="submit">Edit Profile</button>
     </form>
 </div>    

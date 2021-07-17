@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
+    
     'debug_toolbar',
     
     # Local
@@ -83,6 +84,8 @@ AUTHENTICATION_BACKENDS = (
     'allauth.account.auth_backends.AuthenticationBackend',
 )
 
+
+
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 DEFAULT_FROM_EMAIL = 'letsflyonthewebsky.com'
@@ -90,11 +93,18 @@ DEFAULT_FROM_EMAIL = 'letsflyonthewebsky.com'
 ACCOUNT_SESSION_REMEMBER = True
 ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE = False
 ACCOUNT_USERNAME_REQUIRED = False 
+# ACCOUNT_USER_MODEL_USERNAME_FILED = None
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_UNIQUE_EMAIL = True
 
+
+ACCOUNT_FORMS = {'signup': 'users.forms.CustomSignupForm'}
+
+
 AUTH_USER_MODEL = 'users.CustomUser'
+
+
 
 MIDDLEWARE = [
     'django.middleware.cache.UpdateCacheMiddleware',

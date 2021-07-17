@@ -21,9 +21,9 @@
                  <!-- Settings [ User @ Company ] -->
                  
              <ul>
-               {% if request.user.profile.photo %}
+               {% if request.user.photo %}
                  <li>
-                   <img src="{{ request.user.profile.photo.url }}" alt="">
+                   <img src="{{ request.user.photo.url }}" alt="">
                  </li>
 			          {% endif %}
                 <li><a href="{% url 'profile_update' request.user.username %}">Edit Profile</a></li>

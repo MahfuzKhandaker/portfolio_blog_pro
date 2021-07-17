@@ -8,8 +8,8 @@
 <header>
 	<div class="pf-container">
 		<div class="pf-item-left">
-			{% if page_user.profile.photo  %}
-			<img src="{{ page_user.profile.photo.url }}" alt="">
+			{% if page_user.photo  %}
+			<img src="{{ page_user.photo.url }}" alt="">
 			{% endif %}
 		</div>
 		<div class="pf-item-right">
@@ -19,16 +19,16 @@
 			</div>
 			<div class="pf-stats">
 				<ul>
-					<li><span class="pf-stat-count"><a href="{{ page_user.profile.facebook_url }}" target="_blank"> <i class="fa fa-facebook"></i> facebook</a></span></li>
-					<li><span class="pf-stat-count"><a href="{{ page_user.profile.twitter_url }}" target="_blank"><i class="fa fa-twitter"></i> twitter</a></span></li>
-					<li><span class="pf-stat-count"><a href="{{ page_user.profile.linkedin_url }}" target="_blank"><i class="fa fa-linkedin"></i> linkedin</a></span> </li>
-					<li><span class="pf-stat-count"><a href="{{ page_user.profile.github_url }}" target="_blank"><i class="fa fa-github"></i> github</a></span> </li>
-					<li><span class="pf-stat-count"><a href="{{ page_user.profile.youtube_url }}" target="_blank"><i class="fa fa-youtube"></i> youtube</a></span> </li>
+					<li><span class="pf-stat-count"><a href="{{ page_user.facebook_url }}" target="_blank"> <i class="fa fa-facebook"></i> facebook</a></span></li>
+					<li><span class="pf-stat-count"><a href="{{ page_user.twitter_url }}" target="_blank"><i class="fa fa-twitter"></i> twitter</a></span></li>
+					<li><span class="pf-stat-count"><a href="{{ page_user.linkedin_url }}" target="_blank"><i class="fa fa-linkedin"></i> linkedin</a></span> </li>
+					<li><span class="pf-stat-count"><a href="{{ page_user.github_url }}" target="_blank"><i class="fa fa-github"></i> github</a></span> </li>
+					<li><span class="pf-stat-count"><a href="{{ page_user.youtube_url }}" target="_blank"><i class="fa fa-youtube"></i> youtube</a></span> </li>
 				</ul>
 			</div>
 			<div class="pf-bio">
-				{% if page_user.profile.bio %}
-				<p>{{ page_user.profile.bio }}</p>
+				{% if page_user.bio %}
+				<p>{{ page_user.bio }}</p>
 				{% endif %}
 			</div>
 		</div>

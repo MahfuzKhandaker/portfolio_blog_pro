@@ -1,7 +1,7 @@
 from django.contrib.auth import get_user_model
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from .forms import CustomUserChangeForm
+from .forms import CustomUserUpdateForm
 from django.contrib import messages
 
 CustomUser = get_user_model()
@@ -20,13 +20,13 @@ def profile(request, username):
 def profile_update(request, username):
     request.user = CustomUser.objects.get(username=username)
     if request.method == 'POST':
-        user_form = CustomUserChangeForm(data=request.POST or None, instance=request.user, files=request.FILES)
+        user_form = CustomUserUpdateForm(data=request.POST or None, instance=request.user, files=request.FILES)
         if user_form.is_valid():
             user_form.save()
             messages.success(request, f'Your account has been updated!')
             return redirect('profile', request.user.username)
     else:
-        user_form = CustomUserChangeForm(instance=request.user)
+        user_form = CustomUserUpdateForm(instance=request.user)
 
     context = {
         'user_form': user_form,

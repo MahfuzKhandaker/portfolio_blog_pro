@@ -19,11 +19,25 @@
 			</div>
 			<div class="pf-stats">
 				<ul>
+					{% if page_user.facebook_url %}
 					<li><span class="pf-stat-count"><a href="{{ page_user.facebook_url }}" target="_blank"> <i class="fa fa-facebook"></i> facebook</a></span></li>
+					{% endif %}
+
+					{% if page_user.twitter_url %}
 					<li><span class="pf-stat-count"><a href="{{ page_user.twitter_url }}" target="_blank"><i class="fa fa-twitter"></i> twitter</a></span></li>
+					{% endif %}
+
+					{% if page_user.linkedin_url %}
 					<li><span class="pf-stat-count"><a href="{{ page_user.linkedin_url }}" target="_blank"><i class="fa fa-linkedin"></i> linkedin</a></span> </li>
+					{% endif %}
+
+					{% if page_user.github_url %}
 					<li><span class="pf-stat-count"><a href="{{ page_user.github_url }}" target="_blank"><i class="fa fa-github"></i> github</a></span> </li>
+					{% endif %}
+
+					{% if page_user.youtube_url %}
 					<li><span class="pf-stat-count"><a href="{{ page_user.youtube_url }}" target="_blank"><i class="fa fa-youtube"></i> youtube</a></span> </li>
+					{% endif %}
 				</ul>
 			</div>
 			<div class="pf-bio">

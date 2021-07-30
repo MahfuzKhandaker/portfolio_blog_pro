@@ -1,9 +1,5 @@
 {% extends '_base.html' %}
 
-{% load socialaccount %}
-
-{% providers_media_js %}
-
 {% load crispy_forms_tags %}
 
 {% block title %}Log In{% endblock title %}
@@ -11,8 +7,6 @@
 {% block content %}
 <div class="container-accounts">
     <h2>Log In</h2>
-
-    <a href="{% provider_login_url 'facebook' method='js_sdk' %}">Facebook Connect</a>
 
     <form method="post">
         {% csrf_token %}

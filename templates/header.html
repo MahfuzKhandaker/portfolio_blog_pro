@@ -21,11 +21,6 @@
                  <!-- Settings [ User @ Company ] -->
                  
              <ul>
-               {% if request.user.photo %}
-                 <li>
-                   <img src="{{ request.user.photo.url }}" alt="">
-                 </li>
-			          {% endif %}
                 <li><a href="{% url 'profile_update' request.user.username %}">Edit Profile</a></li>
                 <li><a href="{% url 'post_favourite_list' %}">Favourite</a></li>
                 <li><a href="{% url 'account_logout' %}">Log Out</a></li>

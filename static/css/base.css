@@ -40,7 +40,7 @@ strong {
 a,
 i,
 span {
-	color: #7d7b7b;
+	color: #fafafa;
 	display: inline-block;
 	text-decoration: none;
 	-webkit-transition: 0.4s ease all;
@@ -782,7 +782,6 @@ a#like.btn{
 .page-link {
     margin: .5rem .3rem .5rem;
     background-color: transparent;
-    border-radius: 1.3rem;
     padding: .3rem .5rem;
 }
 .page-link a {
@@ -920,7 +919,8 @@ a#like.btn{
 /* About Section */
 .cta {
 	display: inline-block;
-	background-color: #020914;
+	background-color: #FFA600;
+  border: 1px solid #692201;
   font-weight: 600;
 	text-transform: uppercase;
 	letter-spacing: .1rem;

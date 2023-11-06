@@ -74,14 +74,14 @@ def post_list(request):
 
 
 def lazy_load_posts(request):
-    page = request.POST.get('page')
+    page = request.POST.get('page', 1)
     posts = Post.published.all()
     results_per_page = 5
     paginator = Paginator(posts, results_per_page)
     try:
         posts = paginator.page(page)
     except PageNotAnInteger:
-        posts = paginator.page(2)
+        posts = paginator.page(1)
     except EmptyPage:
         posts = paginator.page(paginator.num_pages)
     # build a html posts list with the paginated posts
@@ -149,7 +149,7 @@ def post_detail(request, slug):
         'comment_form': comment_form,
         'share_string': share_string,
     }
-    if request.is_ajax():
+    if request.headers.get('x-requested-with') == 'XMLHttpRequest':
         html = render_to_string('blogs/comment_section.html', context, request=request)
         comments = serializers.serialize('json', list(comments), fields=('content', 'reply', 'post', 'user__username'))
         return JsonResponse({'form': html, 'comments': comments})
@@ -219,7 +219,7 @@ def favourite_post(request):
         'post': post,
         'is_favourite': is_favourite,
     }
-    if request.is_ajax():
+    if request.headers.get('x-requested-with') == 'XMLHttpRequest':
         html = render_to_string('blogs/favourite_section.html', context, request=request)
         return JsonResponse({'form': html})
 
@@ -242,6 +242,6 @@ def likes(request):
         'is_liked': is_liked,
         'total_likes': post.likes.count(),
     }
-    if request.is_ajax():
+    if request.headers.get('x-requested-with') == 'XMLHttpRequest':
         html = render_to_string('blogs/like_section.html', context, request=request)
         return JsonResponse({'form': html})

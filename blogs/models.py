@@ -4,7 +4,7 @@ from django.urls import reverse
 from django.db.models.signals import pre_save
 from django.dispatch import receiver
 from django.utils.text import slugify
-from django.utils.safestring import mark_safe   
+from django.utils.safestring import mark_safe
 from blogs.utils import get_read_time
 
 
@@ -82,15 +82,15 @@ class Post(models.Model):
         return self.title
     
     def save(self, *args, **kwargs):
-        self.slug = slugify(self.title)
-        super(Post, self).save(*args, **kwargs)
+        if not self.slug:
+            self.slug = slugify(self.title)
+        return super().save(*args, **kwargs)
 
     def total_likes(self):
         return self.likes.count()
         
     def get_absolute_url(self):
         return reverse('post-detail', kwargs={'slug': self.slug})
-
 
 def pre_save_post_receiver(sender, instance, *args, **kwargs):
     if instance.content:

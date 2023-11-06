@@ -38,7 +38,6 @@ class CustomUser(AbstractBaseUser):
         unique=True,
     )
     username = models.CharField(max_length=30, unique=True)
-    date_of_birth = models.DateField(null=True, blank=True)
     photo = models.ImageField(default='default.jpg', upload_to='profile', blank=True)
     bio = models.CharField(max_length=255, null=True, blank=True)
     location = models.CharField(max_length=30, blank=True)
@@ -67,7 +66,6 @@ class CustomUser(AbstractBaseUser):
         return self.username
 
     class Meta:
-        ordering = ['-date_of_birth']
         verbose_name_plural = 'users'
 
     def has_perm(self, perm, obj=None):

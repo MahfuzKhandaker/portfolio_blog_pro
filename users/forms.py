@@ -74,7 +74,7 @@ class CustomUserUpdateForm(forms.ModelForm):
 
     class Meta:
         model = get_user_model()
-        fields = ('email', 'username', 'photo', 'date_of_birth', 'bio', 'location', 'website_url', 'facebook_url', 'twitter_url', 'linkedin_url', 'github_url', 'youtube_url')
+        fields = ('email', 'username', 'photo', 'bio', 'location', 'website_url', 'facebook_url', 'twitter_url', 'linkedin_url', 'github_url', 'youtube_url')
 
     def clean_email(self):
         email = self.cleaned_data['email'].lower()
@@ -98,7 +98,6 @@ class CustomUserUpdateForm(forms.ModelForm):
         user_account.email = self.cleaned_data['email'].lower()
         user_account.photo = self.cleaned_data['photo']
         user_account.bio = self.cleaned_data['bio']
-        user_account.date_of_birth = self.cleaned_data['date_of_birth']
         user_account.location = self.cleaned_data['location']
         user_account.website_url = self.cleaned_data['website_url']
         user_account.facebook_url = self.cleaned_data['facebook_url']

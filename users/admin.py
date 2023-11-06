@@ -9,11 +9,11 @@ class CustomUserAdmin(BaseUserAdmin):
     add_form = CustomUserCreationForm
     form = CustomUserUpdateForm
     model = CustomUser
-    list_display = ['email', 'username', 'date_of_birth', 'get_location', 'is_admin']
+    list_display = ['email', 'username', 'get_location', 'is_admin']
     list_filter = ('is_admin',)
     fieldsets = (
         (None, {'fields': ('email', 'password')}),
-        ('Personal info', {'fields': ('username', 'date_of_birth',)}),
+        ('Personal info', {'fields': ('username', )}),
         ('Permissions', {'fields': ('is_admin',)}),
     )
     search_fields = ('email',)

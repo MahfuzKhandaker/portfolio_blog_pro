@@ -19,5 +19,9 @@ gunicorn = "*"
 dj-database-url = "*"
 cloudinary = "*"
 django-cloudinary-storage = "*"
+psycopg = {extras = ["binary"], version = "*"}
+crispy-bootstrap5 = "*"
+django-robots = "*"
+
 [requires]
-python_version = "3.7"
+python_version = "*"
